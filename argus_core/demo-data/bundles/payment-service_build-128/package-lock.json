@@ -1,0 +1,42 @@
+{
+  "name": "payment-service",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "payment-service",
+      "version": "1.0.0",
+      "dependencies": {
+        "a": "^1.0.0",
+        "b": "^1.0.0",
+        "spec-only": "^3.0.0"
+      },
+      "devDependencies": {
+        "dev-only": "^5.0.0"
+      }
+    },
+    "node_modules/a": {
+      "version": "1.0.0",
+      "dependencies": {
+        "shared": "^2.0.0"
+      }
+    },
+    "node_modules/b": {
+      "version": "1.1.0",
+      "dependencies": {
+        "shared": "^2.0.0"
+      }
+    },
+    "node_modules/shared": {
+      "version": "2.0.1"
+    },
+    "node_modules/dev-only": {
+      "version": "5.2.0",
+      "dev": true
+    },
+    "node_modules/spec-only": {
+      "resolved": "https://registry.npmjs.org/spec-only/-/spec-only-3.0.0.tgz"
+    }
+  }
+}

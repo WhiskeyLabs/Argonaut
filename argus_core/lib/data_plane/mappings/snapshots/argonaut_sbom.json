@@ -1,0 +1,105 @@
+{
+  "index": "argonaut_sbom",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "1.0"
+    },
+    "properties": {
+      "componentId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "runId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "repo": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "buildId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "component": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "version": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "license": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "supplier": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "hash": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "purl": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "bomRef": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "bomFormatVersion": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "ecosystem": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "sourceFile": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "createdAt": {
+        "type": "date"
+      }
+    }
+  }
+}

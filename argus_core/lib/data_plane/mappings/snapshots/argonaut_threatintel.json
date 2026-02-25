@@ -1,0 +1,60 @@
+{
+  "index": "argonaut_threatintel",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "1.0"
+    },
+    "properties": {
+      "intelId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "cve": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "kev": {
+        "type": "boolean"
+      },
+      "kevFlag": {
+        "type": "boolean"
+      },
+      "epss": {
+        "type": "float"
+      },
+      "epssScore": {
+        "type": "float"
+      },
+      "exploitInWild": {
+        "type": "boolean"
+      },
+      "publishedAt": {
+        "type": "date"
+      },
+      "publishedDate": {
+        "type": "date"
+      },
+      "lastSeenAt": {
+        "type": "date"
+      },
+      "sourceRefs": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      }
+    }
+  }
+}

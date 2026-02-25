@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+
+set timeout 60
+set host "198.74.62.215"
+set user "root"
+
+if {[info exists env(WEB_NODE_PASSWORD)] && $env(WEB_NODE_PASSWORD) ne ""} {
+  set password $env(WEB_NODE_PASSWORD)
+} else {
+  stty -echo
+  send_user "Enter password for $user@$host: "
+  expect_user -re "(.*)\n"
+  stty echo
+  send_user "\n"
+  set password $expect_out(1,string)
+}
+
+send_user "\n>>> Checking .env.local configuration (bash -lc)...\n"
+spawn ssh $user@$host "cat /opt/argus/app/.env.local"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}

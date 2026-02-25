@@ -1,0 +1,145 @@
+{
+  "index": "argonaut_actions",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": false,
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "1.0"
+    },
+    "properties": {
+      "actionId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "runId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "findingId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "findingIds": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "actionType": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "status": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "jiraKey": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "slackThread": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "idempotencyKey": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "payloadHash": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "repo": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "buildId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "templateVersion": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "targetSystem": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "targetKey": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "payloadType": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "source": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "topNHash": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "attempt": {
+        "type": "integer"
+      },
+      "payload": {
+        "type": "object",
+        "enabled": false
+      },
+      "error": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      }
+    }
+  }
+}

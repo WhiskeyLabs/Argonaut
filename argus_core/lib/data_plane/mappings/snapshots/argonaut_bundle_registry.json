@@ -1,0 +1,135 @@
+{
+  "index": "argonaut_bundle_registry",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "7.4.2"
+    },
+    "properties": {
+      "bundleId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "applicationId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "repo": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "buildId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "status": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "lastRunId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "activeRunId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "artifactCounts": {
+        "type": "object",
+        "dynamic": "strict",
+        "properties": {
+          "sarif": {
+            "type": "integer"
+          },
+          "sbom": {
+            "type": "integer"
+          },
+          "lock": {
+            "type": "integer"
+          },
+          "other": {
+            "type": "integer"
+          }
+        }
+      },
+      "manifestVersion": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "manifestObjectKey": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "bundleHash": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "artifactCount": {
+        "type": "integer"
+      },
+      "artifactTypes": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "totalBytes": {
+        "type": "long"
+      },
+      "objectStore": {
+        "type": "object",
+        "dynamic": "strict",
+        "properties": {
+          "provider": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "bucket": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "endpoint": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+#!/usr/bin/expect
+
+set timeout 600
+set host "45.33.28.137"
+set user "root"
+
+if {[info exists env(WEB_NODE_PASSWORD)] && $env(WEB_NODE_PASSWORD) ne ""} {
+  set password $env(WEB_NODE_PASSWORD)
+} else {
+  stty -echo
+  send_user "Enter password for $user@$host: "
+  expect_user -re "(.*)\n"
+  stty echo
+  send_user "\n"
+  set password $expect_out(1,string)
+}
+
+# Step 1: Sync Code
+send_user "\n>>> Syncing codebase...\n"
+spawn rsync -avz --exclude "node_modules" --exclude ".git" --exclude ".next" ./ $user@$host:/opt/argus/app
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+# Step 2: Upload deploy_app.sh (ensure latest version)
+send_user "\n>>> Uploading build script...\n"
+spawn rsync -avz ./scripts/deploy_app.sh $user@$host:/opt/argus/app/scripts/
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+# Step 3: Run deploy_app.sh
+send_user "\n>>> Running app build and start...\n"
+spawn ssh $user@$host "chmod +x /opt/argus/app/scripts/deploy_app.sh && /opt/argus/app/scripts/deploy_app.sh"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}

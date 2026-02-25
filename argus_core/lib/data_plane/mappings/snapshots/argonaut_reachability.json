@@ -1,0 +1,90 @@
+{
+  "index": "argonaut_reachability",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "1.0"
+    },
+    "properties": {
+      "reachabilityId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "findingId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "runId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "repo": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "buildId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "reachable": {
+        "type": "boolean"
+      },
+      "confidenceScore": {
+        "type": "float"
+      },
+      "confidence": {
+        "type": "float"
+      },
+      "evidencePath": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "method": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "status": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "reason": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "analysisVersion": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "computedAt": {
+        "type": "date"
+      }
+    }
+  }
+}

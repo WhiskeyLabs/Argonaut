@@ -1,0 +1,5478 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "M2_diverse_node:npm:lodash@0.10.16",
+      "name": "lodash",
+      "purl": "pkg:npm/lodash@0.10.16",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:minimist@4.20.27",
+      "name": "minimist",
+      "purl": "pkg:npm/minimist@4.20.27",
+      "scope": "required",
+      "type": "library",
+      "version": "4.20.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:axios@0.7.28",
+      "name": "axios",
+      "purl": "pkg:npm/axios@0.7.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:react@4.19.17",
+      "name": "react",
+      "purl": "pkg:npm/react@4.19.17",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:express@3.18.17",
+      "name": "express",
+      "purl": "pkg:npm/express@3.18.17",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:jsonwebtoken@5.15.24",
+      "name": "jsonwebtoken",
+      "purl": "pkg:npm/jsonwebtoken@5.15.24",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.15.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:qs@4.14.7",
+      "name": "qs",
+      "purl": "pkg:npm/qs@4.14.7",
+      "scope": "required",
+      "type": "library",
+      "version": "4.14.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:debug@0.19.2",
+      "name": "debug",
+      "purl": "pkg:npm/debug@0.19.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4707@0.14.0",
+      "name": "npm-pkg-4707",
+      "purl": "pkg:npm/npm-pkg-4707@0.14.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5149@1.12.8",
+      "name": "npm-pkg-5149",
+      "purl": "pkg:npm/npm-pkg-5149@1.12.8",
+      "scope": "required",
+      "type": "library",
+      "version": "1.12.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5844@3.16.20",
+      "name": "npm-pkg-5844",
+      "purl": "pkg:npm/npm-pkg-5844@3.16.20",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5578@0.17.17",
+      "name": "npm-pkg-5578",
+      "purl": "pkg:npm/npm-pkg-5578@0.17.17",
+      "scope": "required",
+      "type": "library",
+      "version": "0.17.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4713@3.4.28",
+      "name": "npm-pkg-4713",
+      "purl": "pkg:npm/npm-pkg-4713@3.4.28",
+      "scope": "required",
+      "type": "library",
+      "version": "3.4.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-406@5.11.11",
+      "name": "npm-pkg-406",
+      "purl": "pkg:npm/npm-pkg-406@5.11.11",
+      "scope": "required",
+      "type": "library",
+      "version": "5.11.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6918@0.12.28",
+      "name": "npm-pkg-6918",
+      "purl": "pkg:npm/npm-pkg-6918@0.12.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1908@3.16.25",
+      "name": "npm-pkg-1908",
+      "purl": "pkg:npm/npm-pkg-1908@3.16.25",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6524@4.8.27",
+      "name": "npm-pkg-6524",
+      "purl": "pkg:npm/npm-pkg-6524@4.8.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.8.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9241@3.16.16",
+      "name": "npm-pkg-9241",
+      "purl": "pkg:npm/npm-pkg-9241@3.16.16",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.16.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9430@1.4.26",
+      "name": "npm-pkg-9430",
+      "purl": "pkg:npm/npm-pkg-9430@1.4.26",
+      "scope": "required",
+      "type": "library",
+      "version": "1.4.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8573@5.3.22",
+      "name": "npm-pkg-8573",
+      "purl": "pkg:npm/npm-pkg-8573@5.3.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.3.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7702@1.15.28",
+      "name": "npm-pkg-7702",
+      "purl": "pkg:npm/npm-pkg-7702@1.15.28",
+      "scope": "required",
+      "type": "library",
+      "version": "1.15.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2000@5.14.21",
+      "name": "npm-pkg-2000",
+      "purl": "pkg:npm/npm-pkg-2000@5.14.21",
+      "scope": "required",
+      "type": "library",
+      "version": "5.14.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8940@2.17.12",
+      "name": "npm-pkg-8940",
+      "purl": "pkg:npm/npm-pkg-8940@2.17.12",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8981@5.16.22",
+      "name": "npm-pkg-8981",
+      "purl": "pkg:npm/npm-pkg-8981@5.16.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6586@3.6.9",
+      "name": "npm-pkg-6586",
+      "purl": "pkg:npm/npm-pkg-6586@3.6.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-152@0.4.20",
+      "name": "npm-pkg-152",
+      "purl": "pkg:npm/npm-pkg-152@0.4.20",
+      "scope": "required",
+      "type": "library",
+      "version": "0.4.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8568@3.11.29",
+      "name": "npm-pkg-8568",
+      "purl": "pkg:npm/npm-pkg-8568@3.11.29",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4262@5.15.14",
+      "name": "npm-pkg-4262",
+      "purl": "pkg:npm/npm-pkg-4262@5.15.14",
+      "scope": "required",
+      "type": "library",
+      "version": "5.15.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7115@4.1.26",
+      "name": "npm-pkg-7115",
+      "purl": "pkg:npm/npm-pkg-7115@4.1.26",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5189@3.3.14",
+      "name": "npm-pkg-5189",
+      "purl": "pkg:npm/npm-pkg-5189@3.3.14",
+      "scope": "required",
+      "type": "library",
+      "version": "3.3.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7421@1.13.26",
+      "name": "npm-pkg-7421",
+      "purl": "pkg:npm/npm-pkg-7421@1.13.26",
+      "scope": "required",
+      "type": "library",
+      "version": "1.13.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1054@5.8.28",
+      "name": "npm-pkg-1054",
+      "purl": "pkg:npm/npm-pkg-1054@5.8.28",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6065@0.6.23",
+      "name": "npm-pkg-6065",
+      "purl": "pkg:npm/npm-pkg-6065@0.6.23",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.6.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2398@3.0.2",
+      "name": "npm-pkg-2398",
+      "purl": "pkg:npm/npm-pkg-2398@3.0.2",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7393@4.17.29",
+      "name": "npm-pkg-7393",
+      "purl": "pkg:npm/npm-pkg-7393@4.17.29",
+      "scope": "required",
+      "type": "library",
+      "version": "4.17.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9997@1.7.3",
+      "name": "npm-pkg-9997",
+      "purl": "pkg:npm/npm-pkg-9997@1.7.3",
+      "scope": "required",
+      "type": "library",
+      "version": "1.7.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8954@2.20.11",
+      "name": "npm-pkg-8954",
+      "purl": "pkg:npm/npm-pkg-8954@2.20.11",
+      "scope": "required",
+      "type": "library",
+      "version": "2.20.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-85@2.18.18",
+      "name": "npm-pkg-85",
+      "purl": "pkg:npm/npm-pkg-85@2.18.18",
+      "scope": "required",
+      "type": "library",
+      "version": "2.18.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2210@4.7.15",
+      "name": "npm-pkg-2210",
+      "purl": "pkg:npm/npm-pkg-2210@4.7.15",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.7.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9800@5.16.9",
+      "name": "npm-pkg-9800",
+      "purl": "pkg:npm/npm-pkg-9800@5.16.9",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6845@5.5.29",
+      "name": "npm-pkg-6845",
+      "purl": "pkg:npm/npm-pkg-6845@5.5.29",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9602@5.8.10",
+      "name": "npm-pkg-9602",
+      "purl": "pkg:npm/npm-pkg-9602@5.8.10",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2434@4.6.12",
+      "name": "npm-pkg-2434",
+      "purl": "pkg:npm/npm-pkg-2434@4.6.12",
+      "scope": "required",
+      "type": "library",
+      "version": "4.6.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1739@3.2.1",
+      "name": "npm-pkg-1739",
+      "purl": "pkg:npm/npm-pkg-1739@3.2.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5791@0.0.16",
+      "name": "npm-pkg-5791",
+      "purl": "pkg:npm/npm-pkg-5791@0.0.16",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5371@5.9.14",
+      "name": "npm-pkg-5371",
+      "purl": "pkg:npm/npm-pkg-5371@5.9.14",
+      "scope": "required",
+      "type": "library",
+      "version": "5.9.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1989@3.14.18",
+      "name": "npm-pkg-1989",
+      "purl": "pkg:npm/npm-pkg-1989@3.14.18",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2522@3.20.19",
+      "name": "npm-pkg-2522",
+      "purl": "pkg:npm/npm-pkg-2522@3.20.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.20.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5512@3.19.7",
+      "name": "npm-pkg-5512",
+      "purl": "pkg:npm/npm-pkg-5512@3.19.7",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8968@3.1.6",
+      "name": "npm-pkg-8968",
+      "purl": "pkg:npm/npm-pkg-8968@3.1.6",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-742@5.17.29",
+      "name": "npm-pkg-742",
+      "purl": "pkg:npm/npm-pkg-742@5.17.29",
+      "scope": "required",
+      "type": "library",
+      "version": "5.17.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7403@5.6.15",
+      "name": "npm-pkg-7403",
+      "purl": "pkg:npm/npm-pkg-7403@5.6.15",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2116@5.16.6",
+      "name": "npm-pkg-2116",
+      "purl": "pkg:npm/npm-pkg-2116@5.16.6",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2628@5.5.12",
+      "name": "npm-pkg-2628",
+      "purl": "pkg:npm/npm-pkg-2628@5.5.12",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6970@4.13.27",
+      "name": "npm-pkg-6970",
+      "purl": "pkg:npm/npm-pkg-6970@4.13.27",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6279@2.5.11",
+      "name": "npm-pkg-6279",
+      "purl": "pkg:npm/npm-pkg-6279@2.5.11",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4317@3.15.24",
+      "name": "npm-pkg-4317",
+      "purl": "pkg:npm/npm-pkg-4317@3.15.24",
+      "scope": "required",
+      "type": "library",
+      "version": "3.15.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4714@3.5.10",
+      "name": "npm-pkg-4714",
+      "purl": "pkg:npm/npm-pkg-4714@3.5.10",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7285@0.16.25",
+      "name": "npm-pkg-7285",
+      "purl": "pkg:npm/npm-pkg-7285@0.16.25",
+      "scope": "required",
+      "type": "library",
+      "version": "0.16.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1550@1.7.0",
+      "name": "npm-pkg-1550",
+      "purl": "pkg:npm/npm-pkg-1550@1.7.0",
+      "scope": "required",
+      "type": "library",
+      "version": "1.7.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7441@0.15.6",
+      "name": "npm-pkg-7441",
+      "purl": "pkg:npm/npm-pkg-7441@0.15.6",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-446@2.5.11",
+      "name": "npm-pkg-446",
+      "purl": "pkg:npm/npm-pkg-446@2.5.11",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1798@4.8.17",
+      "name": "npm-pkg-1798",
+      "purl": "pkg:npm/npm-pkg-1798@4.8.17",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9337@2.18.8",
+      "name": "npm-pkg-9337",
+      "purl": "pkg:npm/npm-pkg-9337@2.18.8",
+      "scope": "required",
+      "type": "library",
+      "version": "2.18.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1663@2.3.30",
+      "name": "npm-pkg-1663",
+      "purl": "pkg:npm/npm-pkg-1663@2.3.30",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2807@0.1.24",
+      "name": "npm-pkg-2807",
+      "purl": "pkg:npm/npm-pkg-2807@0.1.24",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3040@5.20.3",
+      "name": "npm-pkg-3040",
+      "purl": "pkg:npm/npm-pkg-3040@5.20.3",
+      "scope": "required",
+      "type": "library",
+      "version": "5.20.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4535@4.2.9",
+      "name": "npm-pkg-4535",
+      "purl": "pkg:npm/npm-pkg-4535@4.2.9",
+      "scope": "required",
+      "type": "library",
+      "version": "4.2.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2645@2.8.2",
+      "name": "npm-pkg-2645",
+      "purl": "pkg:npm/npm-pkg-2645@2.8.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.8.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6745@2.13.30",
+      "name": "npm-pkg-6745",
+      "purl": "pkg:npm/npm-pkg-6745@2.13.30",
+      "scope": "required",
+      "type": "library",
+      "version": "2.13.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-939@0.7.0",
+      "name": "npm-pkg-939",
+      "purl": "pkg:npm/npm-pkg-939@0.7.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2016@2.17.27",
+      "name": "npm-pkg-2016",
+      "purl": "pkg:npm/npm-pkg-2016@2.17.27",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5161@3.19.20",
+      "name": "npm-pkg-5161",
+      "purl": "pkg:npm/npm-pkg-5161@3.19.20",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6623@2.19.6",
+      "name": "npm-pkg-6623",
+      "purl": "pkg:npm/npm-pkg-6623@2.19.6",
+      "scope": "required",
+      "type": "library",
+      "version": "2.19.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6982@5.3.21",
+      "name": "npm-pkg-6982",
+      "purl": "pkg:npm/npm-pkg-6982@5.3.21",
+      "scope": "required",
+      "type": "library",
+      "version": "5.3.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8213@5.8.12",
+      "name": "npm-pkg-8213",
+      "purl": "pkg:npm/npm-pkg-8213@5.8.12",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5838@0.13.28",
+      "name": "npm-pkg-5838",
+      "purl": "pkg:npm/npm-pkg-5838@0.13.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4611@5.10.9",
+      "name": "npm-pkg-4611",
+      "purl": "pkg:npm/npm-pkg-4611@5.10.9",
+      "scope": "required",
+      "type": "library",
+      "version": "5.10.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4866@3.10.18",
+      "name": "npm-pkg-4866",
+      "purl": "pkg:npm/npm-pkg-4866@3.10.18",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8883@2.6.17",
+      "name": "npm-pkg-8883",
+      "purl": "pkg:npm/npm-pkg-8883@2.6.17",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1845@1.19.3",
+      "name": "npm-pkg-1845",
+      "purl": "pkg:npm/npm-pkg-1845@1.19.3",
+      "scope": "required",
+      "type": "library",
+      "version": "1.19.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-612@1.16.11",
+      "name": "npm-pkg-612",
+      "purl": "pkg:npm/npm-pkg-612@1.16.11",
+      "scope": "required",
+      "type": "library",
+      "version": "1.16.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-472@3.18.4",
+      "name": "npm-pkg-472",
+      "purl": "pkg:npm/npm-pkg-472@3.18.4",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6805@3.12.7",
+      "name": "npm-pkg-6805",
+      "purl": "pkg:npm/npm-pkg-6805@3.12.7",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3598@1.5.17",
+      "name": "npm-pkg-3598",
+      "purl": "pkg:npm/npm-pkg-3598@1.5.17",
+      "scope": "required",
+      "type": "library",
+      "version": "1.5.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8870@5.17.12",
+      "name": "npm-pkg-8870",
+      "purl": "pkg:npm/npm-pkg-8870@5.17.12",
+      "scope": "required",
+      "type": "library",
+      "version": "5.17.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2420@1.0.0",
+      "name": "npm-pkg-2420",
+      "purl": "pkg:npm/npm-pkg-2420@1.0.0",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.0.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8867@3.13.8",
+      "name": "npm-pkg-8867",
+      "purl": "pkg:npm/npm-pkg-8867@3.13.8",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.13.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2272@5.18.2",
+      "name": "npm-pkg-2272",
+      "purl": "pkg:npm/npm-pkg-2272@5.18.2",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9061@0.5.21",
+      "name": "npm-pkg-9061",
+      "purl": "pkg:npm/npm-pkg-9061@0.5.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.5.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5583@5.16.24",
+      "name": "npm-pkg-5583",
+      "purl": "pkg:npm/npm-pkg-5583@5.16.24",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.16.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-922@5.0.20",
+      "name": "npm-pkg-922",
+      "purl": "pkg:npm/npm-pkg-922@5.0.20",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7710@0.7.21",
+      "name": "npm-pkg-7710",
+      "purl": "pkg:npm/npm-pkg-7710@0.7.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6539@5.11.30",
+      "name": "npm-pkg-6539",
+      "purl": "pkg:npm/npm-pkg-6539@5.11.30",
+      "scope": "required",
+      "type": "library",
+      "version": "5.11.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9202@2.10.27",
+      "name": "npm-pkg-9202",
+      "purl": "pkg:npm/npm-pkg-9202@2.10.27",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6140@2.14.20",
+      "name": "npm-pkg-6140",
+      "purl": "pkg:npm/npm-pkg-6140@2.14.20",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.14.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8992@3.18.9",
+      "name": "npm-pkg-8992",
+      "purl": "pkg:npm/npm-pkg-8992@3.18.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2594@5.13.4",
+      "name": "npm-pkg-2594",
+      "purl": "pkg:npm/npm-pkg-2594@5.13.4",
+      "scope": "required",
+      "type": "library",
+      "version": "5.13.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-88@2.16.22",
+      "name": "npm-pkg-88",
+      "purl": "pkg:npm/npm-pkg-88@2.16.22",
+      "scope": "required",
+      "type": "library",
+      "version": "2.16.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-615@5.5.2",
+      "name": "npm-pkg-615",
+      "purl": "pkg:npm/npm-pkg-615@5.5.2",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6108@4.8.4",
+      "name": "npm-pkg-6108",
+      "purl": "pkg:npm/npm-pkg-6108@4.8.4",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.8.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-301@4.6.27",
+      "name": "npm-pkg-301",
+      "purl": "pkg:npm/npm-pkg-301@4.6.27",
+      "scope": "required",
+      "type": "library",
+      "version": "4.6.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9382@0.12.12",
+      "name": "npm-pkg-9382",
+      "purl": "pkg:npm/npm-pkg-9382@0.12.12",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8336@0.2.4",
+      "name": "npm-pkg-8336",
+      "purl": "pkg:npm/npm-pkg-8336@0.2.4",
+      "scope": "required",
+      "type": "library",
+      "version": "0.2.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5466@4.8.9",
+      "name": "npm-pkg-5466",
+      "purl": "pkg:npm/npm-pkg-5466@4.8.9",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9712@5.6.5",
+      "name": "npm-pkg-9712",
+      "purl": "pkg:npm/npm-pkg-9712@5.6.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4839@4.9.11",
+      "name": "npm-pkg-4839",
+      "purl": "pkg:npm/npm-pkg-4839@4.9.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.9.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6368@1.20.0",
+      "name": "npm-pkg-6368",
+      "purl": "pkg:npm/npm-pkg-6368@1.20.0",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6925@2.17.5",
+      "name": "npm-pkg-6925",
+      "purl": "pkg:npm/npm-pkg-6925@2.17.5",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2943@2.17.4",
+      "name": "npm-pkg-2943",
+      "purl": "pkg:npm/npm-pkg-2943@2.17.4",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-466@0.16.21",
+      "name": "npm-pkg-466",
+      "purl": "pkg:npm/npm-pkg-466@0.16.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.16.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6137@0.11.9",
+      "name": "npm-pkg-6137",
+      "purl": "pkg:npm/npm-pkg-6137@0.11.9",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8719@1.19.19",
+      "name": "npm-pkg-8719",
+      "purl": "pkg:npm/npm-pkg-8719@1.19.19",
+      "scope": "required",
+      "type": "library",
+      "version": "1.19.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2073@0.10.15",
+      "name": "npm-pkg-2073",
+      "purl": "pkg:npm/npm-pkg-2073@0.10.15",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1199@3.8.19",
+      "name": "npm-pkg-1199",
+      "purl": "pkg:npm/npm-pkg-1199@3.8.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1926@2.15.29",
+      "name": "npm-pkg-1926",
+      "purl": "pkg:npm/npm-pkg-1926@2.15.29",
+      "scope": "required",
+      "type": "library",
+      "version": "2.15.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1982@4.16.7",
+      "name": "npm-pkg-1982",
+      "purl": "pkg:npm/npm-pkg-1982@4.16.7",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7471@4.11.2",
+      "name": "npm-pkg-7471",
+      "purl": "pkg:npm/npm-pkg-7471@4.11.2",
+      "scope": "required",
+      "type": "library",
+      "version": "4.11.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1440@3.9.8",
+      "name": "npm-pkg-1440",
+      "purl": "pkg:npm/npm-pkg-1440@3.9.8",
+      "scope": "required",
+      "type": "library",
+      "version": "3.9.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2759@2.13.16",
+      "name": "npm-pkg-2759",
+      "purl": "pkg:npm/npm-pkg-2759@2.13.16",
+      "scope": "required",
+      "type": "library",
+      "version": "2.13.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5288@5.15.12",
+      "name": "npm-pkg-5288",
+      "purl": "pkg:npm/npm-pkg-5288@5.15.12",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.15.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2896@1.14.7",
+      "name": "npm-pkg-2896",
+      "purl": "pkg:npm/npm-pkg-2896@1.14.7",
+      "scope": "required",
+      "type": "library",
+      "version": "1.14.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5737@3.18.12",
+      "name": "npm-pkg-5737",
+      "purl": "pkg:npm/npm-pkg-5737@3.18.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2530@3.18.21",
+      "name": "npm-pkg-2530",
+      "purl": "pkg:npm/npm-pkg-2530@3.18.21",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7067@2.10.26",
+      "name": "npm-pkg-7067",
+      "purl": "pkg:npm/npm-pkg-7067@2.10.26",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.10.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5244@2.14.8",
+      "name": "npm-pkg-5244",
+      "purl": "pkg:npm/npm-pkg-5244@2.14.8",
+      "scope": "required",
+      "type": "library",
+      "version": "2.14.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8932@5.8.7",
+      "name": "npm-pkg-8932",
+      "purl": "pkg:npm/npm-pkg-8932@5.8.7",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2351@4.3.8",
+      "name": "npm-pkg-2351",
+      "purl": "pkg:npm/npm-pkg-2351@4.3.8",
+      "scope": "required",
+      "type": "library",
+      "version": "4.3.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9411@3.20.12",
+      "name": "npm-pkg-9411",
+      "purl": "pkg:npm/npm-pkg-9411@3.20.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.20.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-356@4.10.21",
+      "name": "npm-pkg-356",
+      "purl": "pkg:npm/npm-pkg-356@4.10.21",
+      "scope": "required",
+      "type": "library",
+      "version": "4.10.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5519@0.15.29",
+      "name": "npm-pkg-5519",
+      "purl": "pkg:npm/npm-pkg-5519@0.15.29",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6954@2.20.10",
+      "name": "npm-pkg-6954",
+      "purl": "pkg:npm/npm-pkg-6954@2.20.10",
+      "scope": "required",
+      "type": "library",
+      "version": "2.20.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6550@5.5.0",
+      "name": "npm-pkg-6550",
+      "purl": "pkg:npm/npm-pkg-6550@5.5.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9158@5.8.4",
+      "name": "npm-pkg-9158",
+      "purl": "pkg:npm/npm-pkg-9158@5.8.4",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9486@5.19.13",
+      "name": "npm-pkg-9486",
+      "purl": "pkg:npm/npm-pkg-9486@5.19.13",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.19.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7913@2.0.1",
+      "name": "npm-pkg-7913",
+      "purl": "pkg:npm/npm-pkg-7913@2.0.1",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.0.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1980@5.8.10",
+      "name": "npm-pkg-1980",
+      "purl": "pkg:npm/npm-pkg-1980@5.8.10",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3428@3.16.8",
+      "name": "npm-pkg-3428",
+      "purl": "pkg:npm/npm-pkg-3428@3.16.8",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.16.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1295@4.6.17",
+      "name": "npm-pkg-1295",
+      "purl": "pkg:npm/npm-pkg-1295@4.6.17",
+      "scope": "required",
+      "type": "library",
+      "version": "4.6.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1567@1.10.7",
+      "name": "npm-pkg-1567",
+      "purl": "pkg:npm/npm-pkg-1567@1.10.7",
+      "scope": "required",
+      "type": "library",
+      "version": "1.10.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3382@4.5.22",
+      "name": "npm-pkg-3382",
+      "purl": "pkg:npm/npm-pkg-3382@4.5.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1381@4.13.22",
+      "name": "npm-pkg-1381",
+      "purl": "pkg:npm/npm-pkg-1381@4.13.22",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.13.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1771@0.8.30",
+      "name": "npm-pkg-1771",
+      "purl": "pkg:npm/npm-pkg-1771@0.8.30",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-729@5.7.18",
+      "name": "npm-pkg-729",
+      "purl": "pkg:npm/npm-pkg-729@5.7.18",
+      "scope": "required",
+      "type": "library",
+      "version": "5.7.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7714@2.10.8",
+      "name": "npm-pkg-7714",
+      "purl": "pkg:npm/npm-pkg-7714@2.10.8",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5208@4.15.8",
+      "name": "npm-pkg-5208",
+      "purl": "pkg:npm/npm-pkg-5208@4.15.8",
+      "scope": "required",
+      "type": "library",
+      "version": "4.15.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5359@2.1.20",
+      "name": "npm-pkg-5359",
+      "purl": "pkg:npm/npm-pkg-5359@2.1.20",
+      "scope": "required",
+      "type": "library",
+      "version": "2.1.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2183@0.15.25",
+      "name": "npm-pkg-2183",
+      "purl": "pkg:npm/npm-pkg-2183@0.15.25",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4160@3.6.11",
+      "name": "npm-pkg-4160",
+      "purl": "pkg:npm/npm-pkg-4160@3.6.11",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8394@5.12.9",
+      "name": "npm-pkg-8394",
+      "purl": "pkg:npm/npm-pkg-8394@5.12.9",
+      "scope": "required",
+      "type": "library",
+      "version": "5.12.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9532@0.13.27",
+      "name": "npm-pkg-9532",
+      "purl": "pkg:npm/npm-pkg-9532@0.13.27",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8339@5.17.24",
+      "name": "npm-pkg-8339",
+      "purl": "pkg:npm/npm-pkg-8339@5.17.24",
+      "scope": "required",
+      "type": "library",
+      "version": "5.17.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7907@4.2.27",
+      "name": "npm-pkg-7907",
+      "purl": "pkg:npm/npm-pkg-7907@4.2.27",
+      "scope": "required",
+      "type": "library",
+      "version": "4.2.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8016@2.10.11",
+      "name": "npm-pkg-8016",
+      "purl": "pkg:npm/npm-pkg-8016@2.10.11",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1280@4.5.24",
+      "name": "npm-pkg-1280",
+      "purl": "pkg:npm/npm-pkg-1280@4.5.24",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8651@4.12.20",
+      "name": "npm-pkg-8651",
+      "purl": "pkg:npm/npm-pkg-8651@4.12.20",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9984@1.0.14",
+      "name": "npm-pkg-9984",
+      "purl": "pkg:npm/npm-pkg-9984@1.0.14",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.0.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3436@3.16.27",
+      "name": "npm-pkg-3436",
+      "purl": "pkg:npm/npm-pkg-3436@3.16.27",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8417@1.8.24",
+      "name": "npm-pkg-8417",
+      "purl": "pkg:npm/npm-pkg-8417@1.8.24",
+      "scope": "required",
+      "type": "library",
+      "version": "1.8.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2240@4.10.11",
+      "name": "npm-pkg-2240",
+      "purl": "pkg:npm/npm-pkg-2240@4.10.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.10.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8728@4.17.6",
+      "name": "npm-pkg-8728",
+      "purl": "pkg:npm/npm-pkg-8728@4.17.6",
+      "scope": "required",
+      "type": "library",
+      "version": "4.17.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9942@4.4.23",
+      "name": "npm-pkg-9942",
+      "purl": "pkg:npm/npm-pkg-9942@4.4.23",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.4.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2151@5.18.1",
+      "name": "npm-pkg-2151",
+      "purl": "pkg:npm/npm-pkg-2151@5.18.1",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4594@2.5.4",
+      "name": "npm-pkg-4594",
+      "purl": "pkg:npm/npm-pkg-4594@2.5.4",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8853@5.11.4",
+      "name": "npm-pkg-8853",
+      "purl": "pkg:npm/npm-pkg-8853@5.11.4",
+      "scope": "required",
+      "type": "library",
+      "version": "5.11.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2758@1.1.24",
+      "name": "npm-pkg-2758",
+      "purl": "pkg:npm/npm-pkg-2758@1.1.24",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8947@0.9.7",
+      "name": "npm-pkg-8947",
+      "purl": "pkg:npm/npm-pkg-8947@0.9.7",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8893@0.14.21",
+      "name": "npm-pkg-8893",
+      "purl": "pkg:npm/npm-pkg-8893@0.14.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2540@2.4.22",
+      "name": "npm-pkg-2540",
+      "purl": "pkg:npm/npm-pkg-2540@2.4.22",
+      "scope": "required",
+      "type": "library",
+      "version": "2.4.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7715@0.1.3",
+      "name": "npm-pkg-7715",
+      "purl": "pkg:npm/npm-pkg-7715@0.1.3",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2684@4.6.27",
+      "name": "npm-pkg-2684",
+      "purl": "pkg:npm/npm-pkg-2684@4.6.27",
+      "scope": "required",
+      "type": "library",
+      "version": "4.6.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6928@5.13.6",
+      "name": "npm-pkg-6928",
+      "purl": "pkg:npm/npm-pkg-6928@5.13.6",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.13.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3951@1.15.6",
+      "name": "npm-pkg-3951",
+      "purl": "pkg:npm/npm-pkg-3951@1.15.6",
+      "scope": "required",
+      "type": "library",
+      "version": "1.15.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2598@4.13.23",
+      "name": "npm-pkg-2598",
+      "purl": "pkg:npm/npm-pkg-2598@4.13.23",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7527@2.6.30",
+      "name": "npm-pkg-7527",
+      "purl": "pkg:npm/npm-pkg-7527@2.6.30",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7217@4.19.15",
+      "name": "npm-pkg-7217",
+      "purl": "pkg:npm/npm-pkg-7217@4.19.15",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3458@5.6.3",
+      "name": "npm-pkg-3458",
+      "purl": "pkg:npm/npm-pkg-3458@5.6.3",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5799@0.13.23",
+      "name": "npm-pkg-5799",
+      "purl": "pkg:npm/npm-pkg-5799@0.13.23",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1887@1.6.20",
+      "name": "npm-pkg-1887",
+      "purl": "pkg:npm/npm-pkg-1887@1.6.20",
+      "scope": "required",
+      "type": "library",
+      "version": "1.6.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3102@3.0.17",
+      "name": "npm-pkg-3102",
+      "purl": "pkg:npm/npm-pkg-3102@3.0.17",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.0.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4403@2.11.12",
+      "name": "npm-pkg-4403",
+      "purl": "pkg:npm/npm-pkg-4403@2.11.12",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7809@4.14.28",
+      "name": "npm-pkg-7809",
+      "purl": "pkg:npm/npm-pkg-7809@4.14.28",
+      "scope": "required",
+      "type": "library",
+      "version": "4.14.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5803@3.4.3",
+      "name": "npm-pkg-5803",
+      "purl": "pkg:npm/npm-pkg-5803@3.4.3",
+      "scope": "required",
+      "type": "library",
+      "version": "3.4.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9170@1.11.14",
+      "name": "npm-pkg-9170",
+      "purl": "pkg:npm/npm-pkg-9170@1.11.14",
+      "scope": "required",
+      "type": "library",
+      "version": "1.11.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9971@5.18.1",
+      "name": "npm-pkg-9971",
+      "purl": "pkg:npm/npm-pkg-9971@5.18.1",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4176@5.2.14",
+      "name": "npm-pkg-4176",
+      "purl": "pkg:npm/npm-pkg-4176@5.2.14",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5668@4.16.26",
+      "name": "npm-pkg-5668",
+      "purl": "pkg:npm/npm-pkg-5668@4.16.26",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4524@2.1.2",
+      "name": "npm-pkg-4524",
+      "purl": "pkg:npm/npm-pkg-4524@2.1.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.1.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1151@4.14.18",
+      "name": "npm-pkg-1151",
+      "purl": "pkg:npm/npm-pkg-1151@4.14.18",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.14.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6329@5.18.30",
+      "name": "npm-pkg-6329",
+      "purl": "pkg:npm/npm-pkg-6329@5.18.30",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7842@4.0.4",
+      "name": "npm-pkg-7842",
+      "purl": "pkg:npm/npm-pkg-7842@4.0.4",
+      "scope": "required",
+      "type": "library",
+      "version": "4.0.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2201@0.3.12",
+      "name": "npm-pkg-2201",
+      "purl": "pkg:npm/npm-pkg-2201@0.3.12",
+      "scope": "required",
+      "type": "library",
+      "version": "0.3.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2756@4.8.0",
+      "name": "npm-pkg-2756",
+      "purl": "pkg:npm/npm-pkg-2756@4.8.0",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1166@4.16.3",
+      "name": "npm-pkg-1166",
+      "purl": "pkg:npm/npm-pkg-1166@4.16.3",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2511@2.15.7",
+      "name": "npm-pkg-2511",
+      "purl": "pkg:npm/npm-pkg-2511@2.15.7",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.15.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7679@5.7.12",
+      "name": "npm-pkg-7679",
+      "purl": "pkg:npm/npm-pkg-7679@5.7.12",
+      "scope": "required",
+      "type": "library",
+      "version": "5.7.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8423@2.13.1",
+      "name": "npm-pkg-8423",
+      "purl": "pkg:npm/npm-pkg-8423@2.13.1",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.13.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4084@4.5.14",
+      "name": "npm-pkg-4084",
+      "purl": "pkg:npm/npm-pkg-4084@4.5.14",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1864@4.15.18",
+      "name": "npm-pkg-1864",
+      "purl": "pkg:npm/npm-pkg-1864@4.15.18",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.15.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7911@4.0.15",
+      "name": "npm-pkg-7911",
+      "purl": "pkg:npm/npm-pkg-7911@4.0.15",
+      "scope": "required",
+      "type": "library",
+      "version": "4.0.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6304@5.1.16",
+      "name": "npm-pkg-6304",
+      "purl": "pkg:npm/npm-pkg-6304@5.1.16",
+      "scope": "required",
+      "type": "library",
+      "version": "5.1.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2299@2.7.27",
+      "name": "npm-pkg-2299",
+      "purl": "pkg:npm/npm-pkg-2299@2.7.27",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4380@3.18.0",
+      "name": "npm-pkg-4380",
+      "purl": "pkg:npm/npm-pkg-4380@3.18.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9867@4.5.30",
+      "name": "npm-pkg-9867",
+      "purl": "pkg:npm/npm-pkg-9867@4.5.30",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9221@2.6.18",
+      "name": "npm-pkg-9221",
+      "purl": "pkg:npm/npm-pkg-9221@2.6.18",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9088@1.14.12",
+      "name": "npm-pkg-9088",
+      "purl": "pkg:npm/npm-pkg-9088@1.14.12",
+      "scope": "required",
+      "type": "library",
+      "version": "1.14.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1732@3.12.0",
+      "name": "npm-pkg-1732",
+      "purl": "pkg:npm/npm-pkg-1732@3.12.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3222@3.1.26",
+      "name": "npm-pkg-3222",
+      "purl": "pkg:npm/npm-pkg-3222@3.1.26",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8598@2.11.2",
+      "name": "npm-pkg-8598",
+      "purl": "pkg:npm/npm-pkg-8598@2.11.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2747@0.6.22",
+      "name": "npm-pkg-2747",
+      "purl": "pkg:npm/npm-pkg-2747@0.6.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7331@4.1.11",
+      "name": "npm-pkg-7331",
+      "purl": "pkg:npm/npm-pkg-7331@4.1.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8446@5.1.30",
+      "name": "npm-pkg-8446",
+      "purl": "pkg:npm/npm-pkg-8446@5.1.30",
+      "scope": "required",
+      "type": "library",
+      "version": "5.1.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7889@0.9.2",
+      "name": "npm-pkg-7889",
+      "purl": "pkg:npm/npm-pkg-7889@0.9.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1074@2.6.0",
+      "name": "npm-pkg-1074",
+      "purl": "pkg:npm/npm-pkg-1074@2.6.0",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-715@3.8.2",
+      "name": "npm-pkg-715",
+      "purl": "pkg:npm/npm-pkg-715@3.8.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8970@5.16.18",
+      "name": "npm-pkg-8970",
+      "purl": "pkg:npm/npm-pkg-8970@5.16.18",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8115@0.17.11",
+      "name": "npm-pkg-8115",
+      "purl": "pkg:npm/npm-pkg-8115@0.17.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.17.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8795@3.12.5",
+      "name": "npm-pkg-8795",
+      "purl": "pkg:npm/npm-pkg-8795@3.12.5",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-516@0.13.12",
+      "name": "npm-pkg-516",
+      "purl": "pkg:npm/npm-pkg-516@0.13.12",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7228@5.19.5",
+      "name": "npm-pkg-7228",
+      "purl": "pkg:npm/npm-pkg-7228@5.19.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.19.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3882@1.17.6",
+      "name": "npm-pkg-3882",
+      "purl": "pkg:npm/npm-pkg-3882@1.17.6",
+      "scope": "required",
+      "type": "library",
+      "version": "1.17.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6551@2.20.20",
+      "name": "npm-pkg-6551",
+      "purl": "pkg:npm/npm-pkg-6551@2.20.20",
+      "scope": "required",
+      "type": "library",
+      "version": "2.20.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7670@0.0.11",
+      "name": "npm-pkg-7670",
+      "purl": "pkg:npm/npm-pkg-7670@0.0.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2135@4.16.24",
+      "name": "npm-pkg-2135",
+      "purl": "pkg:npm/npm-pkg-2135@4.16.24",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7772@5.4.21",
+      "name": "npm-pkg-7772",
+      "purl": "pkg:npm/npm-pkg-7772@5.4.21",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2879@3.17.3",
+      "name": "npm-pkg-2879",
+      "purl": "pkg:npm/npm-pkg-2879@3.17.3",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.17.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-25@3.2.30",
+      "name": "npm-pkg-25",
+      "purl": "pkg:npm/npm-pkg-25@3.2.30",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6859@5.18.10",
+      "name": "npm-pkg-6859",
+      "purl": "pkg:npm/npm-pkg-6859@5.18.10",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1364@5.18.0",
+      "name": "npm-pkg-1364",
+      "purl": "pkg:npm/npm-pkg-1364@5.18.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3900@0.12.28",
+      "name": "npm-pkg-3900",
+      "purl": "pkg:npm/npm-pkg-3900@0.12.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4977@4.18.21",
+      "name": "npm-pkg-4977",
+      "purl": "pkg:npm/npm-pkg-4977@4.18.21",
+      "scope": "required",
+      "type": "library",
+      "version": "4.18.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5028@5.17.0",
+      "name": "npm-pkg-5028",
+      "purl": "pkg:npm/npm-pkg-5028@5.17.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.17.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5613@5.5.22",
+      "name": "npm-pkg-5613",
+      "purl": "pkg:npm/npm-pkg-5613@5.5.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9666@0.7.21",
+      "name": "npm-pkg-9666",
+      "purl": "pkg:npm/npm-pkg-9666@0.7.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2608@4.16.29",
+      "name": "npm-pkg-2608",
+      "purl": "pkg:npm/npm-pkg-2608@4.16.29",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.16.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1854@0.4.0",
+      "name": "npm-pkg-1854",
+      "purl": "pkg:npm/npm-pkg-1854@0.4.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.4.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2419@3.8.0",
+      "name": "npm-pkg-2419",
+      "purl": "pkg:npm/npm-pkg-2419@3.8.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9970@2.4.12",
+      "name": "npm-pkg-9970",
+      "purl": "pkg:npm/npm-pkg-9970@2.4.12",
+      "scope": "required",
+      "type": "library",
+      "version": "2.4.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7276@4.3.3",
+      "name": "npm-pkg-7276",
+      "purl": "pkg:npm/npm-pkg-7276@4.3.3",
+      "scope": "required",
+      "type": "library",
+      "version": "4.3.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5321@3.2.27",
+      "name": "npm-pkg-5321",
+      "purl": "pkg:npm/npm-pkg-5321@3.2.27",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4485@3.14.23",
+      "name": "npm-pkg-4485",
+      "purl": "pkg:npm/npm-pkg-4485@3.14.23",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.14.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4111@3.19.13",
+      "name": "npm-pkg-4111",
+      "purl": "pkg:npm/npm-pkg-4111@3.19.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4857@2.5.3",
+      "name": "npm-pkg-4857",
+      "purl": "pkg:npm/npm-pkg-4857@2.5.3",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3352@1.9.22",
+      "name": "npm-pkg-3352",
+      "purl": "pkg:npm/npm-pkg-3352@1.9.22",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.9.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3684@5.10.5",
+      "name": "npm-pkg-3684",
+      "purl": "pkg:npm/npm-pkg-3684@5.10.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.10.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3766@3.4.19",
+      "name": "npm-pkg-3766",
+      "purl": "pkg:npm/npm-pkg-3766@3.4.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.4.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8790@3.6.19",
+      "name": "npm-pkg-8790",
+      "purl": "pkg:npm/npm-pkg-8790@3.6.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8896@4.12.22",
+      "name": "npm-pkg-8896",
+      "purl": "pkg:npm/npm-pkg-8896@4.12.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5696@3.7.5",
+      "name": "npm-pkg-5696",
+      "purl": "pkg:npm/npm-pkg-5696@3.7.5",
+      "scope": "required",
+      "type": "library",
+      "version": "3.7.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-614@5.19.26",
+      "name": "npm-pkg-614",
+      "purl": "pkg:npm/npm-pkg-614@5.19.26",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.19.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4921@1.13.21",
+      "name": "npm-pkg-4921",
+      "purl": "pkg:npm/npm-pkg-4921@1.13.21",
+      "scope": "required",
+      "type": "library",
+      "version": "1.13.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7289@3.20.15",
+      "name": "npm-pkg-7289",
+      "purl": "pkg:npm/npm-pkg-7289@3.20.15",
+      "scope": "required",
+      "type": "library",
+      "version": "3.20.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5032@5.1.25",
+      "name": "npm-pkg-5032",
+      "purl": "pkg:npm/npm-pkg-5032@5.1.25",
+      "scope": "required",
+      "type": "library",
+      "version": "5.1.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9205@2.13.7",
+      "name": "npm-pkg-9205",
+      "purl": "pkg:npm/npm-pkg-9205@2.13.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.13.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8291@2.11.24",
+      "name": "npm-pkg-8291",
+      "purl": "pkg:npm/npm-pkg-8291@2.11.24",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8614@1.0.13",
+      "name": "npm-pkg-8614",
+      "purl": "pkg:npm/npm-pkg-8614@1.0.13",
+      "scope": "required",
+      "type": "library",
+      "version": "1.0.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6348@4.11.27",
+      "name": "npm-pkg-6348",
+      "purl": "pkg:npm/npm-pkg-6348@4.11.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.11.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9163@4.12.11",
+      "name": "npm-pkg-9163",
+      "purl": "pkg:npm/npm-pkg-9163@4.12.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1753@1.6.5",
+      "name": "npm-pkg-1753",
+      "purl": "pkg:npm/npm-pkg-1753@1.6.5",
+      "scope": "required",
+      "type": "library",
+      "version": "1.6.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6449@3.5.13",
+      "name": "npm-pkg-6449",
+      "purl": "pkg:npm/npm-pkg-6449@3.5.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6128@1.19.5",
+      "name": "npm-pkg-6128",
+      "purl": "pkg:npm/npm-pkg-6128@1.19.5",
+      "scope": "required",
+      "type": "library",
+      "version": "1.19.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1916@1.12.3",
+      "name": "npm-pkg-1916",
+      "purl": "pkg:npm/npm-pkg-1916@1.12.3",
+      "scope": "required",
+      "type": "library",
+      "version": "1.12.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9855@2.20.16",
+      "name": "npm-pkg-9855",
+      "purl": "pkg:npm/npm-pkg-9855@2.20.16",
+      "scope": "required",
+      "type": "library",
+      "version": "2.20.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6822@1.10.9",
+      "name": "npm-pkg-6822",
+      "purl": "pkg:npm/npm-pkg-6822@1.10.9",
+      "scope": "required",
+      "type": "library",
+      "version": "1.10.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1585@0.10.21",
+      "name": "npm-pkg-1585",
+      "purl": "pkg:npm/npm-pkg-1585@0.10.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7552@5.13.3",
+      "name": "npm-pkg-7552",
+      "purl": "pkg:npm/npm-pkg-7552@5.13.3",
+      "scope": "required",
+      "type": "library",
+      "version": "5.13.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3125@4.15.10",
+      "name": "npm-pkg-3125",
+      "purl": "pkg:npm/npm-pkg-3125@4.15.10",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.15.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2042@0.11.7",
+      "name": "npm-pkg-2042",
+      "purl": "pkg:npm/npm-pkg-2042@0.11.7",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7265@3.3.29",
+      "name": "npm-pkg-7265",
+      "purl": "pkg:npm/npm-pkg-7265@3.3.29",
+      "scope": "required",
+      "type": "library",
+      "version": "3.3.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2146@0.0.21",
+      "name": "npm-pkg-2146",
+      "purl": "pkg:npm/npm-pkg-2146@0.0.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6932@0.14.15",
+      "name": "npm-pkg-6932",
+      "purl": "pkg:npm/npm-pkg-6932@0.14.15",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7354@3.11.23",
+      "name": "npm-pkg-7354",
+      "purl": "pkg:npm/npm-pkg-7354@3.11.23",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-771@3.5.13",
+      "name": "npm-pkg-771",
+      "purl": "pkg:npm/npm-pkg-771@3.5.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4191@5.17.16",
+      "name": "npm-pkg-4191",
+      "purl": "pkg:npm/npm-pkg-4191@5.17.16",
+      "scope": "required",
+      "type": "library",
+      "version": "5.17.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6957@0.11.30",
+      "name": "npm-pkg-6957",
+      "purl": "pkg:npm/npm-pkg-6957@0.11.30",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-180@2.3.10",
+      "name": "npm-pkg-180",
+      "purl": "pkg:npm/npm-pkg-180@2.3.10",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4230@3.3.22",
+      "name": "npm-pkg-4230",
+      "purl": "pkg:npm/npm-pkg-4230@3.3.22",
+      "scope": "required",
+      "type": "library",
+      "version": "3.3.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5979@0.13.28",
+      "name": "npm-pkg-5979",
+      "purl": "pkg:npm/npm-pkg-5979@0.13.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9468@4.8.10",
+      "name": "npm-pkg-9468",
+      "purl": "pkg:npm/npm-pkg-9468@4.8.10",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9477@2.7.23",
+      "name": "npm-pkg-9477",
+      "purl": "pkg:npm/npm-pkg-9477@2.7.23",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8644@3.8.1",
+      "name": "npm-pkg-8644",
+      "purl": "pkg:npm/npm-pkg-8644@3.8.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8640@3.9.13",
+      "name": "npm-pkg-8640",
+      "purl": "pkg:npm/npm-pkg-8640@3.9.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.9.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3407@5.18.14",
+      "name": "npm-pkg-3407",
+      "purl": "pkg:npm/npm-pkg-3407@5.18.14",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.18.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5863@4.9.30",
+      "name": "npm-pkg-5863",
+      "purl": "pkg:npm/npm-pkg-5863@4.9.30",
+      "scope": "required",
+      "type": "library",
+      "version": "4.9.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5101@0.19.7",
+      "name": "npm-pkg-5101",
+      "purl": "pkg:npm/npm-pkg-5101@0.19.7",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3246@4.19.10",
+      "name": "npm-pkg-3246",
+      "purl": "pkg:npm/npm-pkg-3246@4.19.10",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2012@5.10.12",
+      "name": "npm-pkg-2012",
+      "purl": "pkg:npm/npm-pkg-2012@5.10.12",
+      "scope": "required",
+      "type": "library",
+      "version": "5.10.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7566@4.12.21",
+      "name": "npm-pkg-7566",
+      "purl": "pkg:npm/npm-pkg-7566@4.12.21",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6106@3.14.18",
+      "name": "npm-pkg-6106",
+      "purl": "pkg:npm/npm-pkg-6106@3.14.18",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9330@3.11.0",
+      "name": "npm-pkg-9330",
+      "purl": "pkg:npm/npm-pkg-9330@3.11.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6330@5.11.25",
+      "name": "npm-pkg-6330",
+      "purl": "pkg:npm/npm-pkg-6330@5.11.25",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.11.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7862@0.11.13",
+      "name": "npm-pkg-7862",
+      "purl": "pkg:npm/npm-pkg-7862@0.11.13",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.11.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-722@4.0.27",
+      "name": "npm-pkg-722",
+      "purl": "pkg:npm/npm-pkg-722@4.0.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.0.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8854@4.1.3",
+      "name": "npm-pkg-8854",
+      "purl": "pkg:npm/npm-pkg-8854@4.1.3",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7074@2.12.9",
+      "name": "npm-pkg-7074",
+      "purl": "pkg:npm/npm-pkg-7074@2.12.9",
+      "scope": "required",
+      "type": "library",
+      "version": "2.12.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-37@1.6.1",
+      "name": "npm-pkg-37",
+      "purl": "pkg:npm/npm-pkg-37@1.6.1",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.6.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3750@1.1.22",
+      "name": "npm-pkg-3750",
+      "purl": "pkg:npm/npm-pkg-3750@1.1.22",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8843@3.3.21",
+      "name": "npm-pkg-8843",
+      "purl": "pkg:npm/npm-pkg-8843@3.3.21",
+      "scope": "required",
+      "type": "library",
+      "version": "3.3.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4737@1.3.27",
+      "name": "npm-pkg-4737",
+      "purl": "pkg:npm/npm-pkg-4737@1.3.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.3.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3759@0.2.29",
+      "name": "npm-pkg-3759",
+      "purl": "pkg:npm/npm-pkg-3759@0.2.29",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.2.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1177@4.12.1",
+      "name": "npm-pkg-1177",
+      "purl": "pkg:npm/npm-pkg-1177@4.12.1",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7223@4.0.24",
+      "name": "npm-pkg-7223",
+      "purl": "pkg:npm/npm-pkg-7223@4.0.24",
+      "scope": "required",
+      "type": "library",
+      "version": "4.0.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6701@2.17.21",
+      "name": "npm-pkg-6701",
+      "purl": "pkg:npm/npm-pkg-6701@2.17.21",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3116@0.13.9",
+      "name": "npm-pkg-3116",
+      "purl": "pkg:npm/npm-pkg-3116@0.13.9",
+      "scope": "required",
+      "type": "library",
+      "version": "0.13.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4383@5.17.5",
+      "name": "npm-pkg-4383",
+      "purl": "pkg:npm/npm-pkg-4383@5.17.5",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.17.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-800@0.14.30",
+      "name": "npm-pkg-800",
+      "purl": "pkg:npm/npm-pkg-800@0.14.30",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7832@3.20.20",
+      "name": "npm-pkg-7832",
+      "purl": "pkg:npm/npm-pkg-7832@3.20.20",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.20.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-14@2.3.25",
+      "name": "npm-pkg-14",
+      "purl": "pkg:npm/npm-pkg-14@2.3.25",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7042@1.8.30",
+      "name": "npm-pkg-7042",
+      "purl": "pkg:npm/npm-pkg-7042@1.8.30",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.8.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8583@4.4.6",
+      "name": "npm-pkg-8583",
+      "purl": "pkg:npm/npm-pkg-8583@4.4.6",
+      "scope": "required",
+      "type": "library",
+      "version": "4.4.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2609@5.9.0",
+      "name": "npm-pkg-2609",
+      "purl": "pkg:npm/npm-pkg-2609@5.9.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.9.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3168@3.12.2",
+      "name": "npm-pkg-3168",
+      "purl": "pkg:npm/npm-pkg-3168@3.12.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6405@0.0.11",
+      "name": "npm-pkg-6405",
+      "purl": "pkg:npm/npm-pkg-6405@0.0.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4530@4.7.6",
+      "name": "npm-pkg-4530",
+      "purl": "pkg:npm/npm-pkg-4530@4.7.6",
+      "scope": "required",
+      "type": "library",
+      "version": "4.7.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4197@0.9.17",
+      "name": "npm-pkg-4197",
+      "purl": "pkg:npm/npm-pkg-4197@0.9.17",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8905@0.7.14",
+      "name": "npm-pkg-8905",
+      "purl": "pkg:npm/npm-pkg-8905@0.7.14",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2256@1.4.6",
+      "name": "npm-pkg-2256",
+      "purl": "pkg:npm/npm-pkg-2256@1.4.6",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.4.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1961@3.8.18",
+      "name": "npm-pkg-1961",
+      "purl": "pkg:npm/npm-pkg-1961@3.8.18",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5950@1.6.24",
+      "name": "npm-pkg-5950",
+      "purl": "pkg:npm/npm-pkg-5950@1.6.24",
+      "scope": "required",
+      "type": "library",
+      "version": "1.6.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5893@3.2.29",
+      "name": "npm-pkg-5893",
+      "purl": "pkg:npm/npm-pkg-5893@3.2.29",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4702@4.1.17",
+      "name": "npm-pkg-4702",
+      "purl": "pkg:npm/npm-pkg-4702@4.1.17",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3709@5.8.15",
+      "name": "npm-pkg-3709",
+      "purl": "pkg:npm/npm-pkg-3709@5.8.15",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.8.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5004@1.8.14",
+      "name": "npm-pkg-5004",
+      "purl": "pkg:npm/npm-pkg-5004@1.8.14",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.8.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1694@1.9.3",
+      "name": "npm-pkg-1694",
+      "purl": "pkg:npm/npm-pkg-1694@1.9.3",
+      "scope": "required",
+      "type": "library",
+      "version": "1.9.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6790@0.15.10",
+      "name": "npm-pkg-6790",
+      "purl": "pkg:npm/npm-pkg-6790@0.15.10",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4893@1.1.29",
+      "name": "npm-pkg-4893",
+      "purl": "pkg:npm/npm-pkg-4893@1.1.29",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.1.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4770@3.2.28",
+      "name": "npm-pkg-4770",
+      "purl": "pkg:npm/npm-pkg-4770@3.2.28",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.2.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3319@4.0.0",
+      "name": "npm-pkg-3319",
+      "purl": "pkg:npm/npm-pkg-3319@4.0.0",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.0.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3311@0.20.26",
+      "name": "npm-pkg-3311",
+      "purl": "pkg:npm/npm-pkg-3311@0.20.26",
+      "scope": "required",
+      "type": "library",
+      "version": "0.20.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1537@2.15.16",
+      "name": "npm-pkg-1537",
+      "purl": "pkg:npm/npm-pkg-1537@2.15.16",
+      "scope": "required",
+      "type": "library",
+      "version": "2.15.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5478@4.19.7",
+      "name": "npm-pkg-5478",
+      "purl": "pkg:npm/npm-pkg-5478@4.19.7",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5864@5.18.22",
+      "name": "npm-pkg-5864",
+      "purl": "pkg:npm/npm-pkg-5864@5.18.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.18.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8006@5.13.1",
+      "name": "npm-pkg-8006",
+      "purl": "pkg:npm/npm-pkg-8006@5.13.1",
+      "scope": "required",
+      "type": "library",
+      "version": "5.13.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5949@1.17.30",
+      "name": "npm-pkg-5949",
+      "purl": "pkg:npm/npm-pkg-5949@1.17.30",
+      "scope": "required",
+      "type": "library",
+      "version": "1.17.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9091@5.16.11",
+      "name": "npm-pkg-9091",
+      "purl": "pkg:npm/npm-pkg-9091@5.16.11",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8804@0.20.20",
+      "name": "npm-pkg-8804",
+      "purl": "pkg:npm/npm-pkg-8804@0.20.20",
+      "scope": "required",
+      "type": "library",
+      "version": "0.20.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7101@3.1.20",
+      "name": "npm-pkg-7101",
+      "purl": "pkg:npm/npm-pkg-7101@3.1.20",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7741@1.15.12",
+      "name": "npm-pkg-7741",
+      "purl": "pkg:npm/npm-pkg-7741@1.15.12",
+      "scope": "required",
+      "type": "library",
+      "version": "1.15.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5832@0.8.3",
+      "name": "npm-pkg-5832",
+      "purl": "pkg:npm/npm-pkg-5832@0.8.3",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6926@1.20.6",
+      "name": "npm-pkg-6926",
+      "purl": "pkg:npm/npm-pkg-6926@1.20.6",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3497@3.0.3",
+      "name": "npm-pkg-3497",
+      "purl": "pkg:npm/npm-pkg-3497@3.0.3",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8643@3.11.5",
+      "name": "npm-pkg-8643",
+      "purl": "pkg:npm/npm-pkg-8643@3.11.5",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2168@1.19.9",
+      "name": "npm-pkg-2168",
+      "purl": "pkg:npm/npm-pkg-2168@1.19.9",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.19.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5043@3.9.13",
+      "name": "npm-pkg-5043",
+      "purl": "pkg:npm/npm-pkg-5043@3.9.13",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.9.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9113@3.6.2",
+      "name": "npm-pkg-9113",
+      "purl": "pkg:npm/npm-pkg-9113@3.6.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6159@2.6.19",
+      "name": "npm-pkg-6159",
+      "purl": "pkg:npm/npm-pkg-6159@2.6.19",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.6.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4290@2.7.23",
+      "name": "npm-pkg-4290",
+      "purl": "pkg:npm/npm-pkg-4290@2.7.23",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9010@0.6.23",
+      "name": "npm-pkg-9010",
+      "purl": "pkg:npm/npm-pkg-9010@0.6.23",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3058@0.14.5",
+      "name": "npm-pkg-3058",
+      "purl": "pkg:npm/npm-pkg-3058@0.14.5",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3695@2.19.13",
+      "name": "npm-pkg-3695",
+      "purl": "pkg:npm/npm-pkg-3695@2.19.13",
+      "scope": "required",
+      "type": "library",
+      "version": "2.19.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7450@0.8.27",
+      "name": "npm-pkg-7450",
+      "purl": "pkg:npm/npm-pkg-7450@0.8.27",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1504@5.1.8",
+      "name": "npm-pkg-1504",
+      "purl": "pkg:npm/npm-pkg-1504@5.1.8",
+      "scope": "required",
+      "type": "library",
+      "version": "5.1.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5508@5.2.24",
+      "name": "npm-pkg-5508",
+      "purl": "pkg:npm/npm-pkg-5508@5.2.24",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8607@4.13.23",
+      "name": "npm-pkg-8607",
+      "purl": "pkg:npm/npm-pkg-8607@4.13.23",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6864@0.3.22",
+      "name": "npm-pkg-6864",
+      "purl": "pkg:npm/npm-pkg-6864@0.3.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.3.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1953@0.1.13",
+      "name": "npm-pkg-1953",
+      "purl": "pkg:npm/npm-pkg-1953@0.1.13",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.1.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4050@2.18.29",
+      "name": "npm-pkg-4050",
+      "purl": "pkg:npm/npm-pkg-4050@2.18.29",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.18.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3701@2.19.21",
+      "name": "npm-pkg-3701",
+      "purl": "pkg:npm/npm-pkg-3701@2.19.21",
+      "scope": "required",
+      "type": "library",
+      "version": "2.19.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-222@5.9.29",
+      "name": "npm-pkg-222",
+      "purl": "pkg:npm/npm-pkg-222@5.9.29",
+      "scope": "required",
+      "type": "library",
+      "version": "5.9.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9270@2.15.8",
+      "name": "npm-pkg-9270",
+      "purl": "pkg:npm/npm-pkg-9270@2.15.8",
+      "scope": "required",
+      "type": "library",
+      "version": "2.15.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8484@5.2.24",
+      "name": "npm-pkg-8484",
+      "purl": "pkg:npm/npm-pkg-8484@5.2.24",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4357@2.12.0",
+      "name": "npm-pkg-4357",
+      "purl": "pkg:npm/npm-pkg-4357@2.12.0",
+      "scope": "required",
+      "type": "library",
+      "version": "2.12.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6404@0.19.11",
+      "name": "npm-pkg-6404",
+      "purl": "pkg:npm/npm-pkg-6404@0.19.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9153@5.0.23",
+      "name": "npm-pkg-9153",
+      "purl": "pkg:npm/npm-pkg-9153@5.0.23",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1139@0.0.22",
+      "name": "npm-pkg-1139",
+      "purl": "pkg:npm/npm-pkg-1139@0.0.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5137@5.4.0",
+      "name": "npm-pkg-5137",
+      "purl": "pkg:npm/npm-pkg-5137@5.4.0",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.4.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8021@0.0.18",
+      "name": "npm-pkg-8021",
+      "purl": "pkg:npm/npm-pkg-8021@0.0.18",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7270@0.6.24",
+      "name": "npm-pkg-7270",
+      "purl": "pkg:npm/npm-pkg-7270@0.6.24",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8074@1.7.1",
+      "name": "npm-pkg-8074",
+      "purl": "pkg:npm/npm-pkg-8074@1.7.1",
+      "scope": "required",
+      "type": "library",
+      "version": "1.7.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7422@0.6.1",
+      "name": "npm-pkg-7422",
+      "purl": "pkg:npm/npm-pkg-7422@0.6.1",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8606@4.15.14",
+      "name": "npm-pkg-8606",
+      "purl": "pkg:npm/npm-pkg-8606@4.15.14",
+      "scope": "required",
+      "type": "library",
+      "version": "4.15.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6890@5.12.27",
+      "name": "npm-pkg-6890",
+      "purl": "pkg:npm/npm-pkg-6890@5.12.27",
+      "scope": "required",
+      "type": "library",
+      "version": "5.12.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1723@2.12.7",
+      "name": "npm-pkg-1723",
+      "purl": "pkg:npm/npm-pkg-1723@2.12.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.12.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1371@0.0.5",
+      "name": "npm-pkg-1371",
+      "purl": "pkg:npm/npm-pkg-1371@0.0.5",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4020@4.7.30",
+      "name": "npm-pkg-4020",
+      "purl": "pkg:npm/npm-pkg-4020@4.7.30",
+      "scope": "required",
+      "type": "library",
+      "version": "4.7.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-816@2.0.20",
+      "name": "npm-pkg-816",
+      "purl": "pkg:npm/npm-pkg-816@2.0.20",
+      "scope": "required",
+      "type": "library",
+      "version": "2.0.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-57@0.9.5",
+      "name": "npm-pkg-57",
+      "purl": "pkg:npm/npm-pkg-57@0.9.5",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3226@3.2.28",
+      "name": "npm-pkg-3226",
+      "purl": "pkg:npm/npm-pkg-3226@3.2.28",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8070@0.10.29",
+      "name": "npm-pkg-8070",
+      "purl": "pkg:npm/npm-pkg-8070@0.10.29",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2922@4.7.29",
+      "name": "npm-pkg-2922",
+      "purl": "pkg:npm/npm-pkg-2922@4.7.29",
+      "scope": "required",
+      "type": "library",
+      "version": "4.7.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1339@1.13.14",
+      "name": "npm-pkg-1339",
+      "purl": "pkg:npm/npm-pkg-1339@1.13.14",
+      "scope": "required",
+      "type": "library",
+      "version": "1.13.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8376@5.2.25",
+      "name": "npm-pkg-8376",
+      "purl": "pkg:npm/npm-pkg-8376@5.2.25",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9868@3.15.0",
+      "name": "npm-pkg-9868",
+      "purl": "pkg:npm/npm-pkg-9868@3.15.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.15.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8174@4.5.18",
+      "name": "npm-pkg-8174",
+      "purl": "pkg:npm/npm-pkg-8174@4.5.18",
+      "scope": "required",
+      "type": "library",
+      "version": "4.5.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3339@4.16.2",
+      "name": "npm-pkg-3339",
+      "purl": "pkg:npm/npm-pkg-3339@4.16.2",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7974@5.3.16",
+      "name": "npm-pkg-7974",
+      "purl": "pkg:npm/npm-pkg-7974@5.3.16",
+      "scope": "required",
+      "type": "library",
+      "version": "5.3.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2218@4.19.19",
+      "name": "npm-pkg-2218",
+      "purl": "pkg:npm/npm-pkg-2218@4.19.19",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4785@3.0.21",
+      "name": "npm-pkg-4785",
+      "purl": "pkg:npm/npm-pkg-4785@3.0.21",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-927@3.12.30",
+      "name": "npm-pkg-927",
+      "purl": "pkg:npm/npm-pkg-927@3.12.30",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5404@0.12.15",
+      "name": "npm-pkg-5404",
+      "purl": "pkg:npm/npm-pkg-5404@0.12.15",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.12.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8491@1.10.18",
+      "name": "npm-pkg-8491",
+      "purl": "pkg:npm/npm-pkg-8491@1.10.18",
+      "scope": "required",
+      "type": "library",
+      "version": "1.10.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3211@2.17.23",
+      "name": "npm-pkg-3211",
+      "purl": "pkg:npm/npm-pkg-3211@2.17.23",
+      "scope": "required",
+      "type": "library",
+      "version": "2.17.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2264@2.3.14",
+      "name": "npm-pkg-2264",
+      "purl": "pkg:npm/npm-pkg-2264@2.3.14",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6162@2.7.26",
+      "name": "npm-pkg-6162",
+      "purl": "pkg:npm/npm-pkg-6162@2.7.26",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6481@1.16.25",
+      "name": "npm-pkg-6481",
+      "purl": "pkg:npm/npm-pkg-6481@1.16.25",
+      "scope": "required",
+      "type": "library",
+      "version": "1.16.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9381@0.19.25",
+      "name": "npm-pkg-9381",
+      "purl": "pkg:npm/npm-pkg-9381@0.19.25",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-244@4.4.22",
+      "name": "npm-pkg-244",
+      "purl": "pkg:npm/npm-pkg-244@4.4.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.4.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2529@5.4.0",
+      "name": "npm-pkg-2529",
+      "purl": "pkg:npm/npm-pkg-2529@5.4.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2229@3.5.16",
+      "name": "npm-pkg-2229",
+      "purl": "pkg:npm/npm-pkg-2229@3.5.16",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7653@4.9.8",
+      "name": "npm-pkg-7653",
+      "purl": "pkg:npm/npm-pkg-7653@4.9.8",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.9.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-724@3.1.28",
+      "name": "npm-pkg-724",
+      "purl": "pkg:npm/npm-pkg-724@3.1.28",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8888@4.18.21",
+      "name": "npm-pkg-8888",
+      "purl": "pkg:npm/npm-pkg-8888@4.18.21",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.18.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7579@4.1.26",
+      "name": "npm-pkg-7579",
+      "purl": "pkg:npm/npm-pkg-7579@4.1.26",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3823@1.20.4",
+      "name": "npm-pkg-3823",
+      "purl": "pkg:npm/npm-pkg-3823@1.20.4",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.20.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2917@3.18.11",
+      "name": "npm-pkg-2917",
+      "purl": "pkg:npm/npm-pkg-2917@3.18.11",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3189@5.15.16",
+      "name": "npm-pkg-3189",
+      "purl": "pkg:npm/npm-pkg-3189@5.15.16",
+      "scope": "required",
+      "type": "library",
+      "version": "5.15.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7665@3.1.20",
+      "name": "npm-pkg-7665",
+      "purl": "pkg:npm/npm-pkg-7665@3.1.20",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1565@5.18.12",
+      "name": "npm-pkg-1565",
+      "purl": "pkg:npm/npm-pkg-1565@5.18.12",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.18.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2865@0.6.16",
+      "name": "npm-pkg-2865",
+      "purl": "pkg:npm/npm-pkg-2865@0.6.16",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6579@0.14.1",
+      "name": "npm-pkg-6579",
+      "purl": "pkg:npm/npm-pkg-6579@0.14.1",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2728@1.6.17",
+      "name": "npm-pkg-2728",
+      "purl": "pkg:npm/npm-pkg-2728@1.6.17",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.6.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9503@3.19.28",
+      "name": "npm-pkg-9503",
+      "purl": "pkg:npm/npm-pkg-9503@3.19.28",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.19.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3353@2.7.4",
+      "name": "npm-pkg-3353",
+      "purl": "pkg:npm/npm-pkg-3353@2.7.4",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4844@3.10.27",
+      "name": "npm-pkg-4844",
+      "purl": "pkg:npm/npm-pkg-4844@3.10.27",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-558@0.6.27",
+      "name": "npm-pkg-558",
+      "purl": "pkg:npm/npm-pkg-558@0.6.27",
+      "scope": "required",
+      "type": "library",
+      "version": "0.6.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7939@0.15.2",
+      "name": "npm-pkg-7939",
+      "purl": "pkg:npm/npm-pkg-7939@0.15.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2770@2.7.7",
+      "name": "npm-pkg-2770",
+      "purl": "pkg:npm/npm-pkg-2770@2.7.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1192@3.10.17",
+      "name": "npm-pkg-1192",
+      "purl": "pkg:npm/npm-pkg-1192@3.10.17",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-580@4.17.20",
+      "name": "npm-pkg-580",
+      "purl": "pkg:npm/npm-pkg-580@4.17.20",
+      "scope": "required",
+      "type": "library",
+      "version": "4.17.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8936@0.3.10",
+      "name": "npm-pkg-8936",
+      "purl": "pkg:npm/npm-pkg-8936@0.3.10",
+      "scope": "required",
+      "type": "library",
+      "version": "0.3.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3568@0.12.2",
+      "name": "npm-pkg-3568",
+      "purl": "pkg:npm/npm-pkg-3568@0.12.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3186@5.0.4",
+      "name": "npm-pkg-3186",
+      "purl": "pkg:npm/npm-pkg-3186@5.0.4",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5748@0.5.3",
+      "name": "npm-pkg-5748",
+      "purl": "pkg:npm/npm-pkg-5748@0.5.3",
+      "scope": "required",
+      "type": "library",
+      "version": "0.5.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2595@0.11.22",
+      "name": "npm-pkg-2595",
+      "purl": "pkg:npm/npm-pkg-2595@0.11.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1379@3.7.13",
+      "name": "npm-pkg-1379",
+      "purl": "pkg:npm/npm-pkg-1379@3.7.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.7.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9850@5.8.26",
+      "name": "npm-pkg-9850",
+      "purl": "pkg:npm/npm-pkg-9850@5.8.26",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8360@1.9.3",
+      "name": "npm-pkg-8360",
+      "purl": "pkg:npm/npm-pkg-8360@1.9.3",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.9.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8663@1.6.16",
+      "name": "npm-pkg-8663",
+      "purl": "pkg:npm/npm-pkg-8663@1.6.16",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.6.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1079@1.11.25",
+      "name": "npm-pkg-1079",
+      "purl": "pkg:npm/npm-pkg-1079@1.11.25",
+      "scope": "required",
+      "type": "library",
+      "version": "1.11.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1866@5.4.5",
+      "name": "npm-pkg-1866",
+      "purl": "pkg:npm/npm-pkg-1866@5.4.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3541@5.16.28",
+      "name": "npm-pkg-3541",
+      "purl": "pkg:npm/npm-pkg-3541@5.16.28",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3355@3.17.14",
+      "name": "npm-pkg-3355",
+      "purl": "pkg:npm/npm-pkg-3355@3.17.14",
+      "scope": "required",
+      "type": "library",
+      "version": "3.17.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6483@0.9.22",
+      "name": "npm-pkg-6483",
+      "purl": "pkg:npm/npm-pkg-6483@0.9.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5892@2.5.9",
+      "name": "npm-pkg-5892",
+      "purl": "pkg:npm/npm-pkg-5892@2.5.9",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.5.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8514@5.10.9",
+      "name": "npm-pkg-8514",
+      "purl": "pkg:npm/npm-pkg-8514@5.10.9",
+      "scope": "required",
+      "type": "library",
+      "version": "5.10.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4194@4.1.16",
+      "name": "npm-pkg-4194",
+      "purl": "pkg:npm/npm-pkg-4194@4.1.16",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1155@5.5.19",
+      "name": "npm-pkg-1155",
+      "purl": "pkg:npm/npm-pkg-1155@5.5.19",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5087@2.20.14",
+      "name": "npm-pkg-5087",
+      "purl": "pkg:npm/npm-pkg-5087@2.20.14",
+      "scope": "required",
+      "type": "library",
+      "version": "2.20.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6572@0.8.26",
+      "name": "npm-pkg-6572",
+      "purl": "pkg:npm/npm-pkg-6572@0.8.26",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1446@1.19.7",
+      "name": "npm-pkg-1446",
+      "purl": "pkg:npm/npm-pkg-1446@1.19.7",
+      "scope": "required",
+      "type": "library",
+      "version": "1.19.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-843@5.11.10",
+      "name": "npm-pkg-843",
+      "purl": "pkg:npm/npm-pkg-843@5.11.10",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.11.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4664@4.12.11",
+      "name": "npm-pkg-4664",
+      "purl": "pkg:npm/npm-pkg-4664@4.12.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-177@4.13.1",
+      "name": "npm-pkg-177",
+      "purl": "pkg:npm/npm-pkg-177@4.13.1",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6999@2.7.7",
+      "name": "npm-pkg-6999",
+      "purl": "pkg:npm/npm-pkg-6999@2.7.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8337@3.19.5",
+      "name": "npm-pkg-8337",
+      "purl": "pkg:npm/npm-pkg-8337@3.19.5",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8910@3.14.3",
+      "name": "npm-pkg-8910",
+      "purl": "pkg:npm/npm-pkg-8910@3.14.3",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.14.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9836@3.9.8",
+      "name": "npm-pkg-9836",
+      "purl": "pkg:npm/npm-pkg-9836@3.9.8",
+      "scope": "required",
+      "type": "library",
+      "version": "3.9.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6546@4.9.25",
+      "name": "npm-pkg-6546",
+      "purl": "pkg:npm/npm-pkg-6546@4.9.25",
+      "scope": "required",
+      "type": "library",
+      "version": "4.9.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3999@3.5.0",
+      "name": "npm-pkg-3999",
+      "purl": "pkg:npm/npm-pkg-3999@3.5.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6835@4.7.26",
+      "name": "npm-pkg-6835",
+      "purl": "pkg:npm/npm-pkg-6835@4.7.26",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.7.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6896@3.0.15",
+      "name": "npm-pkg-6896",
+      "purl": "pkg:npm/npm-pkg-6896@3.0.15",
+      "scope": "required",
+      "type": "library",
+      "version": "3.0.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6369@4.18.30",
+      "name": "npm-pkg-6369",
+      "purl": "pkg:npm/npm-pkg-6369@4.18.30",
+      "scope": "required",
+      "type": "library",
+      "version": "4.18.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8950@0.15.17",
+      "name": "npm-pkg-8950",
+      "purl": "pkg:npm/npm-pkg-8950@0.15.17",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2801@1.1.18",
+      "name": "npm-pkg-2801",
+      "purl": "pkg:npm/npm-pkg-2801@1.1.18",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6715@4.10.7",
+      "name": "npm-pkg-6715",
+      "purl": "pkg:npm/npm-pkg-6715@4.10.7",
+      "scope": "required",
+      "type": "library",
+      "version": "4.10.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1449@0.0.0",
+      "name": "npm-pkg-1449",
+      "purl": "pkg:npm/npm-pkg-1449@0.0.0",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6679@5.0.0",
+      "name": "npm-pkg-6679",
+      "purl": "pkg:npm/npm-pkg-6679@5.0.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8347@1.5.27",
+      "name": "npm-pkg-8347",
+      "purl": "pkg:npm/npm-pkg-8347@1.5.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.5.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8082@0.2.20",
+      "name": "npm-pkg-8082",
+      "purl": "pkg:npm/npm-pkg-8082@0.2.20",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.2.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2373@4.16.8",
+      "name": "npm-pkg-2373",
+      "purl": "pkg:npm/npm-pkg-2373@4.16.8",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.16.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3053@3.16.4",
+      "name": "npm-pkg-3053",
+      "purl": "pkg:npm/npm-pkg-3053@3.16.4",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6216@5.4.8",
+      "name": "npm-pkg-6216",
+      "purl": "pkg:npm/npm-pkg-6216@5.4.8",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3561@0.14.24",
+      "name": "npm-pkg-3561",
+      "purl": "pkg:npm/npm-pkg-3561@0.14.24",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4476@3.12.8",
+      "name": "npm-pkg-4476",
+      "purl": "pkg:npm/npm-pkg-4476@3.12.8",
+      "scope": "required",
+      "type": "library",
+      "version": "3.12.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2714@5.6.3",
+      "name": "npm-pkg-2714",
+      "purl": "pkg:npm/npm-pkg-2714@5.6.3",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7775@3.14.19",
+      "name": "npm-pkg-7775",
+      "purl": "pkg:npm/npm-pkg-7775@3.14.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1388@2.2.22",
+      "name": "npm-pkg-1388",
+      "purl": "pkg:npm/npm-pkg-1388@2.2.22",
+      "scope": "required",
+      "type": "library",
+      "version": "2.2.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3537@2.9.14",
+      "name": "npm-pkg-3537",
+      "purl": "pkg:npm/npm-pkg-3537@2.9.14",
+      "scope": "required",
+      "type": "library",
+      "version": "2.9.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7197@1.20.11",
+      "name": "npm-pkg-7197",
+      "purl": "pkg:npm/npm-pkg-7197@1.20.11",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1034@4.18.18",
+      "name": "npm-pkg-1034",
+      "purl": "pkg:npm/npm-pkg-1034@4.18.18",
+      "scope": "required",
+      "type": "library",
+      "version": "4.18.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3441@1.5.2",
+      "name": "npm-pkg-3441",
+      "purl": "pkg:npm/npm-pkg-3441@1.5.2",
+      "scope": "required",
+      "type": "library",
+      "version": "1.5.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7080@5.12.16",
+      "name": "npm-pkg-7080",
+      "purl": "pkg:npm/npm-pkg-7080@5.12.16",
+      "scope": "required",
+      "type": "library",
+      "version": "5.12.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9671@1.5.14",
+      "name": "npm-pkg-9671",
+      "purl": "pkg:npm/npm-pkg-9671@1.5.14",
+      "scope": "required",
+      "type": "library",
+      "version": "1.5.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3605@4.6.30",
+      "name": "npm-pkg-3605",
+      "purl": "pkg:npm/npm-pkg-3605@4.6.30",
+      "scope": "required",
+      "type": "library",
+      "version": "4.6.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2817@4.8.23",
+      "name": "npm-pkg-2817",
+      "purl": "pkg:npm/npm-pkg-2817@4.8.23",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1488@2.0.28",
+      "name": "npm-pkg-1488",
+      "purl": "pkg:npm/npm-pkg-1488@2.0.28",
+      "scope": "required",
+      "type": "library",
+      "version": "2.0.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8044@2.5.10",
+      "name": "npm-pkg-8044",
+      "purl": "pkg:npm/npm-pkg-8044@2.5.10",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5263@3.18.16",
+      "name": "npm-pkg-5263",
+      "purl": "pkg:npm/npm-pkg-5263@3.18.16",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7694@0.15.22",
+      "name": "npm-pkg-7694",
+      "purl": "pkg:npm/npm-pkg-7694@0.15.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3558@2.10.4",
+      "name": "npm-pkg-3558",
+      "purl": "pkg:npm/npm-pkg-3558@2.10.4",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-567@5.13.28",
+      "name": "npm-pkg-567",
+      "purl": "pkg:npm/npm-pkg-567@5.13.28",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.13.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5154@0.2.2",
+      "name": "npm-pkg-5154",
+      "purl": "pkg:npm/npm-pkg-5154@0.2.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.2.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6141@4.9.13",
+      "name": "npm-pkg-6141",
+      "purl": "pkg:npm/npm-pkg-6141@4.9.13",
+      "scope": "required",
+      "type": "library",
+      "version": "4.9.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9384@3.11.26",
+      "name": "npm-pkg-9384",
+      "purl": "pkg:npm/npm-pkg-9384@3.11.26",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5393@5.1.0",
+      "name": "npm-pkg-5393",
+      "purl": "pkg:npm/npm-pkg-5393@5.1.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.1.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4398@5.16.10",
+      "name": "npm-pkg-4398",
+      "purl": "pkg:npm/npm-pkg-4398@5.16.10",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4658@4.3.0",
+      "name": "npm-pkg-4658",
+      "purl": "pkg:npm/npm-pkg-4658@4.3.0",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.3.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3393@1.2.25",
+      "name": "npm-pkg-3393",
+      "purl": "pkg:npm/npm-pkg-3393@1.2.25",
+      "scope": "required",
+      "type": "library",
+      "version": "1.2.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7021@0.8.24",
+      "name": "npm-pkg-7021",
+      "purl": "pkg:npm/npm-pkg-7021@0.8.24",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9081@5.6.28",
+      "name": "npm-pkg-9081",
+      "purl": "pkg:npm/npm-pkg-9081@5.6.28",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8381@5.2.19",
+      "name": "npm-pkg-8381",
+      "purl": "pkg:npm/npm-pkg-8381@5.2.19",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6897@0.0.2",
+      "name": "npm-pkg-6897",
+      "purl": "pkg:npm/npm-pkg-6897@0.0.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.0.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1880@4.10.22",
+      "name": "npm-pkg-1880",
+      "purl": "pkg:npm/npm-pkg-1880@4.10.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.10.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4309@2.12.2",
+      "name": "npm-pkg-4309",
+      "purl": "pkg:npm/npm-pkg-4309@2.12.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.12.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1671@2.15.11",
+      "name": "npm-pkg-1671",
+      "purl": "pkg:npm/npm-pkg-1671@2.15.11",
+      "scope": "required",
+      "type": "library",
+      "version": "2.15.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2195@0.1.21",
+      "name": "npm-pkg-2195",
+      "purl": "pkg:npm/npm-pkg-2195@0.1.21",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5753@2.18.27",
+      "name": "npm-pkg-5753",
+      "purl": "pkg:npm/npm-pkg-5753@2.18.27",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.18.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2692@5.2.17",
+      "name": "npm-pkg-2692",
+      "purl": "pkg:npm/npm-pkg-2692@5.2.17",
+      "scope": "required",
+      "type": "library",
+      "version": "5.2.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4644@4.19.10",
+      "name": "npm-pkg-4644",
+      "purl": "pkg:npm/npm-pkg-4644@4.19.10",
+      "scope": "required",
+      "type": "library",
+      "version": "4.19.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1241@2.5.7",
+      "name": "npm-pkg-1241",
+      "purl": "pkg:npm/npm-pkg-1241@2.5.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.5.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3773@1.20.12",
+      "name": "npm-pkg-3773",
+      "purl": "pkg:npm/npm-pkg-3773@1.20.12",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9277@2.3.13",
+      "name": "npm-pkg-9277",
+      "purl": "pkg:npm/npm-pkg-9277@2.3.13",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.3.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4728@1.8.14",
+      "name": "npm-pkg-4728",
+      "purl": "pkg:npm/npm-pkg-4728@1.8.14",
+      "scope": "required",
+      "type": "library",
+      "version": "1.8.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4351@5.16.0",
+      "name": "npm-pkg-4351",
+      "purl": "pkg:npm/npm-pkg-4351@5.16.0",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9540@2.19.16",
+      "name": "npm-pkg-9540",
+      "purl": "pkg:npm/npm-pkg-9540@2.19.16",
+      "scope": "required",
+      "type": "library",
+      "version": "2.19.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6202@2.11.16",
+      "name": "npm-pkg-6202",
+      "purl": "pkg:npm/npm-pkg-6202@2.11.16",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7166@5.4.24",
+      "name": "npm-pkg-7166",
+      "purl": "pkg:npm/npm-pkg-7166@5.4.24",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2970@4.8.10",
+      "name": "npm-pkg-2970",
+      "purl": "pkg:npm/npm-pkg-2970@4.8.10",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1243@4.13.22",
+      "name": "npm-pkg-1243",
+      "purl": "pkg:npm/npm-pkg-1243@4.13.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4288@0.20.11",
+      "name": "npm-pkg-4288",
+      "purl": "pkg:npm/npm-pkg-4288@0.20.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.20.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1334@1.11.15",
+      "name": "npm-pkg-1334",
+      "purl": "pkg:npm/npm-pkg-1334@1.11.15",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.11.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-377@3.18.22",
+      "name": "npm-pkg-377",
+      "purl": "pkg:npm/npm-pkg-377@3.18.22",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2584@3.20.12",
+      "name": "npm-pkg-2584",
+      "purl": "pkg:npm/npm-pkg-2584@3.20.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.20.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5031@5.6.7",
+      "name": "npm-pkg-5031",
+      "purl": "pkg:npm/npm-pkg-5031@5.6.7",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7639@5.14.22",
+      "name": "npm-pkg-7639",
+      "purl": "pkg:npm/npm-pkg-7639@5.14.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.14.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3634@5.0.15",
+      "name": "npm-pkg-3634",
+      "purl": "pkg:npm/npm-pkg-3634@5.0.15",
+      "scope": "required",
+      "type": "library",
+      "version": "5.0.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7541@3.14.12",
+      "name": "npm-pkg-7541",
+      "purl": "pkg:npm/npm-pkg-7541@3.14.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9100@4.20.12",
+      "name": "npm-pkg-9100",
+      "purl": "pkg:npm/npm-pkg-9100@4.20.12",
+      "scope": "required",
+      "type": "library",
+      "version": "4.20.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8809@0.9.23",
+      "name": "npm-pkg-8809",
+      "purl": "pkg:npm/npm-pkg-8809@0.9.23",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1230@4.13.26",
+      "name": "npm-pkg-1230",
+      "purl": "pkg:npm/npm-pkg-1230@4.13.26",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.13.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3777@5.20.8",
+      "name": "npm-pkg-3777",
+      "purl": "pkg:npm/npm-pkg-3777@5.20.8",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.20.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6981@4.20.10",
+      "name": "npm-pkg-6981",
+      "purl": "pkg:npm/npm-pkg-6981@4.20.10",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.20.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3731@0.8.6",
+      "name": "npm-pkg-3731",
+      "purl": "pkg:npm/npm-pkg-3731@0.8.6",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4520@5.12.24",
+      "name": "npm-pkg-4520",
+      "purl": "pkg:npm/npm-pkg-4520@5.12.24",
+      "scope": "required",
+      "type": "library",
+      "version": "5.12.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8375@0.14.29",
+      "name": "npm-pkg-8375",
+      "purl": "pkg:npm/npm-pkg-8375@0.14.29",
+      "scope": "required",
+      "type": "library",
+      "version": "0.14.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6264@3.17.3",
+      "name": "npm-pkg-6264",
+      "purl": "pkg:npm/npm-pkg-6264@3.17.3",
+      "scope": "required",
+      "type": "library",
+      "version": "3.17.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2383@5.8.22",
+      "name": "npm-pkg-2383",
+      "purl": "pkg:npm/npm-pkg-2383@5.8.22",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6547@2.2.5",
+      "name": "npm-pkg-6547",
+      "purl": "pkg:npm/npm-pkg-6547@2.2.5",
+      "scope": "required",
+      "type": "library",
+      "version": "2.2.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-209@1.16.26",
+      "name": "npm-pkg-209",
+      "purl": "pkg:npm/npm-pkg-209@1.16.26",
+      "scope": "required",
+      "type": "library",
+      "version": "1.16.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8977@2.4.21",
+      "name": "npm-pkg-8977",
+      "purl": "pkg:npm/npm-pkg-8977@2.4.21",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.4.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7633@4.14.17",
+      "name": "npm-pkg-7633",
+      "purl": "pkg:npm/npm-pkg-7633@4.14.17",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.14.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7968@3.16.16",
+      "name": "npm-pkg-7968",
+      "purl": "pkg:npm/npm-pkg-7968@3.16.16",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8384@2.18.18",
+      "name": "npm-pkg-8384",
+      "purl": "pkg:npm/npm-pkg-8384@2.18.18",
+      "scope": "required",
+      "type": "library",
+      "version": "2.18.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1968@3.19.14",
+      "name": "npm-pkg-1968",
+      "purl": "pkg:npm/npm-pkg-1968@3.19.14",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5186@3.10.13",
+      "name": "npm-pkg-5186",
+      "purl": "pkg:npm/npm-pkg-5186@3.10.13",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-189@5.11.11",
+      "name": "npm-pkg-189",
+      "purl": "pkg:npm/npm-pkg-189@5.11.11",
+      "scope": "required",
+      "type": "library",
+      "version": "5.11.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8671@1.20.13",
+      "name": "npm-pkg-8671",
+      "purl": "pkg:npm/npm-pkg-8671@1.20.13",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-965@4.17.23",
+      "name": "npm-pkg-965",
+      "purl": "pkg:npm/npm-pkg-965@4.17.23",
+      "scope": "required",
+      "type": "library",
+      "version": "4.17.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8229@2.6.2",
+      "name": "npm-pkg-8229",
+      "purl": "pkg:npm/npm-pkg-8229@2.6.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3069@2.9.28",
+      "name": "npm-pkg-3069",
+      "purl": "pkg:npm/npm-pkg-3069@2.9.28",
+      "scope": "required",
+      "type": "library",
+      "version": "2.9.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1107@3.14.8",
+      "name": "npm-pkg-1107",
+      "purl": "pkg:npm/npm-pkg-1107@3.14.8",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6672@5.8.1",
+      "name": "npm-pkg-6672",
+      "purl": "pkg:npm/npm-pkg-6672@5.8.1",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2276@0.2.18",
+      "name": "npm-pkg-2276",
+      "purl": "pkg:npm/npm-pkg-2276@0.2.18",
+      "scope": "required",
+      "type": "library",
+      "version": "0.2.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7258@1.2.12",
+      "name": "npm-pkg-7258",
+      "purl": "pkg:npm/npm-pkg-7258@1.2.12",
+      "scope": "required",
+      "type": "library",
+      "version": "1.2.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3351@2.14.10",
+      "name": "npm-pkg-3351",
+      "purl": "pkg:npm/npm-pkg-3351@2.14.10",
+      "scope": "required",
+      "type": "library",
+      "version": "2.14.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5126@4.1.15",
+      "name": "npm-pkg-5126",
+      "purl": "pkg:npm/npm-pkg-5126@4.1.15",
+      "scope": "required",
+      "type": "library",
+      "version": "4.1.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7651@4.10.22",
+      "name": "npm-pkg-7651",
+      "purl": "pkg:npm/npm-pkg-7651@4.10.22",
+      "scope": "required",
+      "type": "library",
+      "version": "4.10.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5778@3.18.2",
+      "name": "npm-pkg-5778",
+      "purl": "pkg:npm/npm-pkg-5778@3.18.2",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1821@3.18.28",
+      "name": "npm-pkg-1821",
+      "purl": "pkg:npm/npm-pkg-1821@3.18.28",
+      "scope": "required",
+      "type": "library",
+      "version": "3.18.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3504@5.16.6",
+      "name": "npm-pkg-3504",
+      "purl": "pkg:npm/npm-pkg-3504@5.16.6",
+      "scope": "required",
+      "type": "library",
+      "version": "5.16.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7307@0.15.27",
+      "name": "npm-pkg-7307",
+      "purl": "pkg:npm/npm-pkg-7307@0.15.27",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5151@0.8.6",
+      "name": "npm-pkg-5151",
+      "purl": "pkg:npm/npm-pkg-5151@0.8.6",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1956@0.10.18",
+      "name": "npm-pkg-1956",
+      "purl": "pkg:npm/npm-pkg-1956@0.10.18",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8175@5.16.14",
+      "name": "npm-pkg-8175",
+      "purl": "pkg:npm/npm-pkg-8175@5.16.14",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.16.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6622@3.15.24",
+      "name": "npm-pkg-6622",
+      "purl": "pkg:npm/npm-pkg-6622@3.15.24",
+      "scope": "required",
+      "type": "library",
+      "version": "3.15.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7914@0.9.14",
+      "name": "npm-pkg-7914",
+      "purl": "pkg:npm/npm-pkg-7914@0.9.14",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2265@1.2.5",
+      "name": "npm-pkg-2265",
+      "purl": "pkg:npm/npm-pkg-2265@1.2.5",
+      "scope": "required",
+      "type": "library",
+      "version": "1.2.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6068@1.17.28",
+      "name": "npm-pkg-6068",
+      "purl": "pkg:npm/npm-pkg-6068@1.17.28",
+      "scope": "required",
+      "type": "library",
+      "version": "1.17.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7843@0.7.5",
+      "name": "npm-pkg-7843",
+      "purl": "pkg:npm/npm-pkg-7843@0.7.5",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.7.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4434@2.0.9",
+      "name": "npm-pkg-4434",
+      "purl": "pkg:npm/npm-pkg-4434@2.0.9",
+      "scope": "required",
+      "type": "library",
+      "version": "2.0.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-649@4.13.8",
+      "name": "npm-pkg-649",
+      "purl": "pkg:npm/npm-pkg-649@4.13.8",
+      "scope": "required",
+      "type": "library",
+      "version": "4.13.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8519@1.9.30",
+      "name": "npm-pkg-8519",
+      "purl": "pkg:npm/npm-pkg-8519@1.9.30",
+      "scope": "required",
+      "type": "library",
+      "version": "1.9.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2001@2.6.6",
+      "name": "npm-pkg-2001",
+      "purl": "pkg:npm/npm-pkg-2001@2.6.6",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9445@0.16.28",
+      "name": "npm-pkg-9445",
+      "purl": "pkg:npm/npm-pkg-9445@0.16.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.16.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8349@0.20.9",
+      "name": "npm-pkg-8349",
+      "purl": "pkg:npm/npm-pkg-8349@0.20.9",
+      "scope": "required",
+      "type": "library",
+      "version": "0.20.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7776@2.9.2",
+      "name": "npm-pkg-7776",
+      "purl": "pkg:npm/npm-pkg-7776@2.9.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.9.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1223@1.11.22",
+      "name": "npm-pkg-1223",
+      "purl": "pkg:npm/npm-pkg-1223@1.11.22",
+      "scope": "required",
+      "type": "library",
+      "version": "1.11.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-390@5.9.20",
+      "name": "npm-pkg-390",
+      "purl": "pkg:npm/npm-pkg-390@5.9.20",
+      "scope": "required",
+      "type": "library",
+      "version": "5.9.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6479@2.2.2",
+      "name": "npm-pkg-6479",
+      "purl": "pkg:npm/npm-pkg-6479@2.2.2",
+      "scope": "required",
+      "type": "library",
+      "version": "2.2.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2948@3.19.10",
+      "name": "npm-pkg-2948",
+      "purl": "pkg:npm/npm-pkg-2948@3.19.10",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5875@5.19.29",
+      "name": "npm-pkg-5875",
+      "purl": "pkg:npm/npm-pkg-5875@5.19.29",
+      "scope": "required",
+      "type": "library",
+      "version": "5.19.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2904@3.2.1",
+      "name": "npm-pkg-2904",
+      "purl": "pkg:npm/npm-pkg-2904@3.2.1",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2396@4.12.11",
+      "name": "npm-pkg-2396",
+      "purl": "pkg:npm/npm-pkg-2396@4.12.11",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7038@0.10.11",
+      "name": "npm-pkg-7038",
+      "purl": "pkg:npm/npm-pkg-7038@0.10.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8372@1.1.0",
+      "name": "npm-pkg-8372",
+      "purl": "pkg:npm/npm-pkg-8372@1.1.0",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7424@0.9.26",
+      "name": "npm-pkg-7424",
+      "purl": "pkg:npm/npm-pkg-7424@0.9.26",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.9.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5353@2.10.14",
+      "name": "npm-pkg-5353",
+      "purl": "pkg:npm/npm-pkg-5353@2.10.14",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2778@1.8.16",
+      "name": "npm-pkg-2778",
+      "purl": "pkg:npm/npm-pkg-2778@1.8.16",
+      "scope": "required",
+      "type": "library",
+      "version": "1.8.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-790@1.4.12",
+      "name": "npm-pkg-790",
+      "purl": "pkg:npm/npm-pkg-790@1.4.12",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.4.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3603@1.16.25",
+      "name": "npm-pkg-3603",
+      "purl": "pkg:npm/npm-pkg-3603@1.16.25",
+      "scope": "required",
+      "type": "library",
+      "version": "1.16.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3424@0.10.27",
+      "name": "npm-pkg-3424",
+      "purl": "pkg:npm/npm-pkg-3424@0.10.27",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6959@0.19.4",
+      "name": "npm-pkg-6959",
+      "purl": "pkg:npm/npm-pkg-6959@0.19.4",
+      "scope": "required",
+      "type": "library",
+      "version": "0.19.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7229@2.10.7",
+      "name": "npm-pkg-7229",
+      "purl": "pkg:npm/npm-pkg-7229@2.10.7",
+      "scope": "required",
+      "type": "library",
+      "version": "2.10.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5102@4.7.25",
+      "name": "npm-pkg-5102",
+      "purl": "pkg:npm/npm-pkg-5102@4.7.25",
+      "scope": "required",
+      "type": "library",
+      "version": "4.7.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4643@3.8.9",
+      "name": "npm-pkg-4643",
+      "purl": "pkg:npm/npm-pkg-4643@3.8.9",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1307@4.18.10",
+      "name": "npm-pkg-1307",
+      "purl": "pkg:npm/npm-pkg-1307@4.18.10",
+      "scope": "required",
+      "type": "library",
+      "version": "4.18.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3117@5.19.27",
+      "name": "npm-pkg-3117",
+      "purl": "pkg:npm/npm-pkg-3117@5.19.27",
+      "scope": "required",
+      "type": "library",
+      "version": "5.19.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9776@4.2.14",
+      "name": "npm-pkg-9776",
+      "purl": "pkg:npm/npm-pkg-9776@4.2.14",
+      "scope": "required",
+      "type": "library",
+      "version": "4.2.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3175@5.13.2",
+      "name": "npm-pkg-3175",
+      "purl": "pkg:npm/npm-pkg-3175@5.13.2",
+      "scope": "required",
+      "type": "library",
+      "version": "5.13.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9106@3.6.0",
+      "name": "npm-pkg-9106",
+      "purl": "pkg:npm/npm-pkg-9106@3.6.0",
+      "scope": "required",
+      "type": "library",
+      "version": "3.6.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7335@2.4.27",
+      "name": "npm-pkg-7335",
+      "purl": "pkg:npm/npm-pkg-7335@2.4.27",
+      "scope": "required",
+      "type": "library",
+      "version": "2.4.27"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8365@0.10.15",
+      "name": "npm-pkg-8365",
+      "purl": "pkg:npm/npm-pkg-8365@0.10.15",
+      "scope": "required",
+      "type": "library",
+      "version": "0.10.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-858@2.3.21",
+      "name": "npm-pkg-858",
+      "purl": "pkg:npm/npm-pkg-858@2.3.21",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7756@3.3.4",
+      "name": "npm-pkg-7756",
+      "purl": "pkg:npm/npm-pkg-7756@3.3.4",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.3.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3907@4.17.25",
+      "name": "npm-pkg-3907",
+      "purl": "pkg:npm/npm-pkg-3907@4.17.25",
+      "scope": "required",
+      "type": "library",
+      "version": "4.17.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5618@3.10.22",
+      "name": "npm-pkg-5618",
+      "purl": "pkg:npm/npm-pkg-5618@3.10.22",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8204@0.18.1",
+      "name": "npm-pkg-8204",
+      "purl": "pkg:npm/npm-pkg-8204@0.18.1",
+      "scope": "required",
+      "type": "library",
+      "version": "0.18.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2567@3.14.7",
+      "name": "npm-pkg-2567",
+      "purl": "pkg:npm/npm-pkg-2567@3.14.7",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6899@2.8.10",
+      "name": "npm-pkg-6899",
+      "purl": "pkg:npm/npm-pkg-6899@2.8.10",
+      "scope": "required",
+      "type": "library",
+      "version": "2.8.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8087@2.7.13",
+      "name": "npm-pkg-8087",
+      "purl": "pkg:npm/npm-pkg-8087@2.7.13",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4371@1.3.1",
+      "name": "npm-pkg-4371",
+      "purl": "pkg:npm/npm-pkg-4371@1.3.1",
+      "scope": "required",
+      "type": "library",
+      "version": "1.3.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1680@3.5.12",
+      "name": "npm-pkg-1680",
+      "purl": "pkg:npm/npm-pkg-1680@3.5.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4515@5.4.5",
+      "name": "npm-pkg-4515",
+      "purl": "pkg:npm/npm-pkg-4515@5.4.5",
+      "scope": "required",
+      "type": "library",
+      "version": "5.4.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1679@2.4.28",
+      "name": "npm-pkg-1679",
+      "purl": "pkg:npm/npm-pkg-1679@2.4.28",
+      "scope": "required",
+      "type": "library",
+      "version": "2.4.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6490@5.10.15",
+      "name": "npm-pkg-6490",
+      "purl": "pkg:npm/npm-pkg-6490@5.10.15",
+      "scope": "required",
+      "type": "library",
+      "version": "5.10.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7326@5.11.21",
+      "name": "npm-pkg-7326",
+      "purl": "pkg:npm/npm-pkg-7326@5.11.21",
+      "scope": "required",
+      "type": "library",
+      "version": "5.11.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6667@0.11.17",
+      "name": "npm-pkg-6667",
+      "purl": "pkg:npm/npm-pkg-6667@0.11.17",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8600@4.11.17",
+      "name": "npm-pkg-8600",
+      "purl": "pkg:npm/npm-pkg-8600@4.11.17",
+      "scope": "required",
+      "type": "library",
+      "version": "4.11.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8509@1.5.18",
+      "name": "npm-pkg-8509",
+      "purl": "pkg:npm/npm-pkg-8509@1.5.18",
+      "scope": "required",
+      "type": "library",
+      "version": "1.5.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7322@3.1.19",
+      "name": "npm-pkg-7322",
+      "purl": "pkg:npm/npm-pkg-7322@3.1.19",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3667@0.14.10",
+      "name": "npm-pkg-3667",
+      "purl": "pkg:npm/npm-pkg-3667@0.14.10",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.14.10"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-469@3.1.3",
+      "name": "npm-pkg-469",
+      "purl": "pkg:npm/npm-pkg-469@3.1.3",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9759@3.15.12",
+      "name": "npm-pkg-9759",
+      "purl": "pkg:npm/npm-pkg-9759@3.15.12",
+      "scope": "required",
+      "type": "library",
+      "version": "3.15.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4394@3.19.14",
+      "name": "npm-pkg-4394",
+      "purl": "pkg:npm/npm-pkg-4394@3.19.14",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8180@3.16.18",
+      "name": "npm-pkg-8180",
+      "purl": "pkg:npm/npm-pkg-8180@3.16.18",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1024@1.9.28",
+      "name": "npm-pkg-1024",
+      "purl": "pkg:npm/npm-pkg-1024@1.9.28",
+      "scope": "required",
+      "type": "library",
+      "version": "1.9.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3133@3.10.22",
+      "name": "npm-pkg-3133",
+      "purl": "pkg:npm/npm-pkg-3133@3.10.22",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6207@0.5.13",
+      "name": "npm-pkg-6207",
+      "purl": "pkg:npm/npm-pkg-6207@0.5.13",
+      "scope": "required",
+      "type": "library",
+      "version": "0.5.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7189@2.8.23",
+      "name": "npm-pkg-7189",
+      "purl": "pkg:npm/npm-pkg-7189@2.8.23",
+      "scope": "required",
+      "type": "library",
+      "version": "2.8.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4553@0.10.9",
+      "name": "npm-pkg-4553",
+      "purl": "pkg:npm/npm-pkg-4553@0.10.9",
+      "scope": "optional",
+      "type": "library",
+      "version": "0.10.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7801@5.6.6",
+      "name": "npm-pkg-7801",
+      "purl": "pkg:npm/npm-pkg-7801@5.6.6",
+      "scope": "required",
+      "type": "library",
+      "version": "5.6.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7514@2.7.13",
+      "name": "npm-pkg-7514",
+      "purl": "pkg:npm/npm-pkg-7514@2.7.13",
+      "scope": "required",
+      "type": "library",
+      "version": "2.7.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3099@0.9.8",
+      "name": "npm-pkg-3099",
+      "purl": "pkg:npm/npm-pkg-3099@0.9.8",
+      "scope": "required",
+      "type": "library",
+      "version": "0.9.8"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1554@4.2.3",
+      "name": "npm-pkg-1554",
+      "purl": "pkg:npm/npm-pkg-1554@4.2.3",
+      "scope": "required",
+      "type": "library",
+      "version": "4.2.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3459@0.15.17",
+      "name": "npm-pkg-3459",
+      "purl": "pkg:npm/npm-pkg-3459@0.15.17",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-857@2.9.0",
+      "name": "npm-pkg-857",
+      "purl": "pkg:npm/npm-pkg-857@2.9.0",
+      "scope": "required",
+      "type": "library",
+      "version": "2.9.0"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9439@0.11.6",
+      "name": "npm-pkg-9439",
+      "purl": "pkg:npm/npm-pkg-9439@0.11.6",
+      "scope": "required",
+      "type": "library",
+      "version": "0.11.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1692@3.16.15",
+      "name": "npm-pkg-1692",
+      "purl": "pkg:npm/npm-pkg-1692@3.16.15",
+      "scope": "required",
+      "type": "library",
+      "version": "3.16.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5755@0.5.28",
+      "name": "npm-pkg-5755",
+      "purl": "pkg:npm/npm-pkg-5755@0.5.28",
+      "scope": "required",
+      "type": "library",
+      "version": "0.5.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2605@2.11.20",
+      "name": "npm-pkg-2605",
+      "purl": "pkg:npm/npm-pkg-2605@2.11.20",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.20"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7029@2.3.14",
+      "name": "npm-pkg-7029",
+      "purl": "pkg:npm/npm-pkg-7029@2.3.14",
+      "scope": "required",
+      "type": "library",
+      "version": "2.3.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8167@1.13.26",
+      "name": "npm-pkg-8167",
+      "purl": "pkg:npm/npm-pkg-8167@1.13.26",
+      "scope": "required",
+      "type": "library",
+      "version": "1.13.26"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-849@0.4.1",
+      "name": "npm-pkg-849",
+      "purl": "pkg:npm/npm-pkg-849@0.4.1",
+      "scope": "required",
+      "type": "library",
+      "version": "0.4.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6372@3.5.14",
+      "name": "npm-pkg-6372",
+      "purl": "pkg:npm/npm-pkg-6372@3.5.14",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.5.14"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3412@3.14.21",
+      "name": "npm-pkg-3412",
+      "purl": "pkg:npm/npm-pkg-3412@3.14.21",
+      "scope": "required",
+      "type": "library",
+      "version": "3.14.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6425@3.19.15",
+      "name": "npm-pkg-6425",
+      "purl": "pkg:npm/npm-pkg-6425@3.19.15",
+      "scope": "required",
+      "type": "library",
+      "version": "3.19.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6190@4.15.24",
+      "name": "npm-pkg-6190",
+      "purl": "pkg:npm/npm-pkg-6190@4.15.24",
+      "scope": "required",
+      "type": "library",
+      "version": "4.15.24"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1154@3.8.17",
+      "name": "npm-pkg-1154",
+      "purl": "pkg:npm/npm-pkg-1154@3.8.17",
+      "scope": "required",
+      "type": "library",
+      "version": "3.8.17"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9293@4.8.29",
+      "name": "npm-pkg-9293",
+      "purl": "pkg:npm/npm-pkg-9293@4.8.29",
+      "scope": "required",
+      "type": "library",
+      "version": "4.8.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9783@1.15.18",
+      "name": "npm-pkg-9783",
+      "purl": "pkg:npm/npm-pkg-9783@1.15.18",
+      "scope": "optional",
+      "type": "library",
+      "version": "1.15.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4743@4.12.28",
+      "name": "npm-pkg-4743",
+      "purl": "pkg:npm/npm-pkg-4743@4.12.28",
+      "scope": "required",
+      "type": "library",
+      "version": "4.12.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2231@2.11.23",
+      "name": "npm-pkg-2231",
+      "purl": "pkg:npm/npm-pkg-2231@2.11.23",
+      "scope": "required",
+      "type": "library",
+      "version": "2.11.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-737@2.14.3",
+      "name": "npm-pkg-737",
+      "purl": "pkg:npm/npm-pkg-737@2.14.3",
+      "scope": "required",
+      "type": "library",
+      "version": "2.14.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8983@0.15.25",
+      "name": "npm-pkg-8983",
+      "purl": "pkg:npm/npm-pkg-8983@0.15.25",
+      "scope": "required",
+      "type": "library",
+      "version": "0.15.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6739@4.11.30",
+      "name": "npm-pkg-6739",
+      "purl": "pkg:npm/npm-pkg-6739@4.11.30",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.11.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-587@2.6.19",
+      "name": "npm-pkg-587",
+      "purl": "pkg:npm/npm-pkg-587@2.6.19",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4130@2.0.30",
+      "name": "npm-pkg-4130",
+      "purl": "pkg:npm/npm-pkg-4130@2.0.30",
+      "scope": "required",
+      "type": "library",
+      "version": "2.0.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5734@1.3.18",
+      "name": "npm-pkg-5734",
+      "purl": "pkg:npm/npm-pkg-5734@1.3.18",
+      "scope": "required",
+      "type": "library",
+      "version": "1.3.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-767@3.13.30",
+      "name": "npm-pkg-767",
+      "purl": "pkg:npm/npm-pkg-767@3.13.30",
+      "scope": "required",
+      "type": "library",
+      "version": "3.13.30"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8765@3.10.6",
+      "name": "npm-pkg-8765",
+      "purl": "pkg:npm/npm-pkg-8765@3.10.6",
+      "scope": "required",
+      "type": "library",
+      "version": "3.10.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1816@5.19.28",
+      "name": "npm-pkg-1816",
+      "purl": "pkg:npm/npm-pkg-1816@5.19.28",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.19.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4741@3.1.16",
+      "name": "npm-pkg-4741",
+      "purl": "pkg:npm/npm-pkg-4741@3.1.16",
+      "scope": "required",
+      "type": "library",
+      "version": "3.1.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6703@0.7.15",
+      "name": "npm-pkg-6703",
+      "purl": "pkg:npm/npm-pkg-6703@0.7.15",
+      "scope": "required",
+      "type": "library",
+      "version": "0.7.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-726@2.19.21",
+      "name": "npm-pkg-726",
+      "purl": "pkg:npm/npm-pkg-726@2.19.21",
+      "scope": "required",
+      "type": "library",
+      "version": "2.19.21"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9683@0.12.5",
+      "name": "npm-pkg-9683",
+      "purl": "pkg:npm/npm-pkg-9683@0.12.5",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6381@5.5.9",
+      "name": "npm-pkg-6381",
+      "purl": "pkg:npm/npm-pkg-6381@5.5.9",
+      "scope": "required",
+      "type": "library",
+      "version": "5.5.9"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1881@5.14.25",
+      "name": "npm-pkg-1881",
+      "purl": "pkg:npm/npm-pkg-1881@5.14.25",
+      "scope": "required",
+      "type": "library",
+      "version": "5.14.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7406@4.16.23",
+      "name": "npm-pkg-7406",
+      "purl": "pkg:npm/npm-pkg-7406@4.16.23",
+      "scope": "required",
+      "type": "library",
+      "version": "4.16.23"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4874@2.8.18",
+      "name": "npm-pkg-4874",
+      "purl": "pkg:npm/npm-pkg-4874@2.8.18",
+      "scope": "optional",
+      "type": "library",
+      "version": "2.8.18"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8961@5.20.25",
+      "name": "npm-pkg-8961",
+      "purl": "pkg:npm/npm-pkg-8961@5.20.25",
+      "scope": "optional",
+      "type": "library",
+      "version": "5.20.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5283@1.4.5",
+      "name": "npm-pkg-5283",
+      "purl": "pkg:npm/npm-pkg-5283@1.4.5",
+      "scope": "required",
+      "type": "library",
+      "version": "1.4.5"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-416@5.8.7",
+      "name": "npm-pkg-416",
+      "purl": "pkg:npm/npm-pkg-416@5.8.7",
+      "scope": "required",
+      "type": "library",
+      "version": "5.8.7"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1383@4.14.13",
+      "name": "npm-pkg-1383",
+      "purl": "pkg:npm/npm-pkg-1383@4.14.13",
+      "scope": "required",
+      "type": "library",
+      "version": "4.14.13"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4442@1.9.6",
+      "name": "npm-pkg-4442",
+      "purl": "pkg:npm/npm-pkg-4442@1.9.6",
+      "scope": "required",
+      "type": "library",
+      "version": "1.9.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-9824@4.10.12",
+      "name": "npm-pkg-9824",
+      "purl": "pkg:npm/npm-pkg-9824@4.10.12",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.10.12"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-7135@1.2.29",
+      "name": "npm-pkg-7135",
+      "purl": "pkg:npm/npm-pkg-7135@1.2.29",
+      "scope": "required",
+      "type": "library",
+      "version": "1.2.29"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4287@4.3.1",
+      "name": "npm-pkg-4287",
+      "purl": "pkg:npm/npm-pkg-4287@4.3.1",
+      "scope": "required",
+      "type": "library",
+      "version": "4.3.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-5328@1.9.15",
+      "name": "npm-pkg-5328",
+      "purl": "pkg:npm/npm-pkg-5328@1.9.15",
+      "scope": "required",
+      "type": "library",
+      "version": "1.9.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6002@1.1.1",
+      "name": "npm-pkg-6002",
+      "purl": "pkg:npm/npm-pkg-6002@1.1.1",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-720@1.19.15",
+      "name": "npm-pkg-720",
+      "purl": "pkg:npm/npm-pkg-720@1.19.15",
+      "scope": "required",
+      "type": "library",
+      "version": "1.19.15"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6094@3.9.16",
+      "name": "npm-pkg-6094",
+      "purl": "pkg:npm/npm-pkg-6094@3.9.16",
+      "scope": "optional",
+      "type": "library",
+      "version": "3.9.16"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8891@0.1.22",
+      "name": "npm-pkg-8891",
+      "purl": "pkg:npm/npm-pkg-8891@0.1.22",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.22"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-210@4.3.1",
+      "name": "npm-pkg-210",
+      "purl": "pkg:npm/npm-pkg-210@4.3.1",
+      "scope": "optional",
+      "type": "library",
+      "version": "4.3.1"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3270@1.1.19",
+      "name": "npm-pkg-3270",
+      "purl": "pkg:npm/npm-pkg-3270@1.1.19",
+      "scope": "required",
+      "type": "library",
+      "version": "1.1.19"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-981@3.11.25",
+      "name": "npm-pkg-981",
+      "purl": "pkg:npm/npm-pkg-981@3.11.25",
+      "scope": "required",
+      "type": "library",
+      "version": "3.11.25"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8181@3.2.4",
+      "name": "npm-pkg-8181",
+      "purl": "pkg:npm/npm-pkg-8181@3.2.4",
+      "scope": "required",
+      "type": "library",
+      "version": "3.2.4"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-8140@3.5.28",
+      "name": "npm-pkg-8140",
+      "purl": "pkg:npm/npm-pkg-8140@3.5.28",
+      "scope": "required",
+      "type": "library",
+      "version": "3.5.28"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-2821@0.8.11",
+      "name": "npm-pkg-2821",
+      "purl": "pkg:npm/npm-pkg-2821@0.8.11",
+      "scope": "required",
+      "type": "library",
+      "version": "0.8.11"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-3302@0.12.3",
+      "name": "npm-pkg-3302",
+      "purl": "pkg:npm/npm-pkg-3302@0.12.3",
+      "scope": "required",
+      "type": "library",
+      "version": "0.12.3"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-4306@2.6.6",
+      "name": "npm-pkg-4306",
+      "purl": "pkg:npm/npm-pkg-4306@2.6.6",
+      "scope": "required",
+      "type": "library",
+      "version": "2.6.6"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-6526@0.1.2",
+      "name": "npm-pkg-6526",
+      "purl": "pkg:npm/npm-pkg-6526@0.1.2",
+      "scope": "required",
+      "type": "library",
+      "version": "0.1.2"
+    },
+    {
+      "bom-ref": "M2_diverse_node:npm:npm-pkg-1353@1.20.1",
+      "name": "npm-pkg-1353",
+      "purl": "pkg:npm/npm-pkg-1353@1.20.1",
+      "scope": "required",
+      "type": "library",
+      "version": "1.20.1"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "name": "demo-app",
+      "type": "application",
+      "version": "0.1.0"
+    },
+    "timestamp": "2026-02-25T12:00:00Z",
+    "tools": [
+      {
+        "name": "demo-bundle-generator",
+        "vendor": "Argonaut",
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "specVersion": "1.5",
+  "version": 1
+}

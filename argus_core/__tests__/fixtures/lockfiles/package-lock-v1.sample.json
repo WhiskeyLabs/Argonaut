@@ -1,0 +1,27 @@
+{
+  "name": "legacy-service",
+  "version": "1.0.0",
+  "lockfileVersion": 1,
+  "requires": true,
+  "dependencies": {
+    "alpha": {
+      "version": "1.2.3",
+      "requires": {
+        "shared": "^2.0.0"
+      },
+      "dependencies": {
+        "shared": {
+          "version": "2.0.1"
+        }
+      }
+    },
+    "beta": {
+      "version": "^4.0.0",
+      "dev": true
+    },
+    "gamma": {
+      "version": "5.0.0",
+      "optional": true
+    }
+  }
+}

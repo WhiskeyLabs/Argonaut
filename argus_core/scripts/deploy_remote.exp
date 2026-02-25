@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+set host "45.33.28.137"
+
+# Sync files
+spawn rsync -avz --exclude "node_modules" --exclude ".git" --exclude ".next" ./ root@$host:/opt/argus/app
+>>>>>>> feature/dependency-graph-upgrade
+expect "password:"
+send "$password\r"
+expect eof
+
+# Run build and restart on server
+<<<<<<< HEAD
+spawn ssh $user@$host "source ~/.nvm/nvm.sh && nvm use 20 && cd /opt/argus/app && NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build && pm2 restart argus-app"
+=======
+spawn ssh root@$host "source ~/.nvm/nvm.sh && nvm use 20 && cd /opt/argus/app && NODE_OPTIONS=\"--max-old-space-size=4096\" npm run build && pm2 restart argus-app"
+>>>>>>> feature/dependency-graph-upgrade
+expect "password:"
+send "$password\r"
+expect eof

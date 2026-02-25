@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --muted: #111111;
+  --border: #2f2f2f;
+
+  --nav-bg: rgba(10, 14, 25, 0.82);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-fg: #e5e7eb;
+  --nav-muted: #9ca3af;
+  --nav-hover: rgba(255, 255, 255, 0.08);
+  --nav-avatar-border: rgba(255, 255, 255, 0.2);
+}
+
+.dark {
+  --nav-bg: rgba(10, 14, 25, 0.82);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-fg: #e5e7eb;
+  --nav-muted: #9ca3af;
+  --nav-hover: rgba(255, 255, 255, 0.08);
+  --nav-avatar-border: rgba(255, 255, 255, 0.2);
+}
+
+.light {
+  --background: #f4f6fb;
+  --foreground: #161b2d;
+  --muted: #475069;
+  --border: #dde4f1;
+
+  --nav-bg: rgba(255, 255, 255, 0.84);
+  --nav-border: #e5e7eb;
+  --nav-fg: #111827;
+  --nav-muted: #4b5563;
+  --nav-hover: #f3f4f6;
+  --nav-avatar-border: rgba(0, 0, 0, 0.05);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --color-primary-50: #fff0f0;
+  --color-primary-100: #ffdedd;
+  --color-primary-200: #ffc2bf;
+  --color-primary-300: #ff9a96;
+  --color-primary-400: #ff625b;
+  --color-primary-500: #871a11;
+  --color-primary-600: #75130b;
+  --color-primary-700: #610e07;
+  --color-primary-800: #4d0a05;
+  --color-primary-900: #3d0703;
+  --color-primary: var(--color-primary-500);
+
+  --color-secondary-50: #ebebf5;
+  --color-secondary-100: #d1d2e6;
+  --color-secondary-200: #a8aace;
+  --color-secondary-300: #7e81b6;
+  --color-secondary-400: #565a9e;
+  --color-secondary-500: #0a0a36;
+  --color-secondary-600: #08082e;
+  --color-secondary-700: #060624;
+  --color-secondary-800: #04041a;
+  --color-secondary-900: #020210;
+  --color-secondary: var(--color-secondary-500);
+
+  --color-tertiary-500: #d5d1d1;
+  --color-tertiary: var(--color-tertiary-500);
+
+  --font-sans: 'Urbanist', var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in-down: fade-in-down 0.6s ease-in-out forwards;
+  --animate-subtle-pulse: subtle-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes subtle-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    70% {
+      box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+      border-color: rgba(239, 68, 68, 0.8);
+    }
+
+    100% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+  }
+}
+
+body {
+  font-family: var(--font-space-grotesk), sans-serif;
+  color: var(--text, #e9ebf3);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(135, 26, 17, 0.22), transparent 40%),
+    radial-gradient(circle at 88% 20%, rgba(47, 79, 191, 0.18), transparent 42%),
+    linear-gradient(140deg, #050505 0%, #0d1119 38%, #121724 100%);
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 85%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(180deg,
+      rgba(255, 255, 255, 0.012),
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 5px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.35;
+}
+
+/* Global utility classes for the new unified aesthetic */
+.argonaut-shell {
+  width: min(1320px, 94vw);
+  margin: 0 auto;
+  padding: 2rem 0 2.2rem;
+}
+
+.argonaut-panel {
+  background: rgba(18, 23, 36, 0.84);
+  border: 1px solid rgba(213, 209, 209, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+}

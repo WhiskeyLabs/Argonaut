@@ -1,0 +1,38 @@
+{
+    "index": "argonaut_graph_views",
+    "mappings": {
+        "dynamic": "strict",
+        "_meta": {
+            "argonaut_mapping_version": "6.1"
+        },
+        "properties": {
+            "runId": {
+                "type": "keyword"
+            },
+            "bundleId": {
+                "type": "keyword"
+            },
+            "repo": {
+                "type": "keyword"
+            },
+            "createdAt": {
+                "type": "date"
+            },
+            "graphVersion": {
+                "type": "keyword"
+            },
+            "nodes": {
+                "type": "object",
+                "dynamic": false
+            },
+            "edges": {
+                "type": "object",
+                "dynamic": false
+            },
+            "stats": {
+                "type": "object",
+                "dynamic": false
+            }
+        }
+    }
+}

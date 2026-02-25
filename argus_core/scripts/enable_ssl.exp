@@ -1,0 +1,36 @@
+#!/usr/bin/expect
+
+set timeout 300
+set host "198.74.62.215"
+set user "root"
+
+if {[info exists env(WEB_NODE_PASSWORD)] && $env(WEB_NODE_PASSWORD) ne ""} {
+  set password $env(WEB_NODE_PASSWORD)
+} else {
+  stty -echo
+  send_user "Enter password for $user@$host: "
+  expect_user -re "(.*)\n"
+  stty echo
+  send_user "\n"
+  set password $expect_out(1,string)
+}
+
+send_user "\n>>> Running Certbot to enable SSL...\n"
+spawn ssh $user@$host "certbot --nginx -d argus.whiskeylabs.io --non-interactive --agree-tos --register-unsafely-without-email --redirect"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+send_user "\n>>> Reloading Nginx...\n"
+spawn ssh $user@$host "systemctl reload nginx"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}

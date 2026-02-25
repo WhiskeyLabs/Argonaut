@@ -1,0 +1,124 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "0d3f01b80243b9a35cac7c33f4b08774949495374af359241b3081396d10345a",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "6ad51914b8a447757f4520a19dd3e80919f7abf69dee40489a9d6ba9c698b188",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "0a9be87ed685fdbecb5ed5d4a0df1b715bda024908dc3d585c2c471c31facdaa",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "d4c06bd6f5814ed4980975250b3e36c62a79e0fc61b593c1299a1ab29205112d",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "120ae136abd2c245b4c1829d9f3b16898c7bba57dd8d5c6ff370f22c9075e6e1",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "969adf95e31f3c6c0ce58bbecabca3dce08eed17ca39f4ecc1d2e75fe58e2ba5",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "6e64bbae0428474cc558bdfb4de89f982e1661b9f7053af9c7efe020948a9011",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:7"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "6d0ed96a4c454e9890ab35d291a2a1ef20a7729a8d096f890a8d3d6bca90c7fe",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:8"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "46edc6fb72b3e43e58bba0274c06a842e004e39709a989841d5284f970331719",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:9"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "67325934c8c4949404691c0652baa0ebb05d5b6c013b3c9c04e8a8ff3e421f14",
+      "reachable": true
+    }
+  ]
+}

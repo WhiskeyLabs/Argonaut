@@ -1,0 +1,350 @@
+{
+  "index": "argonaut_findings",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "date_detection": false,
+    "_meta": {
+      "argonaut_mapping_version": "1.0"
+    },
+    "properties": {
+      "findingId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "runId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "repo": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "buildId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "ruleId": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "cve": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "cves": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "severity": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "title": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "description": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "filePath": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "lineNumber": {
+        "type": "integer"
+      },
+      "file": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "line": {
+        "type": "integer"
+      },
+      "package": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "version": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "fingerprint": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "tool": {
+        "type": "keyword",
+        "doc_values": true,
+        "index": true,
+        "norms": false
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      },
+      "priorityScore": {
+        "type": "float"
+      },
+      "priorityScoreBase": {
+        "type": "integer"
+      },
+      "context": {
+        "type": "object",
+        "dynamic": "strict",
+        "properties": {
+          "threat": {
+            "type": "object",
+            "dynamic": "strict",
+            "properties": {
+              "kev": {
+                "type": "boolean"
+              },
+              "epss": {
+                "type": "float"
+              },
+              "cve": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "source": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "intelVersion": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              }
+            }
+          },
+          "reachability": {
+            "type": "object",
+            "dynamic": "strict",
+            "properties": {
+              "reachable": {
+                "type": "boolean"
+              },
+              "confidenceScore": {
+                "type": "float"
+              },
+              "method": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "status": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "reason": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "evidencePath": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              },
+              "analysisVersion": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              }
+            }
+          }
+        }
+      },
+      "priorityExplanation": {
+        "type": "object",
+        "dynamic": "strict",
+        "properties": {
+          "explanationId": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "findingId": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "repo": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "buildId": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "summary": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "doc_values": true,
+                "index": true,
+                "norms": false
+              }
+            }
+          },
+          "factors": {
+            "type": "object",
+            "dynamic": "strict",
+            "properties": {
+              "kev": {
+                "type": "boolean"
+              },
+              "epss": {
+                "type": "float"
+              },
+              "reachable": {
+                "type": "boolean"
+              },
+              "internetExposed": {
+                "type": "boolean"
+              },
+              "confidenceScore": {
+                "type": "float"
+              },
+              "blastRadius": {
+                "type": "integer"
+              }
+            }
+          },
+          "scoreBreakdown": {
+            "type": "object",
+            "dynamic": "strict",
+            "properties": {
+              "exploitWeight": {
+                "type": "float"
+              },
+              "reachabilityWeight": {
+                "type": "float"
+              },
+              "exposureWeight": {
+                "type": "float"
+              },
+              "totalScore": {
+                "type": "float"
+              }
+            }
+          },
+          "reasonCodes": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "explanationVersion": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "baseScore": {
+            "type": "float"
+          },
+          "boostsApplied": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "finalScore": {
+            "type": "float"
+          },
+          "intelVersion": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "createdAt": {
+            "type": "date"
+          }
+        }
+      },
+      "triage": {
+        "type": "object",
+        "dynamic": "strict",
+        "properties": {
+          "status": {
+            "type": "keyword",
+            "doc_values": true,
+            "index": true,
+            "norms": false
+          },
+          "note": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 500
+              }
+            }
+          },
+          "updatedAt": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}

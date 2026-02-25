@@ -1,0 +1,36 @@
+#!/usr/bin/expect
+
+set timeout 60
+set host "198.74.62.215"
+set user "root"
+
+if {[info exists env(WEB_NODE_PASSWORD)] && $env(WEB_NODE_PASSWORD) ne ""} {
+  set password $env(WEB_NODE_PASSWORD)
+} else {
+  stty -echo
+  send_user "Enter password for $user@$host: "
+  expect_user -re "(.*)\n"
+  stty echo
+  send_user "\n"
+  set password $expect_out(1,string)
+}
+
+send_user "\n>>> Checking Nginx Error Log (Last 20 lines)...\n"
+spawn ssh $user@$host "tail -n 20 /var/log/nginx/error.log"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+send_user "\n>>> Checking SELinux Status...\n"
+spawn ssh $user@$host "if command -v getenforce &> /dev/null; then getenforce; else echo 'SELinux not found'; fi"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}

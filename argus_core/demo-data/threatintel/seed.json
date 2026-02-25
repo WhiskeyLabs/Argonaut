@@ -1,0 +1,8 @@
+[
+  { "cve": "CVE-2024-1111", "kev": true, "epss": 0.91, "source": "seed" },
+  { "cve": "CVE-2024-2222", "kev": false, "epss": 0.77, "source": "seed" },
+  { "cve": "CVE-2023-9999", "kev": true, "epss": null, "source": "seed" },
+  { "cve": "CVE-2022-0101", "kev": false, "epss": 0.08, "source": "seed" },
+  { "cve": "CVE-2021-1111", "kev": false, "epss": 0.54, "source": "seed" },
+  { "cve": "CVE-2020-5555", "kev": true, "epss": 0.12, "source": "seed" }
+]

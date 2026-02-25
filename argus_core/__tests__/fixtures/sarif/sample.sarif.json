@@ -1,0 +1,56 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "semgrep"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2024-1111",
+          "level": "warning",
+          "message": {
+            "text": "Upgrade vulnerable dependency"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/app.ts"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "critical",
+            "packageName": "lodash",
+            "packageVersion": "4.17.20",
+            "cves": ["CVE-2024-2222", "CVE-2024-1111"]
+          }
+        },
+        {
+          "ruleId": "RULE-NO-CVE",
+          "level": "note",
+          "message": {
+            "text": "No vulnerability identifier present"
+          }
+        },
+        {
+          "ruleId": "RULE-MULTI-CVE",
+          "level": "error",
+          "message": {
+            "text": "Impacts CVE-2023-9999 and CVE-2021-1111"
+          },
+          "properties": {
+            "cve": "CVE-2023-9999"
+          }
+        }
+      ]
+    }
+  ]
+}

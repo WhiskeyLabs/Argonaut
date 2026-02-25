@@ -1,0 +1,75 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "composite": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/data/*": [
+        "data/*"
+      ],
+      "@/layouts/*": [
+        "layouts/*"
+      ],
+      "@/css/*": [
+        "css/*"
+      ],
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/theme/*": [
+        "theme/*"
+      ],
+      "@/app/*": [
+        "app/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "hooks/**/*",
+    "components/**/*",
+    "lib/**/*",
+    "app/**/*",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mdx",
+    "**/*.jsx",
+    "**/*.json",
+    ".next/types/**/*.ts",
+    "__tests__"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

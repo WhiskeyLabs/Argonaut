@@ -1,0 +1,55 @@
+#!/usr/bin/expect
+
+set timeout 600
+set host "45.33.28.137"
+set user "root"
+
+if {[info exists env(WEB_NODE_PASSWORD)] && $env(WEB_NODE_PASSWORD) ne ""} {
+  set password $env(WEB_NODE_PASSWORD)
+} else {
+  stty -echo
+  send_user "Enter password for $user@$host: "
+  expect_user -re "(.*)\n"
+  stty echo
+  send_user "\n"
+  set password $expect_out(1,string)
+}
+
+# Step 1: Create directory
+send_user "\n>>> Creating remote directory...\n"
+spawn ssh $user@$host "mkdir -p /opt/argus/app"
+expect {
+  "yes/no" {
+    send "yes\r"
+    exp_continue
+  }
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+# Step 2: Rsync code
+send_user "\n>>> Syncing code (This may take a while)...\n"
+spawn rsync -avz --exclude "node_modules" --exclude ".git" --exclude ".next" ./ $user@$host:/opt/argus/app
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+# Step 3: Run deploy script
+send_user "\n>>> Running remote deployment script...\n"
+spawn ssh $user@$host "cd /opt/argus/app && chmod +x scripts/deploy_web.sh && ./scripts/deploy_web.sh"
+expect {
+  "password:" {
+    send "$password\r"
+    exp_continue
+  }
+  eof
+}
+
+send_user "\n>>> Deployment Automation Complete!\n"

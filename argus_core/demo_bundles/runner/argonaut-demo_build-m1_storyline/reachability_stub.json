@@ -1,0 +1,88 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "c94d087d728a2f4c027b168121e111068c85069722c28c156e95a4b896e25c57",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "1f6658a58aa28f284f651b95fe60b7a92969f6dfae1147b02039392e435cdbcb",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "1ee13f2280f3838015599dedc4e9ecc43bbbe1f74b1fca5b48e74e72facd057c",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "c0569a7fdaee577d4d410f31f047fa92162ddee709a512ab71b9fd67ebdae814",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "c2873da5e9093e987b8dd7a7b2277919b6f746e281b7f3bcce790b773da5f46e",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "875617be259568db2b2e0fb1bb9a2224e5c82346244107fb9aed653a85644fdd",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "31be413cf77b155ebf6b8ec25b99648bec3248f0b3218cffcc678bca229f7a23",
+      "reachable": true
+    }
+  ]
+}

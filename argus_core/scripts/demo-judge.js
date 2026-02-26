@@ -368,6 +368,17 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
     errorSummary,
   });
 
+  // START ANCHOR: Emit workflow:meta log so Kibana dashboard picks up the run immediately
+  await logger.writeTask({
+    stage: 'SYSTEM',
+    taskType: 'SYSTEM',
+    taskKey: 'workflow:meta',
+    status: 'STARTED',
+    message: 'Workflow execution started',
+    startedAt,
+    endedAt: startedAt,
+  });
+
   await safeNotifyLifecycle(notifier, {
     eventType: 'created',
     runId,
@@ -615,6 +626,18 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
     assertStageSummaryIntegrity(stageSummary, terminalStatuses);
 
     const endedAt = nowMs();
+
+    // COMPLETE ANCHOR: Terminal status for Kibana dashboard
+    await logger.writeTask({
+      stage: 'SYSTEM',
+      taskType: 'SYSTEM',
+      taskKey: 'workflow:meta',
+      status: 'SUCCEEDED',
+      message: 'Workflow execution succeeded',
+      startedAt: endedAt,
+      endedAt: endedAt,
+    });
+
     await logger.writeRun({
       status: 'SUCCEEDED',
       startedAt,
@@ -681,6 +704,17 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       endedAt: failedAt,
       refs: { runId },
       error: { code: 'E_STAGE_FAILED', message },
+    });
+
+    // COMPLETE ANCHOR: Terminal status for Kibana dashboard
+    await logger.writeTask({
+      stage: 'SYSTEM',
+      taskType: 'SYSTEM',
+      taskKey: 'workflow:meta',
+      status: 'FAILED',
+      message: `Workflow execution failed: ${message}`,
+      startedAt: failedAt,
+      endedAt: failedAt,
     });
 
     await logger.writeRun({

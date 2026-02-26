@@ -64,4 +64,8 @@ export class TaskLogger {
             console.error('[TaskLogger] Failed to emit log:', error);
         }
     }
+
+    async emitWorkflowAnchor(status: 'STARTED' | 'SUCCEEDED' | 'FAILED', message: string) {
+        return this.log('SYSTEM', 'SYSTEM', 'workflow:meta', status, message);
+    }
 }

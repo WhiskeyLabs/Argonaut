@@ -96,6 +96,7 @@ async function runFixGeneration(runId: string, findingIds: string[] | undefined,
         }
 
         const requestedCount = targets.length;
+        await logger.emitWorkflowAnchor('STARTED', `Fix generation started for ${requestedCount} findings`);
         await logger.log(stage, 'SYSTEM', 'stage:FIX_BUNDLES:started', 'STARTED', `FIX_BUNDLES started: mode=${mode}, requested=${requestedCount}`, { mode, requestedCount });
 
         if (requestedCount === 0) {
@@ -118,6 +119,7 @@ async function runFixGeneration(runId: string, findingIds: string[] | undefined,
 
         // 3. Complete
         const durationMs = Date.now() - startTime;
+        await logger.emitWorkflowAnchor('SUCCEEDED', `Fix generation complete: created=${created}, exists=${exists}, failed=${failed}`);
         await logger.log(stage, 'SYSTEM', 'stage:FIX_BUNDLES:complete', 'SUCCEEDED', `FIX_BUNDLES complete: created=${created}, exists=${exists}, failed=${failed}, durationMs=${durationMs}`, {
             created, exists, failed, durationMs
         });
@@ -139,6 +141,7 @@ async function runFixGeneration(runId: string, findingIds: string[] | undefined,
 
     } catch (error: any) {
         console.error('[runFixGeneration] Fatal error:', error);
+        await logger.emitWorkflowAnchor('FAILED', `Fix generation failed: ${error.message}`);
         await logger.log(stage, 'SYSTEM', 'stage:FIX_BUNDLES:failed', 'FAILED', `FIX_BUNDLES fatal error: ${error.message}`);
 
         await publishAlertToSlack({

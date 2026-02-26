@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getKibanaDiscoverUrl, getKibanaDashboardUrl } from '@/lib/kibanaLinks';
+import { buildKibanaRunDashboardUrl, buildKibanaRunLogsDiscoverUrl } from '@/lib/kibanaLinks';
 import RunTimelineClient from './RunTimelineClient';
 import BackButton from '@/components/BackButton';
 
@@ -56,8 +56,8 @@ export default async function RunPage({ params }: { params: Promise<{ runId: str
     const bundle = await getBundle(run.bundleId);
 
     // Links
-    const kibanaLogsLink = getKibanaDiscoverUrl('argonaut-*', `runId:"${runId}"`);
-    const kibanaRunLink = getKibanaDiscoverUrl('argonaut-*', `runId:"${runId}"`);
+    const kibanaLogsLink = buildKibanaRunLogsDiscoverUrl(runId);     // Discover (tasklogs-only)
+    const kibanaRunLink = buildKibanaRunDashboardUrl(runId);        // Dashboard (run-scoped)
 
     // Execution Mode
     const executionModeStr = (run.executionMode === 'es' || run.executionMode === 'cloud')

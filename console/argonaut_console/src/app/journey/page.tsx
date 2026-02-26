@@ -116,7 +116,7 @@ export default function JourneyPage() {
               {
                 title: "Action Creation",
                 duration: "20-30m",
-                description: "Manually creating Jira tickets, linking CVEs, posting to Slack."
+                description: "Manually creating tickets, linking CVEs, posting to Slack."
               }
             ]}
             summary={{
@@ -165,7 +165,7 @@ export default function JourneyPage() {
               {
                 title: "Action",
                 duration: "1 Click",
-                description: "Engineer clicks 'Create Tickets'. Argonaut creates Jira tickets and posts Slack summary."
+                description: "Engineer clicks 'Generate Fix'. Argonaut generates fix bundles and posts Slack summary with ranked findings."
               }
             ]}
             summary={{
@@ -244,7 +244,7 @@ export default function JourneyPage() {
 
         <div className="mt-12 pt-8 border-t border-white/5 text-center px-4 relative z-10">
           <p className="text-accent-blue font-light italic text-lg max-w-4xl mx-auto leading-relaxed">
-            "Before Argonaut, triage required manually correlating SARIF, lockfiles, CVE feeds, and Slack threads. After Argonaut, one request triggers structured ingestion, ES|QL joins, deterministic scoring, and automated Jira/Slack actions — all in under a minute."
+            "Before Argonaut, triage required manually correlating SARIF, lockfiles, CVE feeds, and Slack threads. After Argonaut, one bundle triggers structured ingestion, deterministic scoring, and automated Slack actions — all in under a minute."
           </p>
         </div>
       </section>

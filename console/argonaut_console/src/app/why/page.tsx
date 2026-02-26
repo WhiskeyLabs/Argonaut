@@ -141,7 +141,7 @@ export default function WhyPage() {
               </span>
               3. Scoring
             </h3>
-            <p className="text-sm text-neutral-400">Joins findings + threat intel + reachability via ES|QL to compute Fix Priority and return the top set.</p>
+            <p className="text-sm text-neutral-400">Joins findings + threat intel + reachability via Elasticsearch to compute Fix Priority Score and return the top set.</p>
           </article>
 
           <article className="argonaut-panel p-6 border-accent-green/20 hover:border-accent-green/50 transition-all group relative overflow-hidden">
@@ -152,7 +152,7 @@ export default function WhyPage() {
               </span>
               4. Action
             </h3>
-            <p className="text-sm text-neutral-400">Creates Jira tickets for the top items and posts a Slack summary that includes "why this is ranked #1."</p>
+            <p className="text-sm text-neutral-400">Posts Slack alerts with ranked findings, generates fix bundles, and produces run report summaries with deep links.</p>
           </article>
         </div>
 
@@ -186,9 +186,9 @@ export default function WhyPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <article className="argonaut-panel p-6 bg-accent-blue/5 border-accent-blue/30 group hover:border-accent-blue/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-blue mb-4">1. Technical Execution (30%)</h3>
+            <h3 className="text-xl font-bold text-accent-blue mb-4">1. Technical Execution (25%)</h3>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex gap-2">
                 <span className="text-accent-blue">→</span>
@@ -206,7 +206,7 @@ export default function WhyPage() {
           </article>
 
           <article className="argonaut-panel p-6 bg-accent-yellow/5 border-accent-yellow/30 group hover:border-accent-yellow/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-yellow mb-4">2. Impact & Wow Factor (30%)</h3>
+            <h3 className="text-xl font-bold text-accent-yellow mb-4">2. Impact & Wow Factor (25%)</h3>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex gap-2">
                 <span className="text-accent-yellow">→</span>
@@ -224,11 +224,11 @@ export default function WhyPage() {
           </article>
 
           <article className="argonaut-panel p-6 bg-accent-green/5 border-accent-green/30 group hover:border-accent-green/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-green mb-4">3. Demo & Presentation (30%)</h3>
+            <h3 className="text-xl font-bold text-accent-green mb-4">3. Demo & Presentation (25%)</h3>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex gap-2">
                 <span className="text-accent-green">→</span>
-                <span><strong>Visual Demo:</strong> Shows tool orchestration, ranked output, and Jira/Slack actions.</span>
+                <span><strong>Visual Demo:</strong> Shows tool orchestration, ranked output, and Slack actions.</span>
               </li>
               <li className="flex gap-2">
                 <span className="text-accent-green">→</span>
@@ -236,7 +236,25 @@ export default function WhyPage() {
               </li>
               <li className="flex gap-2">
                 <span className="text-accent-green">→</span>
-                <span><strong>Evidence:</strong> Agent Builder configs, ES|QL results, Kibana, Jira, Slack.</span>
+                <span><strong>Evidence:</strong> Agent Builder configs, Elasticsearch queries, Kibana dashboards, Slack alerts.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article className="argonaut-panel p-6 bg-accent-pink/5 border-accent-pink/30 group hover:border-accent-pink/60 transition-all">
+            <h3 className="text-xl font-bold text-accent-pink mb-4">4. Elastic-Specific Use (25%)</h3>
+            <ul className="space-y-3 text-sm text-white/80">
+              <li className="flex gap-2">
+                <span className="text-accent-pink">→</span>
+                <span><strong>Elasticsearch-First:</strong> All data lives in purpose-built indices with strict mappings.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-accent-pink">→</span>
+                <span><strong>Observability:</strong> Kibana dashboards provide full audit trail and run observability.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-accent-pink">→</span>
+                <span><strong>Agent Builder:</strong> Workflows, search, and structured data orchestration via Elastic tooling.</span>
               </li>
             </ul>
           </article>
@@ -259,7 +277,7 @@ export default function WhyPage() {
       <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono tracking-widest text-neutral-400 uppercase">
         <span>Argonaut Command Deck</span>
         <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
-        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">CONFIDENTIAL</span>
+        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">v1.0</span>
       </footer>
     </div>
   );

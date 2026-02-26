@@ -7,12 +7,10 @@ import {
   Timer,
   CheckCircle2,
   ArrowDown,
-  Zap,
   Expand,
   BarChart3,
   Target,
-  Terminal,
-  X
+  Terminal
 } from 'lucide-react';
 
 interface NodeSpec {
@@ -27,7 +25,7 @@ interface NodeSpec {
 const NODE_SPECS: Record<string, NodeSpec> = {
   'security-alerts': {
     title: 'Security Alert Ingress',
-    summary: 'Normalizes real-time telemetry from external security tools (PagerDuty, Datadog) into the Argonaut Event Stream.',
+    summary: 'Planned integration: normalizes real-time telemetry from external security tools into the Argonaut Event Stream.',
     responsibilities: [
       'Webhook signature validation',
       'Event normalization to argonaut_schema',
@@ -35,11 +33,11 @@ const NODE_SPECS: Record<string, NodeSpec> = {
     ],
     tags: ['External', 'Ingress', 'Streaming'],
     icon: 'https://cdn.simpleicons.org/pagerduty/ffffff',
-    meta: 'PagerDuty / DD'
+    meta: 'PagerDuty / DD (Planned)'
   },
   'appsec-scans': {
     title: 'AppSec Scan Ingress',
-    summary: 'Ingests batch reports from SCA, SAST, and DAST tools. Extracts SARIF outputs and dependency relationships.',
+    summary: 'Planned integration: ingests batch reports from SCA, SAST, and DAST tools. Currently, SARIF and SBOM artifacts are ingested from object store.',
     responsibilities: [
       'SARIF & SBOM parsing',
       'Dependency graph extraction',
@@ -47,7 +45,7 @@ const NODE_SPECS: Record<string, NodeSpec> = {
     ],
     tags: ['External', 'Batch', 'Security Testing'],
     icon: 'https://cdn.simpleicons.org/snyk/ffffff',
-    meta: 'Snyk / Veracode'
+    meta: 'Snyk / Veracode (Planned)'
   },
   'supervisor-agent': {
     title: 'Supervisor Agent',
@@ -99,15 +97,15 @@ const NODE_SPECS: Record<string, NodeSpec> = {
   },
   'es-state-index': {
     title: 'Elastic State Memory',
-    summary: 'A purpose-built index providing stateful persistence for every LangChain workflow step.',
+    summary: 'Elasticsearch indices providing stateful persistence for every pipeline run, including runs, findings, tasklogs, and actions.',
     responsibilities: [
-      'Workflow checkpoint storage',
-      'Audit log serialization',
-      'Vector knowledge retrieval'
+      'Run state and stage tracking',
+      'Audit log via argonaut_tasklogs',
+      'Finding and action persistence'
     ],
     tags: ['Data', 'Persistence', 'Memory'],
     icon: 'https://cdn.simpleicons.org/elasticsearch/ffffff',
-    meta: 'argonaut_state'
+    meta: 'argonaut_runs / tasklogs'
   },
   'esql-pipeline': {
     title: 'ES|QL Scoring Engine',
@@ -147,41 +145,7 @@ const NODE_SPECS: Record<string, NodeSpec> = {
   }
 };
 
-interface ContractSpec {
-  title: string;
-  subtitle: string;
-  notes: string[];
-}
 
-const CONTRACT_SPECS: Record<string, ContractSpec> = {
-  'state': {
-    title: 'Workload State Contract',
-    subtitle: 'Index: argonaut_state',
-    notes: [
-      'Uses @timestamp for strictly ordered event sequencing.',
-      'Stores full JSON context for workflow resume logic.',
-      'Retains memory for 90 days by default via ILM.'
-    ]
-  },
-  'scoring': {
-    title: 'Scoring & Ranking Contract',
-    subtitle: 'ES|QL Functional Logic',
-    notes: [
-      'Fix Priority Score = (CVSS * 0.4) + (Reachability * 0.4) + (EPSS * 0.2).',
-      'Joins happen at query time across 3 distinct indices.',
-      'Output is a ranked set of "Fix-First" recommendations.'
-    ]
-  },
-  'prompts': {
-    title: 'Agent Instruction Contract',
-    subtitle: 'Prompt Registry v2.4',
-    notes: [
-      'Zero-shot classification and chain-of-thought enrichment.',
-      'Encrypted storage for API keys and endpoint secrets.',
-      'Strict JSON schema validation for all agent outputs.'
-    ]
-  }
-};
 
 interface Counters {
   workflows: number;
@@ -201,8 +165,6 @@ export default function SystemPage() {
   const [selectedNode, setSelectedNode] = useState('supervisor-agent');
   const [activeFilter, setActiveFilter] = useState('all');
   const [showFlow, setShowFlow] = useState(true);
-  const [modalContract, setModalContract] = useState<string | null>(null);
-  const [isSimulating, setIsSimulating] = useState(false);
   const [counters, setCounters] = useState<Counters>({
     workflows: 0,
     findings: 0,
@@ -221,41 +183,45 @@ export default function SystemPage() {
 
     revealElements.forEach(el => io.observe(el));
 
-    // Animate counters
-    const duration = 1000;
-    const steps = 20;
-    const interval = duration / steps;
+    // Fetch live metrics and animate counters
+    let timer: ReturnType<typeof setInterval>;
 
-    const targets = {
-      workflows: 212,
-      findings: 4502,
-      latency: 1.4,
-      automation: 94
-    };
+    fetch('/api/stats')
+      .then(r => r.json())
+      .then(data => {
+        const duration = 1000;
+        const steps = 20;
+        const interval = duration / steps;
 
-    let stepCount = 0;
-    const timer = setInterval(() => {
-      stepCount++;
-      const progress = stepCount / steps;
-      setCounters({
-        workflows: Math.floor(targets.workflows * progress),
-        findings: Math.floor(targets.findings * progress),
-        latency: (targets.latency * progress).toFixed(1),
-        automation: Math.floor(targets.automation * progress)
+        const targets = {
+          workflows: data.runs || 0,
+          findings: data.findings || 0,
+          latency: data.bundles || 0,
+          automation: data.tasklogs || 0
+        };
+
+        let stepCount = 0;
+        timer = setInterval(() => {
+          stepCount++;
+          const progress = stepCount / steps;
+          setCounters({
+            workflows: Math.floor(targets.workflows * progress),
+            findings: Math.floor(targets.findings * progress),
+            latency: Math.floor(targets.latency * progress),
+            automation: Math.floor(targets.automation * progress)
+          });
+          if (stepCount >= steps) clearInterval(timer);
+        }, interval);
+      })
+      .catch(() => {
+        setCounters({ workflows: 0, findings: 0, latency: 0, automation: 0 });
       });
-      if (stepCount >= steps) clearInterval(timer);
-    }, interval);
 
     return () => {
       io.disconnect();
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     };
   }, []);
-
-  const handleSimulate = () => {
-    setIsSimulating(true);
-    setTimeout(() => setIsSimulating(false), 2000);
-  };
 
   const spec = NODE_SPECS[selectedNode];
 
@@ -278,42 +244,35 @@ export default function SystemPage() {
               <span className="pill bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-accent-blue">ES|QL Pipeline: Healthy</span>
             </div>
           </div>
-          <button
-            onClick={() => { }}
-            className="argonaut-panel px-6 py-3 border-accent-blue/30 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 font-mono text-sm uppercase tracking-wider"
-          >
-            <span className="w-2 h-2 bg-accent-blue rounded-full animate-ping" />
-            Run System Pulse
-          </button>
         </div>
 
         <div className="metrics-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
           <MetricCard
-            title="Active Workflows"
+            title="Completed Runs"
             value={counters.workflows}
             icon={<Activity className="w-4 h-4" />}
-            subtitle="Concurrent multi-agent triage processes."
+            subtitle="Total pipeline runs processed."
           />
           <MetricCard
-            title="Findings Triaged"
+            title="Findings Indexed"
             value={counters.findings}
             icon={<ShieldAlert className="w-4 h-4" />}
-            subtitle="Total findings parsed in current epoch."
+            subtitle="Total findings across all runs."
           />
           <MetricCard
-            title="Avg Resolution Time"
-            value={`${counters.latency}s`}
+            title="Bundles Processed"
+            value={counters.latency}
             icon={<Timer className="w-4 h-4" />}
-            subtitle="Latency from ingress to ticket."
+            subtitle="Build bundles ingested and triaged."
           />
           <MetricCard
-            title="Automation Rate"
-            value={`${counters.automation}%`}
+            title="Task Log Entries"
+            value={counters.automation}
             icon={<CheckCircle2 className="w-4 h-4" />}
-            subtitle="Alerts resolved autonomously."
+            subtitle="Pipeline stage audit trail entries."
           />
         </div>
-      </header>
+      </header >
 
       <section className="section argonaut-panel p-8 mb-8 reveal">
         <div className="section-head mb-8">
@@ -369,7 +328,7 @@ export default function SystemPage() {
               <Plane
                 id="orchestration"
                 title="Agent Orchestration Plane"
-                boundary="LangChain"
+                boundary="Argonaut Watcher"
                 active={activeFilter === 'all' || activeFilter === 'orchestration'}
               >
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -478,53 +437,16 @@ export default function SystemPage() {
               </div>
             ))}
           </div>
-          <button
-            onClick={handleSimulate}
-            disabled={isSimulating}
-            className="w-full mt-6 argonaut-panel border-white/10 py-2.5 rounded-lg text-[10px] font-mono uppercase tracking-widest hover:bg-white/5 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
-          >
-            <Zap className={`w-3 h-3 ${isSimulating ? 'text-accent-yellow animate-ping' : 'text-neutral-400 group-hover:text-accent-yellow'}`} />
-            {isSimulating ? 'Simulating Ingress Spike...' : 'Trigger Webhook Spike'}
-          </button>
         </InsightCard>
       </div>
 
-      <section className="section argonaut-panel p-8 reveal">
-        <div className="section-head mb-8">
-          <h2 className="text-2xl font-bold text-white">Core Operating Contracts</h2>
-          <p className="text-neutral-400 font-light mt-1">Deterministic behavior models for Argonaut agents.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {Object.entries(CONTRACT_SPECS).map(([id, c]) => (
-            <button
-              key={id}
-              onClick={() => setModalContract(id)}
-              className="argonaut-panel p-6 text-left hover:border-white/30 transition-all group relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
-                <Terminal className="w-12 h-12" />
-              </div>
-              <h4 className="text-lg font-bold text-white mb-2">{c.title}</h4>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">{c.subtitle}</p>
-              <div className="mt-4 text-[10px] font-mono text-accent-blue uppercase tracking-widest underline underline-offset-4">Inspect Logic</div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {modalContract && (
-        <ContractModal
-          contract={CONTRACT_SPECS[modalContract]}
-          onClose={() => setModalContract(null)}
-        />
-      )}
 
       <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
         <span>Argonaut Command Deck</span>
         <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
-        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">CONFIDENTIAL</span>
+        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">v1.0</span>
       </footer>
-    </div>
+    </div >
   );
 }
 
@@ -627,42 +549,6 @@ function ConfidenceRing({ value, label, color }: { value: number; label: string;
     <div className="flex flex-col items-center gap-3">
       <div className={`text-2xl font-bold font-mono ${colorMap[color]}`}>{value}%</div>
       <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">{label}</div>
-    </div>
-  );
-}
-
-function ContractModal({ contract, onClose }: { contract: ContractSpec; onClose: () => void }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
-      <div className="argonaut-panel max-w-2xl w-full p-8 relative animate-in fade-in zoom-in duration-300">
-        <button onClick={onClose} className="absolute top-6 right-6 text-neutral-400 hover:text-white transition-colors">
-          <X className="w-6 h-6" />
-        </button>
-        <div className="mb-8">
-          <h3 className="text-2xl font-bold text-white mb-2">{contract.title}</h3>
-          <p className="text-neutral-400 font-mono text-sm tracking-wide">{contract.subtitle}</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] pt-2">Responsibilities</h5>
-            <ul className="space-y-3 text-sm text-white/80 font-light">
-              <li className="flex gap-2"><span className="text-accent-blue">→</span><span>Maintains interface integrity.</span></li>
-              <li className="flex gap-2"><span className="text-accent-blue">→</span><span>Strict validation rules.</span></li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] pt-2">Architecture Notes</h5>
-            <ul className="space-y-3 text-sm text-white/80 font-light">
-              {contract.notes.map(n => (
-                <li key={n} className="flex gap-2"><span className="text-accent-blue">→</span><span>{n}</span></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <button onClick={onClose} className="w-full mt-10 bg-white/5 border border-white/10 py-4 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/10 transition-all text-white">
-          Close Specification
-        </button>
-      </div>
     </div>
   );
 }

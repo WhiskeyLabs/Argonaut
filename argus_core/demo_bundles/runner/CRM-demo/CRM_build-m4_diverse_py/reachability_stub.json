@@ -1,0 +1,100 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "ae4fdf4e2ff72f91b500ba0bfbf4625a00086c311f1288426c8b5b59e4bffc17",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "c591072fc30bc22dd74c825a57086274c84068b1953c0519a5b23584b21629d8",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "48be1ac32b1b5d23b7430436c5a96e53ef7ccb74168bbeeeb4bbb141a34c62ec",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "0b585457486b589aea727b8b0792569afb7a237fb5ab6b7ab817e610c87ad4db",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "1381218bafc8db963ed22a0afa94a2e69e0c4852752d3db16fa8acce42650bf4",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "e8729d7ac5746fe634679579bc6c3852cedf27db140a0a93942aeae759acad81",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "1d55751abc840084b99cd69566a89d959b83a58ba65cbe23b0645a218a15dca6",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:7"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "c27176713e3bd05abbe47f38f5b90dc564c3d30e911a7fd7a777ad4b1399bc1b",
+      "reachable": true
+    }
+  ]
+}

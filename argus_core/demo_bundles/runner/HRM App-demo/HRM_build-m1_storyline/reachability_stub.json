@@ -1,0 +1,88 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "62efc54d78d5b935e157bab6ae16a1c94477eba1be8a3e3077e3ccaedc88e6a1",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "40d9f8a79eee6a4aa46cdc11327e1b71babe763530238f8ef0b7446158891998",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "9d7e8203b6438332c0c5ca8c554d0da80f1fa5951455ace40a7fbe26507bdcb4",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "027a6f9e5f703279aa5372cba72edba449999a546a16747419bd1020a6053494",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "f7e45347dd2da3a2bd9eeb6748d13e06fa6781d2caf6e4b2c1765948bba68160",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "2266c1f2a9637af4ee672424b36fd5b8ba9b5644b13a986bab9a30aa215c8e14",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "ebb764f82845f01debe917a7bddf958a50f8766775fbe6f64210d8a7e2ddd59f",
+      "reachable": true
+    }
+  ]
+}

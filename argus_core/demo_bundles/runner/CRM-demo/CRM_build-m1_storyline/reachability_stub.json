@@ -1,0 +1,88 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "f458102cd9a5a24845e329d7ca29ce3ecacce941f8c2343febf89ee139f9c775",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "13c381bb4053071c7ba52815e35f5cb04f11c378f9afa3a3a150c6cbc6aad378",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "7101f226a8c7ab12c0cb9f1c4a7918bbd9b16567c753547e206b3334860d39f2",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "33b6eee47c2d20e6041f3a0533ad3a82398a32c6ef13759f81ed9731b2a30e96",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "276aeeee2acf15b1b62381c88a77b71b7e23a6a9d567088a37298c01e76c7198",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "faedbcdbb936f88d9345e51c6ab1ec50ea6cba22bc5186bf04a22de8a809d186",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "ae9b3357e18d2aa54ccf28e0e276cf19cb5fd56380adad98b24695b3fb721836",
+      "reachable": true
+    }
+  ]
+}

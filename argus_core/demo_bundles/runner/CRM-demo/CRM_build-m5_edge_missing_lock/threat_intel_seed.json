@@ -1,0 +1,16 @@
+{
+  "threat_intel": [
+    {
+      "cve": "CVE-2022-3399",
+      "kev": true,
+      "source": "synthetic",
+      "updated_at": "2026-02-25"
+    },
+    {
+      "cve": "CVE-2025-1755",
+      "kev": true,
+      "source": "synthetic",
+      "updated_at": "2026-02-25"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "threat_intel": [
+    {
+      "cve": "CVE-2021-78982",
+      "kev": true,
+      "source": "synthetic",
+      "updated_at": "2026-02-25"
+    },
+    {
+      "cve": "CVE-2025-95003",
+      "kev": true,
+      "source": "synthetic",
+      "updated_at": "2026-02-25"
+    }
+  ]
+}

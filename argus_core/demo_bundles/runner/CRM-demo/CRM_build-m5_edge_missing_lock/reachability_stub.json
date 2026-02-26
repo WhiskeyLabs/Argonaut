@@ -1,0 +1,88 @@
+{
+  "reachability": [
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:0"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "291ae812ce10a0e0201a1abb26cab72a02b5ae1041fb3664c5259b24bdc826ab",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:1"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "aa85aa316290103b9b8e79d14e78125104be8bfbd389177d1ebc3a10462f20a1",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:2"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "bf5d16425f5b77b685aebbd9e7becc203d0ae242940d38f1fbb3fd843762333a",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:3"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "a19d888bc5b13cd7d69324d8fca188c429f612e8c8cc5d619e24202ea7d30054",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:4"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "d331a13cc911a8d8b16fea1a9b766b102282ec1bb4f6d4cebc9f4c5171e9b927",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:5"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "cc68bfda852ffc702be007cdbebf70b8402e8e0336bca43b516789d65b0d59bf",
+      "reachable": true
+    },
+    {
+      "evidence": {
+        "path": [
+          "internet",
+          "service:demo-api",
+          "callsite:6"
+        ],
+        "source": "synthetic"
+      },
+      "fingerprint": "964032cab9c0bd1ebe7eaf9683b9be88210007eba521b5665e6f4e2e392eec35",
+      "reachable": true
+    }
+  ]
+}

@@ -8,6 +8,11 @@ export const ARGONAUT_INDEX_NAMES = [
     'argonaut_reachability',
     'argonaut_threatintel',
     'argonaut_actions',
+    'argonaut_runs',
+    'argonaut_tasklogs',
+    'argonaut_run_stages',
+    'argonaut_graph_views',
+    'argonaut_bundle_registry',
 ] as const;
 
 export type ArgonautIndexName = typeof ARGONAUT_INDEX_NAMES[number];
@@ -15,12 +20,14 @@ export type ArgonautIndexName = typeof ARGONAUT_INDEX_NAMES[number];
 export type MappingDynamic = 'strict' | false;
 
 export interface MappingField {
-    type?: 'keyword' | 'text' | 'boolean' | 'float' | 'integer' | 'date' | 'object';
+    type?: 'keyword' | 'text' | 'boolean' | 'float' | 'integer' | 'date' | 'object' | 'flattened';
     doc_values?: boolean;
     index?: boolean;
     norms?: boolean;
     dynamic?: MappingDynamic;
     enabled?: boolean;
+    ignore_above?: number;
+    null_value?: string;
     fields?: Record<string, MappingField>;
     properties?: Record<string, MappingField>;
 }
@@ -36,6 +43,7 @@ export interface IndexContract {
     mappings: {
         dynamic: MappingDynamic;
         date_detection: false;
+        ignore_malformed?: boolean;
         _meta: {
             argonaut_mapping_version: string;
         };

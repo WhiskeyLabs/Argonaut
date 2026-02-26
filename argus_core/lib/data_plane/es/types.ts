@@ -36,6 +36,11 @@ export interface BulkUpsertReport {
     ids: string[];
     chunks: number;
     retries: number;
+    firstFailure?: {
+        id: string;
+        status: number;
+        reason: string;
+    } | null;
 }
 
 export interface DeleteByRunIdReport {

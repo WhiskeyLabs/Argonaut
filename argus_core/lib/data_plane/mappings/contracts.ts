@@ -2,33 +2,42 @@ import { ARGONAUT_INDEX_NAMES, ARGONAUT_MAPPING_VERSION, ArgonautIndexName, Inde
 
 type ContractMap = Record<ArgonautIndexName, IndexContract>;
 
-const keyword = (): MappingField => ({
-    type: 'keyword',
-    doc_values: true,
-    index: true,
-    norms: false,
-});
-
+const keyword = (): MappingField => ({ type: 'keyword' });
+const text = (): MappingField => ({ type: 'text' });
 const bool = (): MappingField => ({ type: 'boolean' });
 const float = (): MappingField => ({ type: 'float' });
 const integer = (): MappingField => ({ type: 'integer' });
 const date = (): MappingField => ({ type: 'date' });
 const objectDisabled = (): MappingField => ({ type: 'object', enabled: false });
+const flattened = (): MappingField => ({ type: 'flattened' });
 
-const textWithKeyword = (): MappingField => ({
+const textWithKeyword = (ignoreAbove = 8192): MappingField => ({
     type: 'text',
     fields: {
-        keyword: keyword(),
+        keyword: {
+            ...keyword(),
+            ignore_above: ignoreAbove,
+        },
     },
 });
 
-function baseContract(index: ArgonautIndexName, dynamic: MappingDynamic, properties: Record<string, MappingField>): IndexContract {
+function baseContract(
+    index: ArgonautIndexName,
+    dynamic: MappingDynamic,
+    properties: Record<string, MappingField>,
+    options: { ignore_malformed?: boolean } = {},
+): IndexContract {
     return {
         index,
         settings: {
             index: {
                 number_of_shards: '1',
                 number_of_replicas: '0',
+                ...(options.ignore_malformed !== undefined ? {
+                    mapping: {
+                        ignore_malformed: options.ignore_malformed
+                    }
+                } : {})
             },
         },
         mappings: {
@@ -253,6 +262,82 @@ const contracts: ContractMap = {
         error: keyword(),
         createdAt: date(),
         updatedAt: date(),
+    }),
+
+    argonaut_runs: baseContract('argonaut_runs', 'strict', {
+        runId: keyword(),
+        status: keyword(),
+        repo: keyword(),
+        buildId: keyword(),
+        bundleId: keyword(),
+        startedAt: date(),
+        createdAt: date(),
+        updatedAt: date(),
+        endedAt: date(),
+    }),
+
+    argonaut_tasklogs: baseContract('argonaut_tasklogs', false, {
+        taskId: keyword(),
+        runId: keyword(),
+        stage: keyword(),
+        status: keyword(),
+        message: text(),
+        error: {
+            type: 'object',
+            properties: {
+                code: keyword(),
+                message: textWithKeyword(8192),
+                stack: text(),
+                type: keyword(),
+            },
+        },
+        params: flattened(),
+        meta: flattened(),
+        createdAt: date(),
+    }, { ignore_malformed: true }),
+
+    argonaut_run_stages: baseContract('argonaut_run_stages', false, {
+        runId: keyword(),
+        stage: keyword(),
+        status: keyword(),
+        mode: keyword(),
+        requestedCount: integer(),
+        startedAt: date(),
+        endedAt: date(),
+        requestId: keyword(),
+        stageIdempotencyKey: keyword(),
+    }),
+
+    argonaut_graph_views: baseContract('argonaut_graph_views', 'strict', {
+        runId: keyword(),
+        bundleId: keyword(),
+        repo: keyword(),
+        createdAt: date(),
+        graphVersion: keyword(),
+        nodes: objectDisabled(),
+        edges: objectDisabled(),
+        stats: objectDisabled(),
+    }),
+
+    argonaut_bundle_registry: baseContract('argonaut_bundle_registry', false, {
+        bundleId: keyword(),
+        applicationId: keyword(),
+        repo: keyword(),
+        buildId: keyword(),
+        createdAt: date(),
+        status: keyword(),
+        lastRunId: keyword(),
+        activeRunId: keyword(),
+        artifactCounts: objectDisabled(),
+        manifestVersion: keyword(),
+        manifestObjectKey: keyword(),
+        bundleHash: keyword(),
+        artifactCount: integer(),
+        artifactTypes: keyword(),
+        totalBytes: integer(),
+        objectStore: objectDisabled(),
+        processingLock: objectDisabled(),
+        processedAt: date(),
     }),
 };
 

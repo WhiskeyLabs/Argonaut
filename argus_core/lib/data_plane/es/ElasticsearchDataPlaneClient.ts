@@ -50,6 +50,58 @@ export class ElasticsearchDataPlaneClient implements ElasticsearchBulkClientLike
     private readonly retryBackoffMs: number;
     private retryCounter = 0;
 
+    public readonly indices = {
+        exists: async (params: { index: string }): Promise<boolean> => {
+            try {
+                const response = await this.requestRaw(`/${encodeURIComponent(params.index)}`, {
+                    method: 'GET',
+                    expectedStatuses: [200, 404],
+                });
+                return response.status === 200;
+            } catch (error) {
+                return false;
+            }
+        },
+        create: async (params: { index: string; settings: unknown; mappings: unknown }): Promise<unknown> => {
+            return this.request(`/${encodeURIComponent(params.index)}`, {
+                method: 'PUT',
+                body: {
+                    settings: params.settings,
+                    mappings: params.mappings,
+                },
+                expectedStatuses: [200],
+            });
+        },
+        delete: async (params: { index: string }): Promise<unknown> => {
+            return this.request(`/${encodeURIComponent(params.index)}`, {
+                method: 'DELETE',
+                expectedStatuses: [200, 404],
+            });
+        },
+        getMapping: async (params: { index: string }): Promise<unknown> => {
+            return this.request(`/${encodeURIComponent(params.index)}/_mapping`, {
+                method: 'GET',
+                expectedStatuses: [200],
+            });
+        },
+    };
+
+    /**
+     * Checks cluster health and returns basic info (GET /).
+     */
+    async getClusterInfo(): Promise<{ cluster_name: string; version: { number: string } }> {
+        const response = await this.request('/', {
+            method: 'GET',
+            expectedStatuses: [200],
+        });
+
+        if (!isRecord(response) || typeof response.cluster_name !== 'string') {
+            throw new Error('Invalid cluster info response: missing cluster_name.');
+        }
+
+        return response as { cluster_name: string; version: { number: string } };
+    }
+
     constructor(options: ElasticsearchDataPlaneClientOptions = {}) {
         this.esUrl = normalizeBaseUrl(options.esUrl ?? process.env.ES_URL ?? process.env.ELASTIC_URL ?? 'http://localhost:9200');
         this.authHeader = resolveAuthHeader(options);
@@ -101,6 +153,7 @@ export class ElasticsearchDataPlaneClient implements ElasticsearchBulkClientLike
         const upsertedIds: string[] = [];
         let failed = 0;
         let retries = 0;
+        let firstFailure: BulkUpsertReport['firstFailure'] = null;
 
         for (const chunk of chunks) {
             const operations: Array<Record<string, unknown>> = [];
@@ -127,7 +180,21 @@ export class ElasticsearchDataPlaneClient implements ElasticsearchBulkClientLike
                     continue;
                 }
 
-                console.error('ES Bulk Error for item:', JSON.stringify(response.items[i], null, 2));
+                if (!firstFailure && isRecord(response) && Array.isArray(response.items)) {
+                    const rawItem = response.items[i];
+                    if (isRecord(rawItem)) {
+                        const operation = Object.values(rawItem)[0];
+                        if (isRecord(operation) && isRecord(operation.error)) {
+                            firstFailure = {
+                                id: entry.id,
+                                status: item.status ?? 500,
+                                reason: typeof operation.error.reason === 'string' ? operation.error.reason : 'Unknown reason',
+                            };
+                        }
+                    }
+                }
+
+                console.error('ES Bulk Error for item:', JSON.stringify(isRecord(response) && Array.isArray(response.items) ? response.items[i] : item, null, 2));
                 failed += 1;
             }
         }
@@ -139,6 +206,7 @@ export class ElasticsearchDataPlaneClient implements ElasticsearchBulkClientLike
             ids: upsertedIds,
             chunks: chunks.length,
             retries,
+            firstFailure,
         };
     }
 
@@ -152,7 +220,8 @@ export class ElasticsearchDataPlaneClient implements ElasticsearchBulkClientLike
             return null;
         }
 
-        const source = toRecord(response.body?._source);
+        const body = toRecord(response.body);
+        const source = body ? toRecord(body._source) : null;
         return source ? source : null;
     }
 
@@ -349,23 +418,24 @@ function extractBulkItems(response: unknown): BulkItem[] {
         return [];
     }
 
-    return response.items
-        .map((item) => {
-            if (!isRecord(item)) {
-                return null;
-            }
+    const items: BulkItem[] = [];
+    for (const item of response.items) {
+        if (!isRecord(item)) {
+            continue;
+        }
 
-            const operation = Object.values(item)[0];
-            if (!isRecord(operation)) {
-                return null;
-            }
+        const operation = Object.values(item)[0];
+        if (!isRecord(operation)) {
+            continue;
+        }
 
-            return {
-                _id: typeof operation._id === 'string' ? operation._id : undefined,
-                status: typeof operation.status === 'number' ? operation.status : undefined,
-            } satisfies BulkItem;
-        })
-        .filter((item): item is BulkItem => item !== null);
+        items.push({
+            _id: typeof operation._id === 'string' ? operation._id : undefined,
+            status: typeof operation.status === 'number' ? operation.status : undefined,
+        });
+    }
+
+    return items;
 }
 
 function isSuccessStatus(status: number | undefined): boolean {

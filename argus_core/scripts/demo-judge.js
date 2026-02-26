@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+console.log('[DEBUG] demo-judge.js entry');
 require('ts-node').register({
+
   transpileOnly: true,
   compilerOptions: {
     module: 'commonjs',
@@ -399,15 +401,18 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       refs: { runId, bundleId, repo, buildId },
     });
 
+    console.log(`[DEBUG] Starting ACQUIRE stage for run: ${runId}`);
     const acquireSummary = await runAcquirePipeline(client, {
       repo,
       buildId,
       bundlePath,
       runId,
       dryRun: false,
-      verbose: false,
+      verbose: hasFlag('verbose'),
     });
+    console.log(`[DEBUG] ACQUIRE stage finished with status: ${acquireSummary.status}`);
     const acquireEnd = nowMs();
+
 
     stageSummary.ACQUIRE = { status: acquireSummary.status, startedAt: new Date(acquireStart).toISOString(), endedAt: new Date(acquireEnd).toISOString() };
     terminalStatuses.ACQUIRE = acquireSummary.status === 'SUCCESS' ? 'SUCCEEDED' : 'FAILED';
@@ -472,7 +477,10 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       refs: { runId },
     });
 
+    console.log(`[DEBUG] Starting ENRICH stage`);
     const enrichSummary = await enrichFindingsContext(client);
+    console.log(`[DEBUG] ENRICH stage finished, processed: ${enrichSummary.processed}`);
+
     const enrichEnd = nowMs();
 
     stageSummary.ENRICH = { status: 'SUCCESS', startedAt: new Date(enrichStart).toISOString(), endedAt: new Date(enrichEnd).toISOString() };
@@ -532,7 +540,10 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       refs: { runId, topN },
     });
 
+    console.log(`[DEBUG] Starting SCORE stage`);
     const scoreSummary = await scoreAndWriteback(client, topN);
+    console.log(`[DEBUG] SCORE stage finished, processed: ${scoreSummary.processed}`);
+
     const scoreEnd = nowMs();
 
     stageSummary.SCORE = { status: 'SUCCESS', startedAt: new Date(scoreStart).toISOString(), endedAt: new Date(scoreEnd).toISOString() };
@@ -638,6 +649,7 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       endedAt: endedAt,
     });
 
+    console.log(`[DEBUG] Finalizing run record`);
     await logger.writeRun({
       status: 'SUCCEEDED',
       startedAt,
@@ -646,6 +658,8 @@ async function runEsExecution({ repo, buildId, bundlePath, bundleId, topN, clean
       counts,
       errorSummary,
     });
+    console.log(`[DEBUG] Run record finalized`);
+
 
     process.stdout.write(`${JSON.stringify({
       status: 'SUCCEEDED',

@@ -18,7 +18,8 @@
     "demo:list-bundles": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ./scripts/demo-list-bundles.ts",
     "bootstrap:es": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ../scripts/bootstrap_es.ts",
     "bootstrap:kibana": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ../scripts/bootstrap_kibana.ts",
-    "demo:smoke": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ../scripts/demo_smoke.ts"
+    "demo:smoke": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ../scripts/demo_smoke.ts",
+    "reset:es": "./node_modules/.bin/ts-node --transpile-only --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' ./scripts/reset-es.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.888.0",

@@ -149,18 +149,26 @@ export default function RunTimelineClient({ initialRun, runId }: { initialRun: a
         if (container) {
             if (provenance) {
                 container.innerHTML = `
-                    <div class="space-y-2">
-                        <div class="flex flex-col">
-                            <span class="text-[10px] uppercase font-bold text-blue-500/70 tracking-wider">Workflow</span>
-                            <span class="font-mono text-sm text-blue-100">${provenance.workflowId} <span class="text-blue-400">v${provenance.workflowVersion}</span></span>
-                        </div>
-                        <div class="flex flex-col pt-1">
-                            <span class="text-[10px] uppercase font-bold text-blue-500/70 tracking-wider">Agent</span>
-                            <span class="font-mono text-sm text-blue-100">${provenance.agentId}</span>
-                        </div>
-                        <div class="flex flex-col pt-1">
-                            <span class="text-[10px] uppercase font-bold text-blue-500/70 tracking-wider">System</span>
-                            <span class="font-mono text-xs text-blue-300">${provenance.system}</span>
+                    <div class="space-y-4 font-barlow">
+                        <div class="flex items-start gap-4">
+                            <div class="p-2 rounded-lg bg-accent-blue/10 border border-accent-blue/20 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-blue"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col mb-3">
+                                    <span class="text-[10px] uppercase font-bold text-accent-blue/70 tracking-wider">Workflow Factory</span>
+                                    <span class="font-mono text-sm text-white break-all">${provenance.workflowId}</span>
+                                    <span class="text-[10px] font-bold text-accent-blue/50 uppercase mt-0.5">Version ${provenance.workflowVersion}</span>
+                                </div>
+                                <div class="flex flex-col mb-3">
+                                    <span class="text-[10px] uppercase font-bold text-accent-blue/70 tracking-wider">Proving Agent</span>
+                                    <span class="font-mono text-sm text-blue-100">${provenance.agentId}</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-[10px] uppercase font-bold text-accent-blue/70 tracking-wider">System Epoch</span>
+                                    <span class="font-mono text-[10px] text-blue-300 uppercase">${provenance.system}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;

@@ -1,40 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050505;
-  --foreground: #ffffff;
-  --muted: #111111;
-  --border: #2f2f2f;
+  --background: #0D0D0D;
+  --foreground: #FFFFFF;
+  --muted: #888888;
+  --border: rgba(255, 255, 255, 0.08);
 
-  --nav-bg: rgba(10, 14, 25, 0.82);
-  --nav-border: rgba(255, 255, 255, 0.08);
-  --nav-fg: #e5e7eb;
-  --nav-muted: #9ca3af;
-  --nav-hover: rgba(255, 255, 255, 0.08);
-  --nav-avatar-border: rgba(255, 255, 255, 0.2);
-}
+  /* Neon Accent Palette */
+  --accent-blue: #6DB5FF;
+  --accent-yellow: #FEFA3D;
+  --accent-pink: #FF5DE7;
+  --accent-green: #61FFB2;
 
-.dark {
-  --nav-bg: rgba(10, 14, 25, 0.82);
-  --nav-border: rgba(255, 255, 255, 0.08);
-  --nav-fg: #e5e7eb;
-  --nav-muted: #9ca3af;
-  --nav-hover: rgba(255, 255, 255, 0.08);
-  --nav-avatar-border: rgba(255, 255, 255, 0.2);
-}
+  /* Glassmorphism Presets */
+  --panel-bg: rgba(20, 20, 20, 0.72);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --panel-blur: 16px;
 
-.light {
-  --background: #f4f6fb;
-  --foreground: #161b2d;
-  --muted: #475069;
-  --border: #dde4f1;
-
-  --nav-bg: rgba(255, 255, 255, 0.84);
-  --nav-border: #e5e7eb;
-  --nav-fg: #111827;
-  --nav-muted: #4b5563;
-  --nav-hover: #f3f4f6;
-  --nav-avatar-border: rgba(0, 0, 0, 0.05);
+  /* Nav Tokens */
+  --nav-bg: rgba(13, 13, 13, 0.85);
+  --nav-border: rgba(255, 255, 255, 0.05);
+  --nav-fg: #FFFFFF;
+  --nav-muted: #888888;
+  --nav-hover: rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -43,141 +31,163 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
 
-  --color-primary-50: #fff0f0;
-  --color-primary-100: #ffdedd;
-  --color-primary-200: #ffc2bf;
-  --color-primary-300: #ff9a96;
-  --color-primary-400: #ff625b;
-  --color-primary-500: #871a11;
-  --color-primary-600: #75130b;
-  --color-primary-700: #610e07;
-  --color-primary-800: #4d0a05;
-  --color-primary-900: #3d0703;
-  --color-primary: var(--color-primary-500);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-green: var(--accent-green);
 
-  --color-secondary-50: #ebebf5;
-  --color-secondary-100: #d1d2e6;
-  --color-secondary-200: #a8aace;
-  --color-secondary-300: #7e81b6;
-  --color-secondary-400: #565a9e;
-  --color-secondary-500: #0a0a36;
-  --color-secondary-600: #08082e;
-  --color-secondary-700: #060624;
-  --color-secondary-800: #04041a;
-  --color-secondary-900: #020210;
-  --color-secondary: var(--color-secondary-500);
-
-  --color-tertiary-500: #d5d1d1;
-  --color-tertiary: var(--color-tertiary-500);
-
-  --font-sans: 'Urbanist', var(--font-geist-sans), sans-serif;
+  --font-sans: 'Outfit', var(--font-geist-sans), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+  --font-barlow: var(--font-barlow), sans-serif;
 
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-fade-in-down: fade-in-down 0.6s ease-in-out forwards;
-  --animate-subtle-pulse: subtle-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
 
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
+  --animate-subtle-glow: subtle-glow 3s ease-in-out infinite;
 
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
+  @keyframes subtle-glow {
 
-    to {
-      height: 0;
-    }
-  }
-
-  @keyframes fade-in-down {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-
+    0%,
     100% {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 5px var(--accent-blue));
+    }
+
+    50% {
       opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes subtle-pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-      border-color: rgba(239, 68, 68, 0.4);
-    }
-
-    70% {
-      box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
-      border-color: rgba(239, 68, 68, 0.8);
-    }
-
-    100% {
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-      border-color: rgba(239, 68, 68, 0.4);
+      filter: drop-shadow(0 0 15px var(--accent-blue));
     }
   }
 }
 
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
 body {
-  font-family: var(--font-space-grotesk), sans-serif;
-  color: var(--text, #e9ebf3);
-  background:
-    radial-gradient(circle at 8% 12%, rgba(135, 26, 17, 0.22), transparent 40%),
-    radial-gradient(circle at 88% 20%, rgba(47, 79, 191, 0.18), transparent 42%),
-    linear-gradient(140deg, #050505 0%, #0d1119 38%, #121724 100%);
+  font-family: var(--font-outfit), sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
+/* New Dot Grid Background */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(circle at center, black 20%, transparent 85%);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
   pointer-events: none;
   z-index: -2;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(180deg,
-      rgba(255, 255, 255, 0.012),
-      rgba(255, 255, 255, 0.012) 1px,
-      transparent 1px,
-      transparent 5px);
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.35;
+/* Glassy Panel Utility */
+.argonaut-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  backdrop-filter: blur(var(--panel-blur));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Global utility classes for the new unified aesthetic */
+.argonaut-panel:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* Typography & Labels */
+.eyebrow {
+  font-family: var(--font-barlow);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Neon Button Variants */
+.btn-neon-blue {
+  background: var(--accent-blue);
+  color: #000;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 0 15px rgba(109, 181, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-neon-blue:hover {
+  box-shadow: 0 0 25px rgba(109, 181, 255, 0.5);
+  transform: translateY(-1px);
+}
+
 .argonaut-shell {
   width: min(1320px, 94vw);
   margin: 0 auto;
   padding: 2rem 0 2.2rem;
 }
 
-.argonaut-panel {
-  background: rgba(18, 23, 36, 0.84);
-  border: 1px solid rgba(213, 209, 209, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
+/* Global Transitions */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Status Badges */
+.badge-neon {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  border: 1px solid currentColor;
+}
+
+.badge-blue {
+  color: var(--accent-blue);
+  background: rgba(109, 181, 255, 0.1);
+}
+
+.badge-yellow {
+  color: var(--accent-yellow);
+  background: rgba(254, 250, 61, 0.1);
+}
+
+.badge-pink {
+  color: var(--accent-pink);
+  background: rgba(255, 93, 231, 0.1);
+}
+
+.badge-green {
+  color: var(--accent-green);
+  background: rgba(97, 255, 178, 0.1);
 }

@@ -1,282 +1,228 @@
-// @ts-nocheck
 'use client';
 
-import { useEffect, useRef } from 'react';
-import './journey.css';
+import React, { useEffect, useState } from 'react';
+import {
+  Frown,
+  Smile,
+  ArrowRight,
+  GitCompare,
+  Globe,
+  CheckCircle2,
+  AlertCircle,
+  Clock,
+  User,
+  Zap,
+  ShieldCheck,
+  Search,
+  FileText
+} from 'lucide-react';
+
+interface JourneyStep {
+  title: string;
+  duration: string;
+  description: string;
+}
+
+interface JourneySummary {
+  time: string;
+  emotional: string;
+  timeColor: string;
+}
+
+interface JourneyCardProps {
+  type: 'before' | 'after';
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+  accentColor: string;
+  bgColor: string;
+  trigger: string;
+  triggerMono?: boolean;
+  steps: JourneyStep[];
+  summary: JourneySummary;
+}
+
+interface ComparisonRowProps {
+  label: string;
+  before: string;
+  after: string;
+  isGood?: boolean;
+  last?: boolean;
+}
 
 export default function JourneyPage() {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    console.log('JourneyPage: useEffect mounting');
+    setIsVisible(true);
 
-    const initPage = () => {
-      try {
-        const revealElements = document.querySelectorAll('.reveal');
-        console.log(`JourneyPage: found ${revealElements.length} reveal elements`);
-
-        if (revealElements.length === 0) return false;
-
-        // Theme logic
-        function setTheme(theme) {
-          document.body.setAttribute('data-theme', theme);
-          localStorage.setItem('argonaut-system-theme', theme);
-          const sun = document.getElementById('themeSun');
-          const moon = document.getElementById('themeMoon');
-          const label = document.getElementById('themeLabel');
-          if (sun && moon) {
-            if (theme === 'dark') {
-              sun.style.display = 'none';
-              moon.style.display = 'block';
-              if (label) label.textContent = 'DARK';
-            } else {
-              sun.style.display = 'block';
-              moon.style.display = 'none';
-              if (label) label.textContent = 'LIGHT';
-            }
-          }
-        }
-
-        const toggle = document.getElementById('navThemeToggle');
-        if (toggle) {
-          const saved = localStorage.getItem('argonaut-system-theme');
-          const initialTheme = saved === 'light' || saved === 'dark' ? saved :
-            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          setTheme(initialTheme);
-          toggle.addEventListener('click', () => {
-            const current = document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-            setTheme(current === 'dark' ? 'light' : 'dark');
-          });
-        }
-
-        // Lucide Polling
-        let lucideRetries = 0;
-        const pollLucide = () => {
-          if (window.lucide) {
-            window.lucide.createIcons();
-          } else if (lucideRetries < 20) {
-            lucideRetries++;
-            setTimeout(pollLucide, 100);
-          }
-        };
-        pollLucide();
-
-        // reveal logic
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-            }
-          });
-        }, { threshold: 0 });
-
-        revealElements.forEach(el => {
-          io.observe(el);
-          // Immediate visibility check
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            el.classList.add('is-visible');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
           }
         });
+      },
+      { threshold: 0.1 }
+    );
 
-        // Emergency reveal fallback
-        setTimeout(() => {
-          revealElements.forEach(el => {
-            if (!el.classList.contains('is-visible')) {
-              el.classList.add('is-visible');
-            }
-          });
-        }, 1000);
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-        return true;
-      } catch (err) {
-        console.error('JourneyPage: Initialization error:', err);
-        return true;
-      }
-    };
-
-    // Polling initialization
-    let pollCount = 0;
-    const pollInit = setInterval(() => {
-      console.log(`JourneyPage: polling ${pollCount}`);
-      if (initPage() || pollCount > 60) {
-        if (pollCount > 60) {
-          console.warn('JourneyPage: Polling timed out. Forcing reveal.');
-          document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
-        }
-        clearInterval(pollInit);
-      }
-      pollCount++;
-    }, 100);
-
-    return () => {
-      console.log('JourneyPage: clearing interval');
-      clearInterval(pollInit);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div
-      suppressHydrationWarning={true}
-      dangerouslySetInnerHTML={{
-        __html: `
-
-  
-  <div class="shell">
-
-    <header class="masthead panel reveal">
-      <div class="brand-row">
-        <div class="hero-content">
-          <p class="eyebrow">User Journey</p>
-          <h1 class="hero-title">Argonaut User Journey</h1>
-          <p class="hero-copy">Before vs. After Argonaut: Eradicating Manual Triage Pain</p>
-        </div>
-      </div>
-    </header>
-
-    <div class="insight-grid">
-      <!-- BEFORE -->
-      <article class="insight-card" style="grid-column: span 1; border-color: rgba(239, 68, 68, 0.4);">
-        <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: rgba(239, 68, 68, 0.15); color: var(--danger); margin-bottom: 1rem;">
-          <i data-lucide="frown" style="width: 24px; height: 24px;"></i>
-        </div>
-        <h2 style="margin: 0 0 0.5rem; color: var(--text); font-size: 1.2rem;">Before Argonaut</h2>
-        <p style="color: var(--danger); font-weight: 600; font-size: 0.8rem; margin: 0 0 1rem; text-transform: uppercase;">Manual, Fragmented, Multi-System Triage</p>
-        
-        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line);">
-          <h4 style="font-size: 0.8rem; color: var(--muted); margin: 0 0 0.5rem; text-transform: uppercase;">Trigger Event</h4>
-          <p style="font-size: 0.85rem; margin: 0;">CI pipeline completes. GitHub + SCA tool push new findings. Engineer receives SARIF alerts, Snyk notifications, emails, and Slack pings.</p>
-        </div>
-
-        <ul class="detail-list">
-          <li><strong>Step 1: Tool Hopping (20-40m)</strong><span>Opening 8+ tools, downloading files, checking CVE pages manually. Cognitive overload.</span></li>
-          <li><strong>Step 2: Manual Correlation (30-60m)</strong><span>Grepping codebase, inspecting dependency tree, checking exploit reports. Heuristic guesswork.</span></li>
-          <li><strong>Step 3: Prioritization Guesswork (20m)</strong><span>Narrowing 800 findings down to 12. Subjective, not deterministic.</span></li>
-          <li><strong>Step 4: Action Creation (20-30m)</strong><span>Manually creating Jira tickets, linking CVEs, posting to Slack.</span></li>
-        </ul>
-        
-        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px dashed rgba(239, 68, 68, 0.3);">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.8rem; color: var(--muted);">Total Time:</span>
-            <strong style="color: var(--text);">1.5 to 3 hours</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between;">
-            <span style="font-size: 0.8rem; color: var(--muted);">Emotional State:</span>
-            <strong style="color: var(--danger);">Cognitive overload, fatigue</strong>
+    <div className="shell min-h-screen pb-12">
+      <header className="masthead argonaut-panel p-8 mb-8 reveal">
+        <div className="brand-row">
+          <div className="hero-content">
+            <p className="eyebrow mb-2">User Journey</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Argonaut User Journey</h1>
+            <p className="text-xl text-neutral-400 font-light max-w-2xl">
+              Before vs. After Argonaut: Eradicating Manual Triage Pain and Human-Error Latency.
+            </p>
           </div>
         </div>
-      </article>
+      </header>
 
-      <!-- ARROW INDICATOR (Desktop only normally, handled by grid layout here) -->
-      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; opacity: 0.6;">
-        <i data-lucide="arrow-right" style="width: 48px; height: 48px; color: var(--text);"></i>
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--info);">Transformation</div>
-      </div>
-      
-      <!-- AFTER -->
-      <article class="insight-card" style="grid-column: span 1; border-color: rgba(16, 185, 129, 0.4);">
-        <div style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: var(--good); margin-bottom: 1rem;">
-          <i data-lucide="smile" style="width: 24px; height: 24px;"></i>
-        </div>
-        <h2 style="margin: 0 0 0.5rem; color: var(--text); font-size: 1.2rem;">After Argonaut</h2>
-        <p style="color: var(--good); font-weight: 600; font-size: 0.8rem; margin: 0 0 1rem; text-transform: uppercase;">Agent-Orchestrated, Context-Driven, Action-Complete</p>
-        
-        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line);">
-          <h4 style="font-size: 0.8rem; color: var(--muted); margin: 0 0 0.5rem; text-transform: uppercase;">Trigger Event</h4>
-          <p style="font-size: 0.85rem; margin: 0; font-family: 'IBM Plex Mono', monospace; background: rgba(255,255,255,0.05); padding: 0.5rem; border-radius: 6px;">"Argonaut, triage payment-service build 128."</p>
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center mb-12">
+        {/* BEFORE CARD */}
+        <div className="lg:col-span-3 reveal">
+          <JourneyCard
+            type="before"
+            title="Before Argonaut"
+            subtitle="Manual, Fragmented, Multi-System Triage"
+            icon={<Frown className="w-6 h-6 text-red-400" />}
+            accentColor="border-red-500/30"
+            bgColor="bg-red-500/5"
+            trigger="CI pipeline completes. GitHub + SCA tool push new findings. Engineer receives SARIF alerts, Snyk notifications, emails, and Slack pings."
+            steps={[
+              {
+                title: "Tool Hopping",
+                duration: "20-40m",
+                description: "Opening 8+ tools, downloading files, checking CVE pages manually. Cognitive overload."
+              },
+              {
+                title: "Manual Correlation",
+                duration: "30-60m",
+                description: "Grepping codebase, inspecting dependency tree, checking exploit reports. Heuristic guesswork."
+              },
+              {
+                title: "Prioritization Guesswork",
+                duration: "20m",
+                description: "Narrowing 800 findings down to 12. Subjective, not deterministic."
+              },
+              {
+                title: "Action Creation",
+                duration: "20-30m",
+                description: "Manually creating Jira tickets, linking CVEs, posting to Slack."
+              }
+            ]}
+            summary={{
+              time: "1.5 to 3 hours",
+              emotional: "Cognitive overload, fatigue",
+              timeColor: "text-red-400"
+            }}
+          />
         </div>
 
-        <ul class="detail-list">
-          <li><strong>Step 1: Acquisition (&lt;10s)</strong><span>Ingests SARIF, lockfile, SBOM. Normalizes findings automatically.</span></li>
-          <li><strong>Step 2: Enrichment (&lt;15s)</strong><span>Matches CVEs to intel (KEV/EPSS), runs reachability, adds blast radius metadata.</span></li>
-          <li><strong>Step 3: Deterministic Scoring (&lt;5s)</strong><span>ES|QL joins findings + intel + reachability. Ranks 800 findings → 5 fix-first automatically.</span></li>
-          <li><strong>Step 4: Action (1 Click)</strong><span>Engineer clicks "Create Tickets". Argonaut creates Jira tickets and posts Slack summary.</span></li>
-        </ul>
-        
-        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px dashed rgba(16, 185, 129, 0.3);">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.8rem; color: var(--muted);">Total Time:</span>
-            <strong style="color: var(--good);">&lt; 2 minutes</strong>
+        {/* TRANSFORMATION ARROW */}
+        <div className="lg:col-span-1 flex flex-col items-center justify-center gap-4 reveal opacity-80">
+          <div className="w-16 h-16 rounded-full border border-accent-blue/20 flex items-center justify-center bg-accent-blue/5">
+            <ArrowRight className="w-8 h-8 text-accent-blue" />
           </div>
-          <div style="display: flex; justify-content: space-between;">
-            <span style="font-size: 0.8rem; color: var(--muted);">Emotional State:</span>
-            <strong style="color: var(--good);">Confidence, clarity, no guesswork</strong>
+          <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-accent-blue">Transformation</span>
+        </div>
+
+        {/* AFTER CARD */}
+        <div className="lg:col-span-3 reveal">
+          <JourneyCard
+            type="after"
+            title="After Argonaut"
+            subtitle="Agent-Orchestrated, Context-Driven, Action-Complete"
+            icon={<Smile className="w-6 h-6 text-accent-green" />}
+            accentColor="border-accent-green/30"
+            bgColor="bg-accent-green/5"
+            trigger='"Argonaut, triage payment-service build 128."'
+            triggerMono
+            steps={[
+              {
+                title: "Acquisition",
+                duration: "<10s",
+                description: "Ingests SARIF, lockfile, SBOM. Normalizes findings automatically."
+              },
+              {
+                title: "Enrichment",
+                duration: "<15s",
+                description: "Matches CVEs to intel (KEV/EPSS), runs reachability, adds blast radius metadata."
+              },
+              {
+                title: "Deterministic Scoring",
+                duration: "<5s",
+                description: "ES|QL joins findings + intel + reachability. Ranks 800 findings → 5 fix-first automatically."
+              },
+              {
+                title: "Action",
+                duration: "1 Click",
+                description: "Engineer clicks 'Create Tickets'. Argonaut creates Jira tickets and posts Slack summary."
+              }
+            ]}
+            summary={{
+              time: "< 2 minutes",
+              emotional: "Confidence, clarity, no guesswork",
+              timeColor: "text-accent-green"
+            }}
+          />
+        </div>
+      </div>
+
+      <section className="section argonaut-panel p-8 mb-8 reveal">
+        <div className="section-head mb-8">
+          <h2 className="text-2xl font-bold text-white">Side-by-Side Comparison</h2>
+          <p className="text-neutral-400 font-light mt-1">Direct metrics showing the Argonaut advantage.</p>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 uppercase text-[10px] font-mono tracking-widest text-neutral-400">
+                <th className="pb-4 px-4 font-normal">Stage</th>
+                <th className="pb-4 px-4 font-normal">Before</th>
+                <th className="pb-4 px-4 font-normal text-accent-blue">After Argonaut</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm">
+              <ComparisonRow label="Tools opened" before="5–8" after="1" isGood />
+              <ComparisonRow label="Manual joins" before="Yes" after="No (ES|QL)" isGood />
+              <ComparisonRow label="Reachability check" before="Manual grep" after="Automated" isGood />
+              <ComparisonRow label="Threat intel lookup" before="Manual" after="Automated" isGood />
+              <ComparisonRow label="Ticket creation" before="Manual" after="Automated" isGood />
+              <ComparisonRow label="Time" before="1.5–3 hours" after="< 2 minutes" isGood />
+              <ComparisonRow label="Confidence" before="Heuristic" after="Evidence-backed" isGood />
+              <ComparisonRow label="Audit trail" before="Scattered" after="Centralized" isGood last />
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="section argonaut-panel p-8 mb-8 reveal overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-accent-blue/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent-pink/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
+
+        <div className="section-head mb-8 relative z-10">
+          <div className="flex items-center gap-3">
+            <Globe className="w-6 h-6 text-accent-blue" />
+            <h2 className="text-2xl font-bold text-white">System-Level Impact</h2>
           </div>
         </div>
-      </article>
-    </div>
 
-    <section class="section panel reveal">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><i data-lucide="git-compare" class="line-icon"></i> Side-by-Side Comparison</h2>
-        </div>
-      </div>
-      <div style="padding: 1rem; overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
-          <thead style="border-bottom: 1px solid var(--line); color: var(--muted); text-transform: uppercase; font-size: 0.75rem; font-family: 'IBM Plex Mono', monospace;">
-            <tr>
-              <th style="padding: 0.75rem; font-weight: 600;">Stage</th>
-              <th style="padding: 0.75rem; font-weight: 600;">Before</th>
-              <th style="padding: 0.75rem; font-weight: 600; color: var(--brand-bright);">After Argonaut</th>
-            </tr>
-          </thead>
-          <tbody style="color: var(--text);">
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Tools opened</td>
-              <td style="padding: 0.75rem; color: var(--danger);">5–8</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">1</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Manual joins</td>
-              <td style="padding: 0.75rem; color: var(--danger);">Yes</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">No (ES|QL)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Reachability check</td>
-              <td style="padding: 0.75rem; color: var(--danger);">Manual grep</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">Automated</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Threat intel lookup</td>
-              <td style="padding: 0.75rem; color: var(--danger);">Manual</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">Automated</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Ticket creation</td>
-              <td style="padding: 0.75rem; color: var(--danger);">Manual</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">Automated</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Time</td>
-              <td style="padding: 0.75rem; color: var(--danger);">1.5–3 hours</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">&lt; 2 minutes</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--line-strong);">
-              <td style="padding: 0.75rem;">Confidence</td>
-              <td style="padding: 0.75rem; color: var(--warn);">Heuristic</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">Evidence-backed</td>
-            </tr>
-            <tr>
-              <td style="padding: 0.75rem;">Audit trail</td>
-              <td style="padding: 0.75rem; color: var(--warn);">Scattered</td>
-              <td style="padding: 0.75rem; color: var(--good); font-weight: bold;">Centralized</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section panel reveal" style="background: linear-gradient(135deg, rgba(29, 42, 122, 0.15) 0%, rgba(135, 26, 17, 0.15) 100%);">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><i data-lucide="globe" class="line-icon"></i> System-Level Impact</h2>
-        </div>
-      </div>
-      <div style="padding: 1rem;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
           <div>
-            <h4 style="color: var(--danger); margin-top: 0;">Before</h4>
-            <ul style="font-size: 0.85rem; color: var(--muted); padding-left: 1rem; line-height: 1.5;">
+            <h4 className="text-red-400 font-bold mb-4 uppercase tracking-wider text-xs flex items-center gap-2">
+              <AlertCircle className="w-4 h-4" /> Before
+            </h4>
+            <ul className="space-y-3 text-neutral-400 text-sm border-l border-red-500/20 pl-6">
               <li>Triage knowledge lives in individuals.</li>
               <li>Prioritization varies between engineers.</li>
               <li>High cognitive load.</li>
@@ -284,8 +230,10 @@ export default function JourneyPage() {
             </ul>
           </div>
           <div>
-            <h4 style="color: var(--good); margin-top: 0;">After</h4>
-            <ul style="font-size: 0.85rem; color: var(--text); padding-left: 1rem; line-height: 1.5; font-weight: 500;">
+            <h4 className="text-accent-green font-bold mb-4 uppercase tracking-wider text-xs flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4" /> After
+            </h4>
+            <ul className="space-y-3 text-white text-sm border-l border-accent-green/20 pl-6 font-medium">
               <li>Triage becomes standardized.</li>
               <li>Prioritization is deterministic.</li>
               <li>Every decision is explainable.</li>
@@ -293,23 +241,95 @@ export default function JourneyPage() {
             </ul>
           </div>
         </div>
-        <div style="margin-top: 1.5rem; text-align: center;">
-          <p style="font-style: italic; color: var(--info); font-size: 0.9rem;">"Before Argonaut, triage required manually correlating SARIF, lockfiles, CVE feeds, and Slack threads. After Argonaut, one request triggers structured ingestion, ES|QL joins, deterministic scoring, and automated Jira/Slack actions — all in under a minute."</p>
+
+        <div className="mt-12 pt-8 border-t border-white/5 text-center px-4 relative z-10">
+          <p className="text-accent-blue font-light italic text-lg max-w-4xl mx-auto leading-relaxed">
+            "Before Argonaut, triage required manually correlating SARIF, lockfiles, CVE feeds, and Slack threads. After Argonaut, one request triggers structured ingestion, ES|QL joins, deterministic scoring, and automated Jira/Slack actions — all in under a minute."
+          </p>
+        </div>
+      </section>
+
+      <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
+        <span>Argonaut Command Deck</span>
+        <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
+        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">CONFIDENTIAL</span>
+      </footer>
+    </div>
+  );
+}
+
+function JourneyCard({
+  type,
+  title,
+  subtitle,
+  icon,
+  accentColor,
+  bgColor,
+  trigger,
+  triggerMono,
+  steps,
+  summary
+}: JourneyCardProps) {
+  return (
+    <div className={`argonaut-panel h-full border-t-2 ${accentColor} flex flex-col`}>
+      <div className="p-6 border-b border-white/5">
+        <div className={`w-12 h-12 rounded-xl ${bgColor} flex items-center justify-center mb-4`}>
+          {icon}
+        </div>
+        <h2 className="text-xl font-bold text-white mb-1">{title}</h2>
+        <p className={`text-[10px] font-bold uppercase tracking-wider ${type === 'before' ? 'text-red-400' : 'text-accent-green'}`}>
+          {subtitle}
+        </p>
+      </div>
+
+      <div className="p-6 flex-grow space-y-6">
+        <div>
+          <h4 className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-3">Trigger Event</h4>
+          <p className={`text-sm ${triggerMono ? 'font-mono bg-white/5 p-3 rounded-lg border border-white/5 text-accent-blue' : 'text-neutral-400'}`}>
+            {trigger}
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <h4 className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">Process Steps</h4>
+          {steps.map((step: JourneyStep, idx: number) => (
+            <div key={idx} className="group">
+              <div className="flex justify-between items-start mb-1">
+                <span className="text-xs font-bold text-white group-hover:text-accent-blue transition-colors">
+                  Step {idx + 1}: {step.title}
+                </span>
+                <span className="text-[10px] font-mono text-neutral-400">{step.duration}</span>
+              </div>
+              <p className="text-xs text-neutral-400 leading-relaxed pl-2 border-l border-white/10">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
 
-    <footer class="footer reveal">
-      <span>Argonaut Command Deck</span>
-      <span>Powered by Elastic Agent Builder</span>
-      <span>CONFIDENTIAL</span>
-    </footer>
-  </div>
+      <div className={`p-6 bg-white/2 border-t border-white/5 rounded-b-2xl mt-auto space-y-3`}>
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-neutral-400">Total Time:</span>
+          <strong className={`text-sm ${summary.timeColor}`}>{summary.time}</strong>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-xs text-neutral-400">Emotional State:</span>
+          <strong className={`text-sm text-white`}>{summary.emotional}</strong>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-  
-  
-
-
-` }} />
+function ComparisonRow({ label, before, after, isGood, last }: ComparisonRowProps) {
+  return (
+    <tr className={`${!last ? 'border-b border-white/5' : ''} hover:bg-white/[0.02] transition-colors`}>
+      <td className="py-4 px-4 text-neutral-400 font-medium">{label}</td>
+      <td className="py-4 px-4 text-red-300 font-mono">{before}</td>
+      <td className={`py-4 px-4 font-bold font-mono ${isGood ? 'text-accent-green' : 'text-white'}`}>
+        {after}
+      </td>
+    </tr>
   );
 }

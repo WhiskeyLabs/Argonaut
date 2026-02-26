@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Outfit, IBM_Plex_Mono, Barlow } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const barlow = Barlow({
+  variable: "--font-barlow",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -38,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${spaceGrotesk.variable} ${plexMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${outfit.variable} ${barlow.variable} ${plexMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <TopNav />
         <main className="pt-[56px] min-h-screen">

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ArrowLeft, Inbox } from 'lucide-react';
 import FindingsGridClient from './FindingsGridClient';
 
 async function getRun(runId: string) {
@@ -23,29 +24,40 @@ export default async function FindingsPage({ params }: { params: Promise<{ runId
     }
 
     return (
-        <main className="argonaut-shell flex flex-col h-screen">
+        <main className="argonaut-shell flex flex-col h-screen overflow-hidden">
             {/* Header section with Breadcrumb */}
-            <header className="mb-6 border-b border-white/5 pb-6 shrink-0">
+            <header className="mb-6 argonaut-panel p-8 reveal is-visible shrink-0">
                 <div className="flex justify-between items-start">
                     <div>
                         <Link href={`/runs/${runId}`} className="text-sm font-medium text-neutral-400 hover:text-white transition-colors flex items-center gap-1 mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+                            <ArrowLeft className="w-4 h-4" />
                             Back to Run
                         </Link>
-                        <p className="text-[11px] tracking-[0.22em] uppercase text-emerald-500 font-bold mb-1">Findings Triage</p>
-                        <div className="flex items-center gap-4 mb-2">
+                        <p className="eyebrow">Findings Triage</p>
+                        <div className="flex flex-wrap items-center gap-4 mb-3">
                             <h1 className="text-4xl font-bold tracking-tight text-white">{run.runId}</h1>
                         </div>
-                        <div className="flex items-center gap-4 text-[11px] uppercase tracking-widest font-mono text-neutral-500">
-                            <span>App: <span className="text-neutral-300">{run.applicationId}</span></span>
-                            <span>Bundle: <span className="text-neutral-300">{run.bundleId}</span></span>
+                        <div className="flex flex-wrap items-center gap-6 text-[11px] uppercase tracking-[0.15em] font-mono text-neutral-500">
+                            <div className="flex items-center gap-2">
+                                <span className="opacity-50">App:</span>
+                                <span className="text-accent-blue font-bold">{run.applicationId}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="opacity-50">Bundle:</span>
+                                <span className="text-neutral-300">{run.bundleId}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="hidden lg:flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/5 flex items-center justify-center">
+                            <Inbox className="w-5 h-5 text-accent-blue" />
                         </div>
                     </div>
                 </div>
             </header>
 
             {/* Main content - flex col to take remaining height */}
-            <div className="flex-1 min-h-0 relative">
+            <div className="flex-1 min-h-0 relative px-8 pb-8 reveal is-visible" style={{ transitionDelay: '50ms' }}>
                 <FindingsGridClient runId={runId} />
             </div>
         </main>

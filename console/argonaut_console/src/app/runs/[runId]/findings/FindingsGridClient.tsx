@@ -1,5 +1,21 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import {
+    Filter,
+    CheckCircle2,
+    XCircle,
+    AlertTriangle,
+    Shield,
+    Zap,
+    ChevronLeft,
+    ChevronRight,
+    Search,
+    ExternalLink,
+    Clock,
+    Flame,
+    Activity,
+    Check
+} from 'lucide-react';
 import ResearchDrawer from '@/components/ResearchDrawer';
 
 // Simplified Types for the UI
@@ -263,112 +279,149 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
 
     // ---- Render Helpers ----
     const renderSeverity = (sev: string) => {
-        const colors: Record<string, string> = {
-            'CRITICAL': 'text-red-400 bg-red-400/10 border-red-400/20',
-            'HIGH': 'text-orange-400 bg-orange-400/10 border-orange-400/20',
-            'MEDIUM': 'text-amber-400 bg-amber-400/10 border-amber-400/20',
-            'LOW': 'text-neutral-400 bg-neutral-400/10 border-neutral-400/20'
+        const severityMap: Record<string, { class: string, icon: any }> = {
+            'CRITICAL': { class: 'text-accent-pink border-accent-pink/30 bg-accent-pink/5', icon: Flame },
+            'HIGH': { class: 'text-accent-yellow border-accent-yellow/30 bg-accent-yellow/5', icon: AlertTriangle },
+            'MEDIUM': { class: 'text-accent-blue border-accent-blue/30 bg-accent-blue/5', icon: Activity },
+            'LOW': { class: 'text-neutral-400 border-white/10 bg-white/5', icon: Clock }
         };
-        const c = colors[sev?.toUpperCase()] || colors['LOW'];
-        return <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${c}`}>{sev}</span>;
+        const upperSev = sev?.toUpperCase() || 'LOW';
+        const config = severityMap[upperSev] || severityMap['LOW'];
+        const Icon = config.icon;
+
+        return (
+            <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-widest border flex items-center gap-1.5 w-fit ${config.class}`}>
+                <Icon className="w-3 h-3" />
+                {sev}
+            </span>
+        );
     };
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="argonaut-panel h-full flex flex-col overflow-hidden border-white/10">
             {/* Toolbar */}
-            <div className="p-4 border-b border-white/5 bg-neutral-900/50 flex flex-wrap items-center justify-between gap-4 shrink-0">
-                <div className="flex flex-wrap items-center gap-2">
-                    {/* Filters */}
-                    <label className="flex items-center gap-1.5 text-xs text-neutral-300">
-                        <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
-                            checked={filters.reachableOnly} onChange={e => setFilters(f => ({ ...f, reachableOnly: e.target.checked }))} />
-                        Reachable
-                    </label>
-                    <label className="flex items-center gap-1.5 text-xs text-neutral-300 ml-3">
-                        <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
-                            checked={filters.kevOnly} onChange={e => setFilters(f => ({ ...f, kevOnly: e.target.checked }))} />
-                        KEV
-                    </label>
-                    <label className="flex items-center gap-1.5 text-xs text-neutral-300 ml-3">
-                        <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
-                            checked={filters.epssMin} onChange={e => setFilters(f => ({ ...f, epssMin: e.target.checked }))} />
-                        EPSS {'>'} 0.5
-                    </label>
-
-                    <div className="h-4 w-px bg-white/10 mx-2"></div>
-
-                    <span className="text-xs text-neutral-500 uppercase tracking-wider font-bold">Status:</span>
-                    {['Open', 'Fixed', 'Ignored', 'FalsePositive'].map(st => (
-                        <label key={st} className="flex items-center gap-1.5 text-xs text-neutral-300">
-                            <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
-                                checked={filters.status.includes(st)}
-                                onChange={e => {
-                                    setFilters(f => {
-                                        const newStatuses = e.target.checked
-                                            ? [...f.status, st]
-                                            : f.status.filter(x => x !== st);
-                                        return { ...f, status: newStatuses };
-                                    });
-                                }} />
-                            {st}
+            <div className="p-6 border-b border-white/10 bg-white/2 flex flex-wrap items-center justify-between gap-6 shrink-0">
+                <div className="flex flex-wrap items-center gap-6">
+                    {/* Filters Group */}
+                    <div className="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                        <Filter className="w-3.5 h-3.5 text-neutral-500" />
+                        <label className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-neutral-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="checkbox" className="w-3 h-3 rounded border-white/10 bg-black/20 text-accent-blue focus:ring-accent-blue/50"
+                                checked={filters.reachableOnly} onChange={e => setFilters(f => ({ ...f, reachableOnly: e.target.checked }))} />
+                            Reachable
                         </label>
-                    ))}
+                        <div className="w-px h-3 bg-white/10" />
+                        <label className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-neutral-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="checkbox" className="w-3 h-3 rounded border-white/10 bg-black/20 text-accent-blue focus:ring-accent-blue/50"
+                                checked={filters.kevOnly} onChange={e => setFilters(f => ({ ...f, kevOnly: e.target.checked }))} />
+                            KEV
+                        </label>
+                        <div className="w-px h-3 bg-white/10" />
+                        <label className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-neutral-400 cursor-pointer hover:text-white transition-colors">
+                            <input type="checkbox" className="w-3 h-3 rounded border-white/10 bg-black/20 text-accent-blue focus:ring-accent-blue/50"
+                                checked={filters.epssMin} onChange={e => setFilters(f => ({ ...f, epssMin: e.target.checked }))} />
+                            High EPSS
+                        </label>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-600">Status</span>
+                        <div className="flex items-center gap-1.5">
+                            {['Open', 'Fixed', 'Ignored', 'FalsePositive'].map(st => (
+                                <button
+                                    key={st}
+                                    onClick={() => {
+                                        setFilters(f => ({
+                                            ...f,
+                                            status: f.status.includes(st) ? f.status.filter(x => x !== st) : [...f.status, st]
+                                        }));
+                                    }}
+                                    className={`px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border transition-all ${filters.status.includes(st)
+                                        ? 'bg-accent-blue/20 text-accent-blue border-accent-blue/30 shadow-[0_0_10px_rgba(33,150,243,0.1)]'
+                                        : 'bg-white/5 text-neutral-500 border-white/5 hover:border-white/20'
+                                        }`}
+                                >
+                                    {st}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                     <button
                         onClick={handleGenerateTopNFixes}
                         disabled={fixGenerating || stageStatus === 'RUNNING'}
-                        className={`px-3 py-1.5 text-xs font-bold rounded flex items-center gap-2 transition-all shadow-sm ${fixGenerating || stageStatus === 'RUNNING'
-                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30 cursor-not-allowed animate-pulse'
-                            : 'bg-blue-600/90 hover:bg-blue-600 text-white border border-blue-500/50'
+                        className={`btn-neon-blue px-5 py-2 flex items-center gap-2 !text-[10px] ${fixGenerating || stageStatus === 'RUNNING' ? 'opacity-50 !cursor-wait' : ''
                             }`}
                     >
-                        <svg className={`w-3.5 h-3.5 ${fixGenerating ? 'animate-spin' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        {fixGenerating || stageStatus === 'RUNNING' ? 'Generating Fixes...' : 'Generate fixes for top 5'}
+                        {fixGenerating || stageStatus === 'RUNNING' ? (
+                            <Activity className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                            <Zap className="w-3.5 h-3.5" />
+                        )}
+                        {fixGenerating || stageStatus === 'RUNNING' ? 'Generative Remediation in Progress...' : 'Remediate Top 5 Findings'}
                     </button>
 
-                    <div className="h-4 w-px bg-white/10 mx-1"></div>
-
-                    <span className="text-xs text-neutral-400 font-mono">{total} findings</span>
-                    {selectedIds.size > 0 && (
-                        <div className="flex items-center gap-2 ml-4 text-xs">
-                            <span className="text-blue-400 font-medium mr-2">{selectedIds.size} selected</span>
-                            <button disabled={bulkUpdating} onClick={() => handleBulkStatus('Fixed')} className="px-2.5 py-1 font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded hover:bg-emerald-500/20 disabled:opacity-50">Fix</button>
-                            <button disabled={bulkUpdating} onClick={() => handleBulkStatus('Ignored')} className="px-2.5 py-1 font-medium bg-neutral-500/10 text-neutral-400 border border-neutral-500/20 rounded hover:bg-neutral-500/20 disabled:opacity-50">Ignore</button>
-                            <button disabled={bulkUpdating} onClick={() => handleBulkStatus('FalsePositive')} className="px-2.5 py-1 font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20 rounded hover:bg-orange-500/20 disabled:opacity-50">FP</button>
-                            <button disabled={bulkUpdating} onClick={() => handleBulkStatus('Open')} className="px-2.5 py-1 font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded hover:bg-blue-500/20 disabled:opacity-50">Open</button>
-                        </div>
-                    )}
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-black/20 rounded border border-white/5">
+                        <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-widest">
+                            {total} <span className="text-neutral-600 font-normal">Hits</span>
+                        </span>
+                    </div>
                 </div>
             </div>
 
+            {/* Bulk Actions Bar (Sticky but overlay) */}
+            {selectedIds.size > 0 && (
+                <div className="px-6 py-3 bg-accent-blue/10 border-b border-accent-blue/20 flex items-center justify-between shrink-0 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 rounded bg-accent-blue/20 flex items-center justify-center border border-accent-blue/30">
+                            <Check className="w-3.5 h-3.5 text-accent-blue" />
+                        </div>
+                        <span className="text-xs font-bold text-accent-blue uppercase tracking-widest font-barlow">
+                            {selectedIds.size} Findings Selected
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <button disabled={bulkUpdating} onClick={() => handleBulkStatus('Fixed')} className="px-4 py-1.5 text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded hover:bg-emerald-500/20 active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50">Mark Fixed</button>
+                        <button disabled={bulkUpdating} onClick={() => handleBulkStatus('Ignored')} className="px-4 py-1.5 text-[10px] font-bold bg-neutral-500/10 text-neutral-400 border border-neutral-500/20 rounded hover:bg-neutral-500/20 active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50">Ignore</button>
+                        <button disabled={bulkUpdating} onClick={() => handleBulkStatus('FalsePositive')} className="px-4 py-1.5 text-[10px] font-bold bg-accent-pink/10 text-accent-pink border border-accent-pink/20 rounded hover:bg-accent-pink/20 active:scale-95 transition-all uppercase tracking-widest disabled:opacity-50">False Positive</button>
+                        <div className="w-px h-4 bg-accent-blue/20 mx-2" />
+                        <button onClick={() => setSelectedIds(new Set())} className="text-[10px] font-bold text-neutral-500 hover:text-white uppercase tracking-widest px-2">Cancel</button>
+                    </div>
+                </div>
+            )}
+
             {/* Grid */}
-            <div className="flex-1 overflow-auto bg-[#0A0A0A]">
-                <table className="w-full text-left border-collapse text-sm">
-                    <thead className="sticky top-0 bg-[#111] shadow-md z-10 border-b border-white/10">
+            <div className="flex-1 overflow-auto custom-scrollbar">
+                <table className="w-full text-left border-collapse">
+                    <thead className="sticky top-0 bg-[#0D0D0D] z-10 border-b border-white/10">
                         <tr>
-                            <th className="p-3 w-12 text-center text-neutral-400 font-medium">
-                                <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
+                            <th className="p-4 w-12 text-center">
+                                <input type="checkbox" className="w-3.5 h-3.5 rounded border-white/10 bg-white/5 text-accent-blue focus:ring-accent-blue/50 cursor-pointer"
                                     checked={findings.length > 0 && selectedIds.size === findings.length}
                                     onChange={toggleAll}
                                 />
                             </th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold w-32">Priority</th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold w-24">Severity</th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold max-w-sm">Description</th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold w-48">Asset URL</th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold w-32">Status</th>
-                            <th className="p-3 text-xs uppercase tracking-wider text-neutral-500 font-bold">Notes</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold w-24 font-barlow">Priority</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold w-32 font-barlow">Severity</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold font-barlow">Finding Details</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold w-48 font-barlow">Asset Location</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold w-40 font-barlow">Triage</th>
+                            <th className="p-4 text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold font-barlow">Analysis Notes</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5">
+                    <tbody className="divide-y divide-white/5 bg-black/20">
                         {loading ? (
-                            <tr><td colSpan={7} className="p-8 text-center text-neutral-500">Loading findings...</td></tr>
+                            <tr><td colSpan={7} className="p-16 text-center">
+                                <Activity className="w-8 h-8 text-neutral-800 animate-pulse mx-auto mb-4" />
+                                <span className="text-xs uppercase tracking-[0.3em] text-neutral-600 animate-pulse">Scanning Data Plane...</span>
+                            </td></tr>
                         ) : findings.length === 0 ? (
-                            <tr><td colSpan={7} className="p-8 text-center text-neutral-500">No findings matched your filters.</td></tr>
+                            <tr><td colSpan={7} className="p-16 text-center">
+                                <Shield className="w-8 h-8 text-neutral-800 mx-auto mb-4 opacity-20" />
+                                <p className="text-xs uppercase tracking-[0.2em] text-neutral-600">No telemetry matches the current filter profile.</p>
+                            </td></tr>
                         ) : (
                             findings.map(f => {
                                 const isSelected = selectedIds.has(f._id);
@@ -376,49 +429,70 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                                 const displayStatus = rawStatus === 'DEMO_CURATED' ? 'Open' : rawStatus;
 
                                 return (
-                                    <tr key={f._id} className={`hover:bg-white/[0.02] transition-colors ${isSelected ? 'bg-blue-500/[0.03]' : ''}`}>
-                                        <td className="p-3 text-center">
-                                            <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700"
+                                    <tr key={f._id} className={`group hover:bg-white/[0.03] transition-all ${isSelected ? 'bg-accent-blue/5 border-l-2 border-l-accent-blue' : 'border-l-2 border-l-transparent'}`}>
+                                        <td className="p-4 text-center">
+                                            <input type="checkbox" className="w-3.5 h-3.5 rounded border-white/10 bg-white/5 text-accent-blue focus:ring-accent-blue/50 cursor-pointer"
                                                 checked={isSelected} onChange={() => toggleSelection(f._id)} />
                                         </td>
-                                        <td className="p-3">
-                                            <span className="font-mono text-neutral-300">{f.priorityScore.toFixed(1)}</span>
+                                        <td className="p-4">
+                                            <div className="flex flex-col">
+                                                <span className="font-mono text-sm font-bold text-white leading-none mb-1">{f.priorityScore.toFixed(1)}</span>
+                                                <div className="w-12 h-1 bg-white/5 rounded-full overflow-hidden">
+                                                    <div
+                                                        className="h-full bg-accent-blue"
+                                                        style={{ width: `${Math.min(f.priorityScore, 10) * 10}%` }}
+                                                    />
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td className="p-3">
+                                        <td className="p-4">
                                             {renderSeverity(f.severity)}
                                         </td>
-                                        <td className="p-3 max-w-sm">
-                                            <button
-                                                onClick={() => setDrawerFindingId(f.findingId)}
-                                                className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors text-left flex items-start gap-1 focus:outline-none"
-                                                title={f.title || f.cve || f.ruleId || f.description || 'Finding Details'}
-                                            >
-                                                <span className="truncate">{f.title || f.cve || f.ruleId || (f.description ? f.description.substring(0, 100) + '...' : 'Unknown Finding')}</span>
-                                                <svg className="w-3.5 h-3.5 mt-0.5 shrink-0 opacity-50 hover:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                </svg>
-                                            </button>
-                                            {f.description && (
-                                                <div className="text-xs text-neutral-400 mt-1 truncate max-w-sm" title={f.description}>
-                                                    {f.description}
+                                        <td className="p-4 max-w-xl">
+                                            <div className="flex flex-col gap-1.5">
+                                                <button
+                                                    onClick={() => setDrawerFindingId(f.findingId)}
+                                                    className="text-sm font-bold text-white hover:text-accent-blue transition-all text-left flex items-start gap-2 focus:outline-none"
+                                                >
+                                                    <span className="truncate group-hover:underline decoration-accent-blue/30 underline-offset-4">{f.title || f.cve || f.ruleId || 'Unknown Finding'}</span>
+                                                    <ExternalLink className="w-3 h-3 mt-1 opacity-20 group-hover:opacity-100 transition-opacity" />
+                                                </button>
+                                                {f.description && (
+                                                    <div className="text-[11px] leading-relaxed text-neutral-400 line-clamp-2" title={f.description}>
+                                                        {f.description}
+                                                    </div>
+                                                )}
+                                                <div className="flex flex-wrap items-center gap-2 mt-1">
+                                                    <span className="text-[9px] font-mono text-neutral-600 bg-white/5 px-1.5 py-0.5 rounded border border-white/5">
+                                                        {f.findingId}
+                                                    </span>
+                                                    {f.context?.reachability?.reachable && (
+                                                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest bg-accent-pink/10 text-accent-pink border border-accent-pink/20">
+                                                            <Flame className="w-2.5 h-2.5" />
+                                                            Reachable
+                                                        </span>
+                                                    )}
+                                                    {f.context?.threat?.kev && (
+                                                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest bg-red-400/10 text-red-100 border border-red-400/30">
+                                                            KEV
+                                                        </span>
+                                                    )}
                                                 </div>
-                                            )}
-                                            <div className="text-[10px] text-neutral-600 font-mono mt-1">
-                                                {f.findingId}
-                                            </div>
-                                            {/* Context badges */}
-                                            <div className="flex gap-1.5 mt-1.5">
-                                                {f.context?.reachability?.reachable && <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border text-purple-400 border-purple-400/20 bg-purple-400/10">Reachable</span>}
-                                                {f.context?.threat?.kev && <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border text-red-400 border-red-400/20 bg-red-400/10">KEV</span>}
-                                                {f.context?.threat?.epss && f.context.threat.epss >= 0.5 && <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider border text-orange-400 border-orange-400/20 bg-orange-400/10">EPSS &ge;50%</span>}
                                             </div>
                                         </td>
-                                        <td className="p-3 w-48">
-                                            <div className="truncate text-xs font-mono text-neutral-400" title={f.assetUrl}>{f.assetUrl}</div>
+                                        <td className="p-4">
+                                            <div className="flex flex-col gap-1">
+                                                <div className="truncate text-[10px] font-mono font-medium text-neutral-400" title={f.assetUrl || ''}>
+                                                    {f.assetUrl ? f.assetUrl.split('/').pop() : 'no-asset'}
+                                                </div>
+                                                <div className="truncate text-[9px] font-mono text-neutral-600" title={f.assetUrl || ''}>
+                                                    {f.assetUrl ? (f.assetUrl.split('/').slice(0, -1).join('/') || '/') : ''}
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td className="p-3">
+                                        <td className="p-4">
                                             <select
-                                                className="bg-transparent border border-white/10 rounded px-2 py-1 text-xs text-neutral-300 focus:outline-none focus:border-blue-500"
+                                                className="w-full bg-black/40 border border-white/10 rounded px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-neutral-300 focus:outline-none focus:border-accent-blue transition-all cursor-pointer appearance-none hover:border-white/20"
                                                 value={displayStatus}
                                                 disabled={bulkUpdating}
                                                 onChange={(e) => updateTriage([{ findingId: f._id, triage: { status: e.target.value, note: localNotes[f._id] } }])}
@@ -429,15 +503,18 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                                                 <option value="FalsePositive">False Positive</option>
                                             </select>
                                         </td>
-                                        <td className="p-3">
-                                            <input
-                                                type="text"
-                                                disabled={bulkUpdating}
-                                                placeholder="Add note..."
-                                                className="w-full bg-transparent border-b border-white/10 focus:border-blue-500 text-xs px-2 py-1 outline-none text-neutral-300 placeholder:text-neutral-600 transition-colors"
-                                                value={localNotes[f._id] ?? ''}
-                                                onChange={(e) => handleNoteChange(f._id, e.target.value)}
-                                            />
+                                        <td className="p-4">
+                                            <div className="relative group/note">
+                                                <input
+                                                    type="text"
+                                                    disabled={bulkUpdating}
+                                                    placeholder="Add engineering context..."
+                                                    className="w-full bg-transparent border-b border-white/5 focus:border-accent-blue text-xs px-1 py-1 outline-none text-neutral-300 placeholder:text-neutral-700 transition-all font-light"
+                                                    value={localNotes[f._id] ?? ''}
+                                                    onChange={(e) => handleNoteChange(f._id, e.target.value)}
+                                                />
+                                                <Search className="w-3 h-3 absolute right-1 top-2 text-neutral-800 group-focus-within/note:text-accent-blue/50 transition-colors pointer-events-none" />
+                                            </div>
                                         </td>
                                     </tr>
                                 );
@@ -447,23 +524,34 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                 </table>
             </div>
 
-            {/* Pagination */}
-            <div className="p-3 border-t border-white/5 bg-[#0a0a0a] flex items-center justify-between shrink-0">
-                <span className="text-xs text-neutral-500">Page {cursorStack.length + 1}</span>
-                <div className="flex items-center gap-2">
+            {/* Pagination / Footer */}
+            <div className="px-6 py-4 border-t border-white/10 bg-white/2 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-600">
+                        Surface Layer <span className="text-neutral-400 ml-1">{cursorStack.length + 1}</span>
+                    </span>
+                    <div className="h-4 w-px bg-white/5" />
+                    <span className="text-[9px] font-mono text-neutral-700 uppercase tracking-widest">
+                        Ready for Triage
+                    </span>
+                </div>
+
+                <div className="flex items-center gap-3">
                     <button
                         onClick={handlePrevPage}
                         disabled={cursorStack.length === 0 || loading}
-                        className="px-3 py-1.5 text-xs font-medium text-neutral-400 bg-neutral-800/50 hover:bg-neutral-800 hover:text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="p-2 text-neutral-500 hover:text-white bg-white/5 border border-white/5 rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition-all hover:bg-white/10"
+                        title="Previous Plane"
                     >
-                        Previous
+                        <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                         onClick={handleNextPage}
                         disabled={!nextCursor || loading}
-                        className="px-3 py-1.5 text-xs font-medium text-neutral-400 bg-neutral-800/50 hover:bg-neutral-800 hover:text-white rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="p-2 text-neutral-500 hover:text-white bg-white/5 border border-white/5 rounded-lg disabled:opacity-20 disabled:cursor-not-allowed transition-all hover:bg-white/10"
+                        title="Next Plane"
                     >
-                        Next
+                        <ChevronRight className="w-4 h-4" />
                     </button>
                 </div>
             </div>

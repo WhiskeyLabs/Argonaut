@@ -34,9 +34,9 @@ export async function GET() {
                                 size: 10
                             }
                         },
-                        latest_bundle: {
+                        recent_bundles: {
                             top_hits: {
-                                size: 1,
+                                size: 5,
                                 sort: [
                                     {
                                         createdAt: {
@@ -45,7 +45,7 @@ export async function GET() {
                                     }
                                 ],
                                 _source: {
-                                    includes: ['createdAt', 'status']
+                                    includes: ['bundleId', 'buildId', 'createdAt', 'status', 'lastRunId', 'activeRunId']
                                 }
                             }
                         }
@@ -60,15 +60,15 @@ export async function GET() {
                 return acc;
             }, { NEW: 0, PROCESSED: 0, FAILED: 0 });
 
-            const latestBundleHit = bucket.latest_bundle.hits.hits[0];
-            const latestBundle = latestBundleHit ? latestBundleHit._source : null;
+            const recentBundles = bucket.recent_bundles.hits.hits.map((hit: any) => hit._source);
 
             return {
                 applicationId: bucket.key,
                 applicationName: bucket.app_name.buckets[0]?.key || bucket.key,
                 totalBundles: bucket.doc_count,
                 statusCounts: statuses,
-                latestBundle
+                latestBundle: recentBundles[0] || null,
+                recentBundles
             };
         });
 

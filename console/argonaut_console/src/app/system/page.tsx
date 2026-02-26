@@ -1,668 +1,668 @@
-// @ts-nocheck
 'use client';
 
-import { useEffect, useRef } from 'react';
-import './system.css';
+import { useEffect, useState } from 'react';
+import {
+  Activity,
+  ShieldAlert,
+  Timer,
+  CheckCircle2,
+  ArrowDown,
+  Zap,
+  Expand,
+  BarChart3,
+  Target,
+  Terminal,
+  X
+} from 'lucide-react';
+
+interface NodeSpec {
+  title: string;
+  summary: string;
+  responsibilities: string[];
+  tags: string[];
+  icon: string;
+  meta: string;
+}
+
+const NODE_SPECS: Record<string, NodeSpec> = {
+  'security-alerts': {
+    title: 'Security Alert Ingress',
+    summary: 'Normalizes real-time telemetry from external security tools (PagerDuty, Datadog) into the Argonaut Event Stream.',
+    responsibilities: [
+      'Webhook signature validation',
+      'Event normalization to argonaut_schema',
+      'Immediate state checkpointing'
+    ],
+    tags: ['External', 'Ingress', 'Streaming'],
+    icon: 'https://cdn.simpleicons.org/pagerduty/ffffff',
+    meta: 'PagerDuty / DD'
+  },
+  'appsec-scans': {
+    title: 'AppSec Scan Ingress',
+    summary: 'Ingests batch reports from SCA, SAST, and DAST tools. Extracts SARIF outputs and dependency relationships.',
+    responsibilities: [
+      'SARIF & SBOM parsing',
+      'Dependency graph extraction',
+      'Historical scan correlation'
+    ],
+    tags: ['External', 'Batch', 'Security Testing'],
+    icon: 'https://cdn.simpleicons.org/snyk/ffffff',
+    meta: 'Snyk / Veracode'
+  },
+  'supervisor-agent': {
+    title: 'Supervisor Agent',
+    summary: 'The primary cognitive router. Decides which worker agents to invoke based on alert classification.',
+    responsibilities: [
+      'Workflow state management',
+      'Task decomposition',
+      'Final approval & logic override'
+    ],
+    tags: ['Agent', 'Orchestration', 'Cognitive'],
+    icon: 'ARGUS_Logo.png',
+    meta: 'Router'
+  },
+  'triage-agent': {
+    title: 'Triage Agent',
+    summary: 'Specialized worker for initial data cleansing and formatting of incoming security alerts.',
+    responsibilities: [
+      'Schema enforcement',
+      'Duplicate finding suppression',
+      'Initial risk tagging'
+    ],
+    tags: ['Agent', 'Data Processing', 'Cleansing'],
+    icon: 'ARGUS_Logo.png',
+    meta: 'Worker'
+  },
+  'enrichment-agent': {
+    title: 'Enrichment Agent',
+    summary: 'Augments findings with external threat intelligence and internal code context.',
+    responsibilities: [
+      'Threat intel API integration (EPSS/KEV)',
+      'Reaching out to reachability-builder',
+      'Adding asset blast radius'
+    ],
+    tags: ['Agent', 'Intel', 'Enrichment'],
+    icon: 'ARGUS_Logo.png',
+    meta: 'Worker'
+  },
+  'action-agent': {
+    title: 'Action Agent',
+    summary: 'Responsible for downstream impact: creating tickets, posting summaries, and initiating auto-remediation.',
+    responsibilities: [
+      'Jira/Slack dynamic templating',
+      'Notification throttling',
+      'Remediation follow-up'
+    ],
+    tags: ['Agent', 'Automation', 'Integration'],
+    icon: 'https://cdn.simpleicons.org/slack/ffffff',
+    meta: 'Worker'
+  },
+  'es-state-index': {
+    title: 'Elastic State Memory',
+    summary: 'A purpose-built index providing stateful persistence for every LangChain workflow step.',
+    responsibilities: [
+      'Workflow checkpoint storage',
+      'Audit log serialization',
+      'Vector knowledge retrieval'
+    ],
+    tags: ['Data', 'Persistence', 'Memory'],
+    icon: 'https://cdn.simpleicons.org/elasticsearch/ffffff',
+    meta: 'argonaut_state'
+  },
+  'esql-pipeline': {
+    title: 'ES|QL Scoring Engine',
+    summary: 'Execute-in-database prioritization logic. Replaces slow application-side loops with native Elastic joins.',
+    responsibilities: [
+      'Cross-index joining (Findings + Intel)',
+      'Mathematical ranking (Fix Priority Score)',
+      'Aggregated system views'
+    ],
+    tags: ['Data', 'Analytics', 'ES|QL'],
+    icon: 'https://cdn.simpleicons.org/kibana/ffffff',
+    meta: 'In-Database'
+  },
+  'parse-engine': {
+    title: 'Core Parser (@argus)',
+    summary: 'The battle-tested normalization engine reused from Argus CLI for maximum schema consistency.',
+    responsibilities: [
+      'Recursive SARIF traversal',
+      'Universal ID generation',
+      'Validation ruleset application'
+    ],
+    tags: ['Logic', 'Parsing', 'Argus Core'],
+    icon: 'ARGUS_Logo.png',
+    meta: '@argus_core'
+  },
+  'reachability-builder': {
+    title: 'Reachability Graph Builder',
+    summary: 'Maps dependency lockfiles into visual trees to identify if a vulnerable library is actually called.',
+    responsibilities: [
+      'Lockfile v3 graph traversal',
+      'Call path validation',
+      'Pruning irrelevant alerts'
+    ],
+    tags: ['Logic', 'Graphs', 'Reachability'],
+    icon: 'ARGUS_Logo.png',
+    meta: '@argus_core'
+  }
+};
+
+interface ContractSpec {
+  title: string;
+  subtitle: string;
+  notes: string[];
+}
+
+const CONTRACT_SPECS: Record<string, ContractSpec> = {
+  'state': {
+    title: 'Workload State Contract',
+    subtitle: 'Index: argonaut_state',
+    notes: [
+      'Uses @timestamp for strictly ordered event sequencing.',
+      'Stores full JSON context for workflow resume logic.',
+      'Retains memory for 90 days by default via ILM.'
+    ]
+  },
+  'scoring': {
+    title: 'Scoring & Ranking Contract',
+    subtitle: 'ES|QL Functional Logic',
+    notes: [
+      'Fix Priority Score = (CVSS * 0.4) + (Reachability * 0.4) + (EPSS * 0.2).',
+      'Joins happen at query time across 3 distinct indices.',
+      'Output is a ranked set of "Fix-First" recommendations.'
+    ]
+  },
+  'prompts': {
+    title: 'Agent Instruction Contract',
+    subtitle: 'Prompt Registry v2.4',
+    notes: [
+      'Zero-shot classification and chain-of-thought enrichment.',
+      'Encrypted storage for API keys and endpoint secrets.',
+      'Strict JSON schema validation for all agent outputs.'
+    ]
+  }
+};
+
+interface Counters {
+  workflows: number;
+  findings: number;
+  latency: string | number;
+  automation: number;
+}
+
+const EVENTS = [
+  { source: 'PagerDuty', msg: 'Ingested raw SARIF alert #4022', time: 'Just Now', type: 'ingress' },
+  { source: 'Supervisor', msg: 'Orchestrating enrichment for CVE-2024-001', time: '12s ago', type: 'orch' },
+  { source: 'Enrichment', msg: 'Matched reachability path: payment.js -> lib.util', time: '24s ago', type: 'logic' },
+  { source: 'ES|QL', msg: 'Calculated FPS: 8.4 (High Priority)', time: '40s ago', type: 'data' }
+];
 
 export default function SystemPage() {
+  const [selectedNode, setSelectedNode] = useState('supervisor-agent');
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [showFlow, setShowFlow] = useState(true);
+  const [modalContract, setModalContract] = useState<string | null>(null);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [counters, setCounters] = useState<Counters>({
+    workflows: 0,
+    findings: 0,
+    latency: 0,
+    automation: 0
+  });
 
   useEffect(() => {
-    console.log('SystemPage: useEffect mounting');
+    // Reveal animation logic
+    const revealElements = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0 });
 
-    const initPage = () => {
-      try {
-        const revealElements = document.querySelectorAll('.reveal');
-        console.log(`SystemPage: found ${revealElements.length} reveal elements`);
+    revealElements.forEach(el => io.observe(el));
 
-        if (revealElements.length === 0) return false; // Not ready
+    // Animate counters
+    const duration = 1000;
+    const steps = 20;
+    const interval = duration / steps;
 
-        const nodeSpecs = {
-          'security-alerts': {
-            title: 'Security Alert Ingress',
-            summary: 'Normalizes real-time telemetry from external security tools (PagerDuty, Datadog) into the Argonaut Event Stream.',
-            responsibilities: [
-              'Webhook signature validation',
-              'Event normalization to argonaut_schema',
-              'Immediate state checkpointing'
-            ],
-            tags: ['External', 'Ingress', 'Streaming']
-          },
-          'appsec-scans': {
-            title: 'AppSec Scan Ingress',
-            summary: 'Ingests batch reports from SCA, SAST, and DAST tools. Extracts SARIF outputs and dependency relationships.',
-            responsibilities: [
-              'SARIF & SBOM parsing',
-              'Dependency graph extraction',
-              'Historical scan correlation'
-            ],
-            tags: ['External', 'Batch', 'Security Testing']
-          },
-          'supervisor-agent': {
-            title: 'Supervisor Agent',
-            summary: 'The primary cognitive router. Decides which worker agents to invoke based on alert classification.',
-            responsibilities: [
-              'Workflow state management',
-              'Task decomposition',
-              'Final approval & logic override'
-            ],
-            tags: ['Agent', 'Orchestration', 'Cognitive']
-          },
-          'triage-agent': {
-            title: 'Triage Agent',
-            summary: 'Specialized worker for initial data cleansing and formatting of incoming security alerts.',
-            responsibilities: [
-              'Schema enforcement',
-              'Duplicate finding suppression',
-              'Initial risk tagging'
-            ],
-            tags: ['Agent', 'Data Processing', 'Cleansing']
-          },
-          'enrichment-agent': {
-            title: 'Enrichment Agent',
-            summary: 'Augments findings with external threat intelligence and internal code context.',
-            responsibilities: [
-              'Threat intel API integration (EPSS/KEV)',
-              'Reaching out to reachability-builder',
-              'Adding asset blast radius'
-            ],
-            tags: ['Agent', 'Intel', 'Enrichment']
-          },
-          'action-agent': {
-            title: 'Action Agent',
-            summary: 'Responsible for downstream impact: creating tickets, posting summaries, and initiating auto-remediation.',
-            responsibilities: [
-              'Jira/Slack dynamic templating',
-              'Notification throttling',
-              'Remediation follow-up'
-            ],
-            tags: ['Agent', 'Automation', 'Integration']
-          },
-          'es-state-index': {
-            title: 'Elastic State Memory',
-            summary: 'A purpose-built index providing stateful persistence for every LangChain workflow step.',
-            responsibilities: [
-              'Workflow checkpoint storage',
-              'Audit log serialization',
-              'Vector knowledge retrieval'
-            ],
-            tags: ['Data', 'Persistence', 'Memory']
-          },
-          'esql-pipeline': {
-            title: 'ES|QL Scoring Engine',
-            summary: 'Execute-in-database prioritization logic. Replaces slow application-side loops with native Elastic joins.',
-            responsibilities: [
-              'Cross-index joining (Findings + Intel)',
-              'Mathematical ranking (Fix Priority Score)',
-              'Aggregated system views'
-            ],
-            tags: ['Data', 'Analytics', 'ES|QL']
-          },
-          'parse-engine': {
-            title: 'Core Parser (@argus)',
-            summary: 'The battle-tested normalization engine reused from Argus CLI for maximum schema consistency.',
-            responsibilities: [
-              'Recursive SARIF traversal',
-              'Universal ID generation',
-              'Validation ruleset application'
-            ],
-            tags: ['Logic', 'Parsing', 'Argus Core']
-          },
-          'reachability-builder': {
-            title: 'Reachability Graph Builder',
-            summary: 'Maps dependency lockfiles into visual trees to identify if a vulnerable library is actually called.',
-            responsibilities: [
-              'Lockfile v3 graph traversal',
-              'Call path validation',
-              'Pruning irrelevant alerts'
-            ],
-            tags: ['Logic', 'Graphs', 'Reachability']
-          }
-        };
-
-        const contractSpecs = {
-          'state': {
-            title: 'Workload State Contract',
-            subtitle: 'Index: argonaut_state',
-            notes: [
-              'Uses @timestamp for strictly ordered event sequencing.',
-              'Stores full JSON context for workflow resume logic.',
-              'Retains memory for 90 days by default via ILM.'
-            ]
-          },
-          'scoring': {
-            title: 'Scoring & Ranking Contract',
-            subtitle: 'ES|QL Functional Logic',
-            notes: [
-              'Fix Priority Score = (CVSS * 0.4) + (Reachability * 0.4) + (EPSS * 0.2).',
-              'Joins happen at query time across 3 distinct indices.',
-              'Output is a ranked set of "Fix-First" recommendations.'
-            ]
-          },
-          'prompts': {
-            title: 'Agent Instruction Contract',
-            subtitle: 'Prompt Registry v2.4',
-            notes: [
-              'Zero-shot classification and chain-of-thought enrichment.',
-              'Encrypted storage for API keys and endpoint secrets.',
-              'Strict JSON schema validation for all agent outputs.'
-            ]
-          }
-        };
-
-        function setupNavThemeToggle() {
-          function setTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('argonaut-system-theme', theme);
-            const sun = document.getElementById('themeSun');
-            const moon = document.getElementById('themeMoon');
-            const label = document.getElementById('themeLabel');
-            if (sun && moon) {
-              if (theme === 'dark') {
-                sun.style.display = 'none';
-                moon.style.display = 'block';
-                if (label) label.textContent = 'DARK';
-              } else {
-                sun.style.display = 'block';
-                moon.style.display = 'none';
-                if (label) label.textContent = 'LIGHT';
-              }
-            }
-          }
-          const themeToggle = document.getElementById('navThemeToggle');
-          if (themeToggle) {
-            const savedTheme = localStorage.getItem('argonaut-system-theme');
-            const initialTheme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme :
-              (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            setTheme(initialTheme);
-            themeToggle.addEventListener('click', () => {
-              const currentTheme = document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-              setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-            });
-          }
-        }
-
-        function setupFilters() {
-          const btns = document.querySelectorAll('.seg-btn');
-          const grid = document.getElementById('topologyGrid');
-          btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-              btns.forEach(b => b.classList.remove('active'));
-              btn.classList.add('active');
-              const f = btn.getAttribute('data-filter');
-              grid.className = 'topology-grid' + (f === 'all' ? ' flow-active' : '');
-              document.querySelectorAll('.plane').forEach(p => {
-                p.style.opacity = (f === 'all' || p.getAttribute('data-plane') === f) ? '1' : '0.15';
-              });
-              document.querySelectorAll('.flow-arrow').forEach(a => a.style.opacity = (f === 'all' ? '1' : '0'));
-            });
-          });
-        }
-
-        function setupToggles() {
-          const flowToggle = document.getElementById('flowToggle');
-          const grid = document.getElementById('topologyGrid');
-          if (flowToggle) {
-            flowToggle.addEventListener('change', (e) => {
-              if (e.target.checked) grid.classList.add('flow-active');
-              else grid.classList.remove('flow-active');
-            });
-          }
-        }
-
-        function setupNodes() {
-          const nodes = document.querySelectorAll('.node');
-          nodes.forEach(node => {
-            node.addEventListener('click', () => {
-              const id = node.getAttribute('data-node');
-              const spec = nodeSpecs[id];
-              if (spec) {
-                document.getElementById('detailTitle').textContent = spec.title;
-                document.getElementById('detailPlane').textContent = node.getAttribute('data-plane') + ' plane';
-                document.getElementById('detailSummary').textContent = spec.summary;
-                const tags = document.getElementById('detailTags');
-                tags.innerHTML = '';
-                spec.tags.forEach(t => {
-                  const s = document.createElement('span'); s.className = 'chip'; s.textContent = t; tags.appendChild(s);
-                });
-                const list = document.getElementById('detailResponsibilities');
-                list.innerHTML = '';
-                spec.responsibilities.forEach(r => {
-                  const li = document.createElement('li'); li.innerHTML = `<strong>${r.split(' ')[0]}</strong> ${r.split(' ').slice(1).join(' ')}`;
-                  list.appendChild(li);
-                });
-                document.querySelectorAll('.node').forEach(n => n.classList.remove('active'));
-                node.classList.add('active');
-              }
-            });
-          });
-          const firstNode = document.querySelector('.node[data-node="supervisor-agent"]');
-          if (firstNode) firstNode.click();
-        }
-
-        function setupContracts() {
-          const modal = document.getElementById('insightModal');
-          const close = document.getElementById('modalClose');
-          const contracts = document.querySelectorAll('.contract');
-          contracts.forEach(c => {
-            c.addEventListener('click', () => {
-              const id = c.getAttribute('data-contract');
-              const spec = contractSpecs[id];
-              if (spec) {
-                document.getElementById('modalTitle').textContent = spec.title;
-                document.getElementById('modalSubtitle').textContent = spec.subtitle;
-                const list = document.getElementById('modalResponsibilities');
-                list.innerHTML = '<li>Maintains interface integrity.</li><li>Strict validation rules.</li>';
-                const notes = document.getElementById('modalNotes');
-                notes.innerHTML = '';
-                spec.notes.forEach(n => { const li = document.createElement('li'); li.textContent = n; notes.appendChild(li); });
-                modal.classList.add('active');
-                modal.setAttribute('aria-hidden', 'false');
-              }
-            });
-          });
-          close.addEventListener('click', () => {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-          });
-          modal.addEventListener('click', (e) => { if (e.target === modal) close.click(); });
-        }
-
-        function setupIncidentSimulation() {
-          const btn = document.getElementById('simulateIncident');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              btn.disabled = true;
-              btn.innerHTML = '<span class="status-indicator warning"></span> Simulating Ingress Spike...';
-              setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = '<i data-lucide="zap" class="line-icon"></i> Trigger Webhook Spike';
-              }, 2000);
-            });
-          }
-        }
-
-        function setupPulse() {
-          const btn = document.getElementById('pulseRun');
-          if (btn) {
-            btn.addEventListener('click', () => {
-              btn.classList.add('active');
-              setTimeout(() => btn.classList.remove('active'), 1000);
-            });
-          }
-        }
-
-        function renderEvents() {
-          const feed = document.getElementById('eventFeed');
-          if (!feed) return;
-          const events = [
-            { source: 'PagerDuty', msg: 'Ingested raw SARIF alert #4022', time: 'Just Now', type: 'ingress' },
-            { source: 'Supervisor', msg: 'Orchestrating enrichment for CVE-2024-001', time: '12s ago', type: 'orch' },
-            { source: 'Enrichment', msg: 'Matched reachability path: payment.js -> lib.util', time: '24s ago', type: 'logic' },
-            { source: 'ES|QL', msg: 'Calculated FPS: 8.4 (High Priority)', time: '40s ago', type: 'data' }
-          ];
-          feed.innerHTML = events.map(e => `
-            <div class="log-entry">
-              <span class="log-src ${e.type}">${e.source}</span>
-              <span class="log-msg">${e.msg}</span>
-              <span class="log-time">${e.time}</span>
-            </div>
-          `).join('');
-        }
-
-        function animateCounters() {
-          document.querySelectorAll('[data-counter]').forEach(el => {
-            const target = parseFloat(el.getAttribute('data-counter'));
-            const suffix = el.getAttribute('data-suffix') || '';
-            let current = 0;
-            const step = target / 20;
-            const i = setInterval(() => {
-              current += step;
-              if (current >= target) { current = target; clearInterval(i); }
-              el.textContent = current.toLocaleString(undefined, { maximumFractionDigits: (target < 10 ? 1 : 0) }) + suffix;
-            }, 50);
-          });
-        }
-
-        function animateBars() {
-          document.querySelectorAll('.bar-fill').forEach(bar => {
-            setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 300);
-          });
-        }
-
-        function animateRings() {
-          document.querySelectorAll('.ring').forEach(ring => {
-            const val = ring.getAttribute('data-ring');
-            ring.style.background = `conic-gradient(var(--brand-bright) ${val}%, transparent 0%)`;
-          });
-        }
-
-        // Initialize Lucide
-        let lucideRetries = 0;
-        const pollLucide = () => {
-          if (window.lucide) {
-            window.lucide.createIcons();
-          } else if (lucideRetries < 20) {
-            lucideRetries++;
-            setTimeout(pollLucide, 100);
-          }
-        };
-        pollLucide();
-
-        // Setup reveal logic
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('is-visible');
-          });
-        }, { threshold: 0 });
-
-        revealElements.forEach(el => {
-          io.observe(el);
-          // Immediate visibility check
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            el.classList.add('is-visible');
-          }
-        });
-
-        // Emergency reveal fallback
-        setTimeout(() => {
-          revealElements.forEach(el => {
-            if (!el.classList.contains('is-visible')) {
-              el.classList.add('is-visible');
-            }
-          });
-        }, 1000);
-
-        // Run all setup
-        setupNavThemeToggle(); setupFilters(); setupToggles(); setupNodes(); setupContracts(); setupIncidentSimulation(); setupPulse(); renderEvents(); animateCounters(); animateBars(); animateRings();
-        return true; // Success
-      } catch (err) {
-        console.error('SystemPage: Initialization error:', err);
-        return true; // Stop polling on error
-      }
+    const targets = {
+      workflows: 212,
+      findings: 4502,
+      latency: 1.4,
+      automation: 94
     };
 
-    // Polling initialization
-    let pollCount = 0;
-    const pollInit = setInterval(() => {
-      console.log(`SystemPage: polling ${pollCount}`);
-      if (initPage() || pollCount > 60) {
-        if (pollCount > 60) {
-          console.warn('SystemPage: Polling timed out. Forcing reveal.');
-          document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
-        }
-        clearInterval(pollInit);
-      }
-      pollCount++;
-    }, 100);
+    let stepCount = 0;
+    const timer = setInterval(() => {
+      stepCount++;
+      const progress = stepCount / steps;
+      setCounters({
+        workflows: Math.floor(targets.workflows * progress),
+        findings: Math.floor(targets.findings * progress),
+        latency: (targets.latency * progress).toFixed(1),
+        automation: Math.floor(targets.automation * progress)
+      });
+      if (stepCount >= steps) clearInterval(timer);
+    }, interval);
 
     return () => {
-      console.log('SystemPage: clearing interval');
-      clearInterval(pollInit);
+      io.disconnect();
+      clearInterval(timer);
     };
   }, []);
 
-  return (
-    <div
-      suppressHydrationWarning={true}
-      dangerouslySetInnerHTML={{
-        __html: `
+  const handleSimulate = () => {
+    setIsSimulating(true);
+    setTimeout(() => setIsSimulating(false), 2000);
+  };
 
-  <div class="shell">
-    <header class="masthead panel reveal">
-      <div class="brand-row">
-        <div class="hero-content">
-          <p class="eyebrow">Architecture Command Deck</p>
-          <h1 class="hero-title">Argonaut System Visualization</h1>
-          <p class="hero-copy">
-            A real-time visualization of the Argonaut multi-agent security triage factory. Illustrates the flow from
-            alerts through LangChain-orchestrated agents, utilizing Elastic for deterministic state.
-          </p>
-          <div class="status-pills">
-            <span class="pill"><span class="pulse-dot"></span><strong>Live Workflows</strong></span>
-            <span class="pill"><strong>Agent Pool:</strong>&nbsp;Active</span>
-            <span class="pill"><strong>ES|QL Pipeline:</strong>&nbsp;Healthy</span>
-            <span class="pill"><strong>Argus Engine:</strong>&nbsp;Linked</span>
+  const spec = NODE_SPECS[selectedNode];
+
+  return (
+    <div className="shell min-h-screen pb-12">
+      <header className="masthead argonaut-panel p-8 mb-8 reveal">
+        <div className="brand-row flex items-start justify-between gap-4 flex-wrap">
+          <div className="hero-content max-w-4xl">
+            <p className="eyebrow mb-2">Architecture Command Deck</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Argonaut System Visualization</h1>
+            <p className="text-xl text-neutral-400 font-light max-w-2xl">
+              Visualizing the Argonaut System Architecture: Knowledge Planes, Evidence Graphs, and Actionable Intelligence.
+            </p>
+            <div className="status-pills flex gap-3 mt-6 flex-wrap">
+              <span className="pill bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono flex items-center gap-2">
+                <span className="w-2 h-2 bg-accent-green rounded-full animate-pulse" />
+                Live Workflows
+              </span>
+              <span className="pill bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono">Agent Pool: Active</span>
+              <span className="pill bg-white/5 border border-white/10 px-3 py-1 rounded-full text-xs font-mono text-accent-blue">ES|QL Pipeline: Healthy</span>
+            </div>
           </div>
-        </div>
-        <div class="action-strip">
-          <button class="action-btn pulse-btn" id="pulseRun" type="button">
-            <span class="heartbeat-dot" aria-hidden="true"></span>
+          <button
+            onClick={() => { }}
+            className="argonaut-panel px-6 py-3 border-accent-blue/30 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 font-mono text-sm uppercase tracking-wider"
+          >
+            <span className="w-2 h-2 bg-accent-blue rounded-full animate-ping" />
             Run System Pulse
           </button>
         </div>
-      </div>
 
-      <div class="metrics-grid">
-        <article class="metric-card">
-          <div class="metric-top"><span>Active Workflows</span><span class="metric-icon"><i data-lucide="activity"></i></span></div>
-          <div class="metric-val" data-counter="212">0</div>
-          <p class="metric-sub">Concurrent multi-agent triage processes orchestrated by Supervisor.</p>
-        </article>
-        <article class="metric-card">
-          <div class="metric-top"><span>Findings Triaged</span><span class="metric-icon"><i data-lucide="shield-alert"></i></span></div>
-          <div class="metric-val" data-counter="4502">0</div>
-          <p class="metric-sub">Total findings parsed and scored via ES|QL in the current epoch.</p>
-        </article>
-        <article class="metric-card">
-          <div class="metric-top"><span>Avg Resolution Time</span><span class="metric-icon"><i data-lucide="timer"></i></span></div>
-          <div class="metric-val" data-counter="1.4" data-suffix="s">0s</div>
-          <p class="metric-sub">End-to-end latency from ingress to Jira ticket generation.</p>
-        </article>
-        <article class="metric-card">
-          <div class="metric-top"><span>Automation Rate</span><span class="metric-icon"><i data-lucide="check-circle-2"></i></span></div>
-          <div class="metric-val" data-counter="94" data-suffix="%">0%</div>
-          <p class="metric-sub">Percentage of alerts resolved without human intervention.</p>
-        </article>
-      </div>
-    </header>
-
-    <section class="section panel reveal">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">Interactive Architecture Topology</h2>
-          <p class="section-note">Click any component node to inspect responsibilities and system bounds. Use filters to
-            isolate execution planes.</p>
+        <div className="metrics-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <MetricCard
+            title="Active Workflows"
+            value={counters.workflows}
+            icon={<Activity className="w-4 h-4" />}
+            subtitle="Concurrent multi-agent triage processes."
+          />
+          <MetricCard
+            title="Findings Triaged"
+            value={counters.findings}
+            icon={<ShieldAlert className="w-4 h-4" />}
+            subtitle="Total findings parsed in current epoch."
+          />
+          <MetricCard
+            title="Avg Resolution Time"
+            value={`${counters.latency}s`}
+            icon={<Timer className="w-4 h-4" />}
+            subtitle="Latency from ingress to ticket."
+          />
+          <MetricCard
+            title="Automation Rate"
+            value={`${counters.automation}%`}
+            icon={<CheckCircle2 className="w-4 h-4" />}
+            subtitle="Alerts resolved autonomously."
+          />
         </div>
-      </div>
+      </header>
 
-      <div class="topology-layout">
-        <article class="map-panel">
-          <div class="map-toolbar">
-            <div class="segmented" id="planeFilters">
-              <button class="seg-btn active" data-filter="all" type="button">All</button>
-              <button class="seg-btn" data-filter="ingress" type="button">Ingress</button>
-              <button class="seg-btn" data-filter="orchestration" type="button">Orchestration</button>
-              <button class="seg-btn" data-filter="data" type="button">Data &amp; State</button>
-              <button class="seg-btn" data-filter="logic" type="button">Core Logic</button>
-            </div>
-            <div class="toggle-cluster">
-              <label class="toggle"><input id="flowToggle" type="checkbox" checked="">Activity Rails</label>
-            </div>
-          </div>
-
-          <div class="topology-grid flow-active" id="topologyGrid">
-            <section class="plane" data-plane="ingress">
-              <div class="plane-head">
-                <h3 class="plane-title">Ingress Plane</h3><span class="plane-boundary">External Services</span>
-              </div>
-              <div class="node-grid">
-                <button class="node" data-node="security-alerts" data-plane="ingress" type="button"><span class="node-main"><img src="https://cdn.simpleicons.org/pagerduty/ffffff" width="14" height="14" alt="PagerDuty">Security Alerts</span><span class="node-sub">Real-time webhooks.</span><span class="node-meta">PagerDuty / DD</span></button>
-                <button class="node" data-node="appsec-scans" data-plane="ingress" type="button"><span class="node-main"><img src="https://cdn.simpleicons.org/snyk/ffffff" width="14" height="14" alt="Snyk">AppSec Scans</span><span class="node-sub">Batch report intake.</span><span class="node-meta">Snyk / Veracode</span></button>
-              </div>
-            </section>
-            <div class="flow-arrow ingress-to-orch">
-              <i data-lucide="arrow-down"></i>
-              <span>Alerts &amp; telemetry trigger agent workflows</span>
-            </div>
-            <section class="plane" data-plane="orchestration">
-              <div class="plane-head">
-                <h3 class="plane-title">Agent Orchestration Plane</h3><span class="plane-boundary">LangChain</span>
-              </div>
-              <div class="node-grid">
-                <button class="node" data-node="supervisor-agent" data-plane="orchestration" type="button"><span class="node-main"><img src="ARGUS_Logo.png" width="14" height="14" alt="Argonaut" style="filter: brightness(0) invert(1);">Supervisor Agent</span><span class="node-sub">Cognitive
-                    routing.</span><span class="node-meta">Router</span></button>
-                <button class="node" data-node="triage-agent" data-plane="orchestration" type="button"><span class="node-main"><img src="ARGUS_Logo.png" width="14" height="14" alt="Argonaut" style="filter: brightness(0) invert(1);">Triage Agent</span><span class="node-sub">Formats raw
-                    input.</span><span class="node-meta">Worker</span></button>
-                <button class="node" data-node="enrichment-agent" data-plane="orchestration" type="button"><span class="node-main"><img src="ARGUS_Logo.png" width="14" height="14" alt="Argonaut" style="filter: brightness(0) invert(1);">Enrichment Agent</span><span class="node-sub">Gathers
-                    TI &amp; paths.</span><span class="node-meta">Worker</span></button>
-                <button class="node" data-node="action-agent" data-plane="orchestration" type="button"><span class="node-main"><img src="https://cdn.simpleicons.org/slack/ffffff" width="14" height="14" alt="Slack">Action Agent</span><span class="node-sub">Generates tickets.</span><span class="node-meta">Worker</span></button>
-              </div>
-            </section>
-            <div class="flow-arrow orch-to-data">
-              <i data-lucide="arrow-down"></i>
-              <span>Agent state &amp; scoring persisted deterministically</span>
-            </div>
-            <section class="plane" data-plane="data">
-              <div class="plane-head">
-                <h3 class="plane-title">Data &amp; State Plane</h3><span class="plane-boundary">Elastic Agent Builder</span>
-              </div>
-              <div class="node-grid two-col">
-                <button class="node" data-node="es-state-index" data-plane="data" type="button"><span class="node-main"><img src="https://cdn.simpleicons.org/elasticsearch/ffffff" width="14" height="14" alt="Elastic">State Index</span><span class="node-sub">Workflow memory.</span><span class="node-meta">argonaut_state</span></button>
-                <button class="node" data-node="esql-pipeline" data-plane="data" type="button"><span class="node-main"><img src="https://cdn.simpleicons.org/kibana/ffffff" width="14" height="14" alt="Kibana">ES|QL Pipeline</span><span class="node-sub">Fix Priority Score.</span><span class="node-meta">In-Database</span></button>
-              </div>
-            </section>
-            <div class="flow-arrow data-to-logic">
-              <i data-lucide="arrow-down"></i>
-              <span>Data models invoke core Argus parsing &amp; paths</span>
-            </div>
-            <section class="plane" data-plane="logic">
-              <div class="plane-head">
-                <h3 class="plane-title">Core Logic Plane</h3><span class="plane-boundary">Argus Reuse</span>
-              </div>
-              <div class="node-grid two-col">
-                <button class="node" data-node="parse-engine" data-plane="logic" type="button"><span class="node-main"><img src="ARGUS_Logo.png" width="14" height="14" alt="Argonaut" style="filter: brightness(0) invert(1);">Parse Engine</span><span class="node-sub">Normalized
-                    schemas.</span><span class="node-meta">@argus_core</span></button>
-                <button class="node" data-node="reachability-builder" data-plane="logic" type="button"><span class="node-main"><img src="ARGUS_Logo.png" width="14" height="14" alt="Argonaut" style="filter: brightness(0) invert(1);">Reachability Builder</span><span class="node-sub">Lockfile graph
-                    trees.</span><span class="node-meta">@argus_core</span></button>
-              </div>
-            </section>
-          </div>
-        </article>
-
-        <aside class="detail-panel">
-          <div class="detail-head">
-            <h3 class="detail-title" id="detailTitle">Supervisor Agent</h3>
-            <span class="chip" id="detailPlane">Orchestration Plane</span>
-          </div>
-          <div class="detail-body">
-            <div class="chip-row" id="detailTags"></div>
-            <p class="detail-copy" id="detailSummary"></p>
-            <ul class="detail-list" id="detailResponsibilities"></ul>
-            <div class="detail-actions">
-              <button class="ghost-btn" id="openDetailModal" type="button"><i data-lucide="expand" class="line-icon"></i>Open Full Spec</button>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="insight-grid reveal">
-      <article class="insight-card">
-        <h3 class="insight-title"><i data-lucide="bar-chart-3" class="line-icon"></i>Agent Workflow Latency</h3>
-        <div class="bar-stack">
-          <div class="bar-row">
-            <div class="bar-label"><span>Initial Fetch &amp; Parse</span><strong id="latencyLocalText">120ms</strong></div>
-            <div class="bar-rail"><span class="bar-fill good" id="latencyLocal" data-width="12"></span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Threat Intel &amp; Reachability</span><strong id="latencyCloudText">680ms</strong>
-            </div>
-            <div class="bar-rail"><span class="bar-fill warn" id="latencyCloud" data-width="68"></span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label"><span>Ticket Generation &amp; Routing</span><strong id="latencyAiText">450ms</strong>
-            </div>
-            <div class="bar-rail"><span class="bar-fill" id="latencyAi" data-width="45"></span></div>
-          </div>
+      <section className="section argonaut-panel p-8 mb-8 reveal">
+        <div className="section-head mb-8">
+          <h2 className="text-2xl font-bold text-white">Interactive Architecture Topology</h2>
+          <p className="text-neutral-400 font-light mt-1">Isolate execution planes and inspect component responsibilities.</p>
         </div>
-      </article>
 
-      <article class="insight-card">
-        <h3 class="insight-title"><i data-lucide="target" class="line-icon"></i>System Confidence Rings</h3>
-        <div class="rings">
-          <div class="ring-item">
-            <div class="ring" data-ring="98"><strong>98%</strong></div>
-            <p>Threat Evidence</p>
+        <div className="topology-layout grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="map-panel lg:col-span-2 argonaut-panel overflow-hidden border-white/5 bg-white/2">
+            <div className="map-toolbar p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
+              <div className="segmented flex gap-2">
+                {['all', 'ingress', 'orchestration', 'data', 'logic'].map(f => (
+                  <button
+                    key={f}
+                    onClick={() => setActiveFilter(f)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all ${activeFilter === f
+                      ? 'bg-accent-blue/20 text-accent-blue border border-accent-blue/30'
+                      : 'text-neutral-400 hover:text-white border border-transparent'
+                      }`}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <span className="text-xs font-mono text-neutral-400 group-hover:text-white transition-colors">ACTIVITY RAILS</span>
+                <input
+                  type="checkbox"
+                  checked={showFlow}
+                  onChange={e => setShowFlow(e.target.checked)}
+                  className="w-4 h-4 accent-accent-blue"
+                />
+              </label>
+            </div>
+
+            <div className={`topology-grid p-8 space-y-8 relative ${showFlow ? 'flow-active' : ''}`}>
+              <Plane
+                id="ingress"
+                title="Ingress Plane"
+                boundary="External Services"
+                active={activeFilter === 'all' || activeFilter === 'ingress'}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <Node id="security-alerts" active={selectedNode === 'security-alerts'} onClick={setSelectedNode} />
+                  <Node id="appsec-scans" active={selectedNode === 'appsec-scans'} onClick={setSelectedNode} />
+                </div>
+              </Plane>
+
+              <div className={`flex justify-center transition-opacity duration-500 ${showFlow && activeFilter === 'all' ? 'opacity-100' : 'opacity-0'}`}>
+                <ArrowDown className="text-accent-blue animate-bounce" />
+              </div>
+
+              <Plane
+                id="orchestration"
+                title="Agent Orchestration Plane"
+                boundary="LangChain"
+                active={activeFilter === 'all' || activeFilter === 'orchestration'}
+              >
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <Node id="supervisor-agent" active={selectedNode === 'supervisor-agent'} onClick={setSelectedNode} />
+                  <Node id="triage-agent" active={selectedNode === 'triage-agent'} onClick={setSelectedNode} />
+                  <Node id="enrichment-agent" active={selectedNode === 'enrichment-agent'} onClick={setSelectedNode} />
+                  <Node id="action-agent" active={selectedNode === 'action-agent'} onClick={setSelectedNode} />
+                </div>
+              </Plane>
+
+              <div className={`flex justify-center transition-opacity duration-500 ${showFlow && activeFilter === 'all' ? 'opacity-100' : 'opacity-0'}`}>
+                <ArrowDown className="text-accent-pink animate-bounce" />
+              </div>
+
+              <Plane
+                id="data"
+                title="Data & State Plane"
+                boundary="Elastic Agent Builder"
+                active={activeFilter === 'all' || activeFilter === 'data'}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <Node id="es-state-index" active={selectedNode === 'es-state-index'} onClick={setSelectedNode} />
+                  <Node id="esql-pipeline" active={selectedNode === 'esql-pipeline'} onClick={setSelectedNode} />
+                </div>
+              </Plane>
+
+              <div className={`flex justify-center transition-opacity duration-500 ${showFlow && activeFilter === 'all' ? 'opacity-100' : 'opacity-0'}`}>
+                <ArrowDown className="text-accent-green animate-bounce" />
+              </div>
+
+              <Plane
+                id="logic"
+                title="Core Logic Plane"
+                boundary="Argus Reuse"
+                active={activeFilter === 'all' || activeFilter === 'logic'}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  <Node id="parse-engine" active={selectedNode === 'parse-engine'} onClick={setSelectedNode} />
+                  <Node id="reachability-builder" active={selectedNode === 'reachability-builder'} onClick={setSelectedNode} />
+                </div>
+              </Plane>
+            </div>
           </div>
-          <div class="ring-item">
-            <div class="ring" data-ring="92"><strong>92%</strong></div>
-            <p>Path Validation</p>
+
+          <aside className="detail-panel space-y-6">
+            <div className="argonaut-panel p-6 border-accent-blue/20 h-full">
+              <div className="detail-head mb-6">
+                <h3 className="text-xl font-bold text-white mb-2">{spec.title}</h3>
+                <span className="text-xs font-mono text-accent-blue uppercase tracking-widest">{selectedNode.replace('-', ' ')}</span>
+              </div>
+              <div className="detail-body space-y-6">
+                <div className="flex gap-2 flex-wrap">
+                  {spec.tags.map(t => (
+                    <span key={t} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest">{t}</span>
+                  ))}
+                </div>
+                <p className="text-neutral-400 text-sm leading-relaxed font-light">{spec.summary}</p>
+                <div className="space-y-3">
+                  <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em]">Responsibilities</h5>
+                  <ul className="space-y-2 text-sm text-white/80 font-light">
+                    {spec.responsibilities.map(r => (
+                      <li key={r} className="flex gap-2">
+                        <span className="text-accent-blue">→</span>
+                        <span>{r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button className="w-full mt-8 border border-white/10 py-3 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/5 transition-all flex items-center justify-center gap-2 text-neutral-400 hover:text-white">
+                  <Expand className="w-3 h-3" />
+                  Open Full Spec
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div className="insight-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 reveal">
+        <InsightCard title="Agent Workflow Latency" icon={<BarChart3 className="w-4 h-4" />}>
+          <div className="space-y-4 pt-4">
+            <LatencyBar label="Initial Fetch & Parse" value={12} text="120ms" color="accent-green" />
+            <LatencyBar label="Threat Intel & Path" value={68} text="680ms" color="accent-yellow" />
+            <LatencyBar label="Action & Routing" value={45} text="450ms" color="accent-pink" />
           </div>
-          <div class="ring-item">
-            <div class="ring" data-ring="87"><strong>87%</strong></div>
-            <p>Suggested Fix</p>
+        </InsightCard>
+
+        <InsightCard title="System Confidence" icon={<Target className="w-4 h-4" />}>
+          <div className="flex justify-around items-end h-full py-4">
+            <ConfidenceRing value={98} label="Evidence" color="accent-blue" />
+            <ConfidenceRing value={92} label="Paths" color="accent-green" />
+            <ConfidenceRing value={87} label="Fixes" color="accent-pink" />
           </div>
-        </div>
-      </article>
+        </InsightCard>
 
-      <article class="insight-card">
-        <h3 class="insight-title"><i data-lucide="terminal" class="line-icon"></i>Multi-Agent Event Stream</h3>
-        <div id="eventFeed" class="log-stream" aria-live="polite"></div>
-        <button class="ghost-btn" id="simulateIncident" type="button"><i data-lucide="zap" class="line-icon"></i>Trigger
-          Webhook Spike</button>
-      </article>
-    </section>
-
-    <section class="section panel reveal">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">Core Operating Contracts</h2>
-          <p class="section-note">Each contract below powers deterministic behavior in Argonaut. Click a contract card
-            to inspect design intent.</p>
-        </div>
+        <InsightCard title="Multi-Agent Event Stream" icon={<Terminal className="w-4 h-4" />}>
+          <div className="space-y-3 pt-4 font-mono text-[10px]">
+            {EVENTS.map((e, i) => (
+              <div key={i} className="flex gap-3 border-l border-white/10 pl-3 py-1">
+                <span className={`uppercase font-bold ${e.type === 'ingress' ? 'text-accent-blue' :
+                  e.type === 'orch' ? 'text-accent-pink' :
+                    e.type === 'data' ? 'text-accent-yellow' : 'text-accent-green'
+                  }`}>{e.source}</span>
+                <span className="text-white/60 truncate flex-1">{e.msg}</span>
+                <span className="text-white/20">{e.time}</span>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={handleSimulate}
+            disabled={isSimulating}
+            className="w-full mt-6 argonaut-panel border-white/10 py-2.5 rounded-lg text-[10px] font-mono uppercase tracking-widest hover:bg-white/5 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+          >
+            <Zap className={`w-3 h-3 ${isSimulating ? 'text-accent-yellow animate-ping' : 'text-neutral-400 group-hover:text-accent-yellow'}`} />
+            {isSimulating ? 'Simulating Ingress Spike...' : 'Trigger Webhook Spike'}
+          </button>
+        </InsightCard>
       </div>
-      <div class="contracts">
-        <article class="contract" data-contract="state" tabindex="0" role="button">
-          <h4>State Index</h4>
-          <p>Index: <code>argonaut_state</code>. Maintains rigorous tracking of multi-agent workflows and checkpointing.
-          </p>
-        </article>
-        <article class="contract" data-contract="scoring" tabindex="0" role="button">
-          <h4>ES|QL Scoring Model</h4>
-          <p>Mathematical representation of risk executed natively on Elasticsearch nodes for sub-second ranking.</p>
-        </article>
-        <article class="contract" data-contract="prompts" tabindex="0" role="button">
-          <h4>System Prompts</h4>
-          <p>Strict LLM boundaries ensuring structured JSON outputs and preventing hallucination.</p>
-        </article>
-      </div>
-    </section>
 
-    <footer class="footer reveal">
-      <span>Argonaut Architecture Deck</span>
-      <span>Powered by Elastic Agent Builder</span>
-      <span>CONFIDENTIAL</span>
-    </footer>
-  </div>
-
-  <div class="modal" id="insightModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div>
-          <h3 class="modal-title" id="modalTitle">Detail</h3>
-          <p class="modal-sub" id="modalSubtitle"></p>
+      <section className="section argonaut-panel p-8 reveal">
+        <div className="section-head mb-8">
+          <h2 className="text-2xl font-bold text-white">Core Operating Contracts</h2>
+          <p className="text-neutral-400 font-light mt-1">Deterministic behavior models for Argonaut agents.</p>
         </div>
-        <button class="icon-btn" id="modalClose" type="button" aria-label="Close details"><i data-lucide="x" class="line-icon"></i></button>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {Object.entries(CONTRACT_SPECS).map(([id, c]) => (
+            <button
+              key={id}
+              onClick={() => setModalContract(id)}
+              className="argonaut-panel p-6 text-left hover:border-white/30 transition-all group relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                <Terminal className="w-12 h-12" />
+              </div>
+              <h4 className="text-lg font-bold text-white mb-2">{c.title}</h4>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed">{c.subtitle}</p>
+              <div className="mt-4 text-[10px] font-mono text-accent-blue uppercase tracking-widest underline underline-offset-4">Inspect Logic</div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {modalContract && (
+        <ContractModal
+          contract={CONTRACT_SPECS[modalContract]}
+          onClose={() => setModalContract(null)}
+        />
+      )}
+
+      <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
+        <span>Argonaut Command Deck</span>
+        <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
+        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">CONFIDENTIAL</span>
+      </footer>
+    </div>
+  );
+}
+
+function MetricCard({ title, value, icon, subtitle }: { title: string; value: string | number; icon: React.ReactNode; subtitle: string }) {
+  return (
+    <div className="argonaut-panel p-6 bg-white/2 border-white/5 relative group overflow-hidden">
+      <div className="absolute -inset-1 bg-gradient-to-r from-accent-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="flex justify-between items-start mb-4 relative z-10">
+        <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">{title}</span>
+        <span className="text-accent-blue/60 group-hover:text-accent-blue transition-colors">{icon}</span>
       </div>
-      <div class="chip-row" id="modalTags"></div>
-      <div class="modal-grid">
-        <section class="modal-block">
-          <h5>Responsibilities</h5>
-          <ul id="modalResponsibilities"></ul>
-        </section>
-        <section class="modal-block">
-          <h5>Architecture Notes</h5>
-          <ul id="modalNotes"></ul>
-        </section>
+      <div className="text-4xl font-bold text-white mb-2 relative z-10 font-outfit">{value}</div>
+      <p className="text-[11px] text-neutral-400 font-light leading-relaxed relative z-10">{subtitle}</p>
+    </div>
+  );
+}
+
+function Plane({ id, title, boundary, active, children }: { id: string; title: string; boundary: string; active: boolean; children: React.ReactNode }) {
+  return (
+    <div
+      className={`plane p-6 rounded-2xl border transition-all duration-700 ${active
+        ? 'bg-white/5 border-white/10 opacity-100 scale-100'
+        : 'bg-transparent border-transparent opacity-10 scale-[0.98]'
+        }`}
+    >
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xs font-mono font-bold text-white/70 uppercase tracking-[0.2em]">{title}</h3>
+        <span className="text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-full text-neutral-400">{boundary}</span>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function Node({ id, active, onClick }: { id: string; active: boolean; onClick: (id: string) => void }) {
+  const spec = NODE_SPECS[id];
+  return (
+    <button
+      onClick={() => onClick(id)}
+      className={`argonaut-panel p-4 text-left transition-all relative group overflow-hidden min-h-[100px] flex flex-col justify-center ${active
+        ? 'border-accent-blue/50 bg-accent-blue/10'
+        : 'border-white/5 bg-white/2 hover:border-white/20'
+        }`}
+    >
+      <div className="flex items-center gap-2 mb-2 relative z-10">
+        {spec.icon.startsWith('http') ? (
+          <img src={spec.icon} className="w-4 h-4" alt="" />
+        ) : (
+          <img src={spec.icon} className={`w-4 h-4 ${active ? '' : 'brightness-0 invert opacity-40'}`} alt="" />
+        )}
+        <span className={`text-[11px] font-bold ${active ? 'text-white' : 'text-white/60'}`}>{spec.title.split(' ').slice(0, 2).join(' ')}</span>
+      </div>
+      <p className="text-[10px] text-neutral-400 leading-tight font-light relative z-10 line-clamp-2">{spec.summary}</p>
+      <div className="mt-2 text-[9px] font-mono text-white/20 uppercase tracking-widest relative z-10">{spec.meta}</div>
+    </button>
+  );
+}
+
+function InsightCard({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="argonaut-panel p-6 border-white/5 bg-white/2">
+      <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-4">
+        <span className="text-accent-blue">{icon}</span>
+        <h3 className="text-xs font-mono font-bold text-white/80 uppercase tracking-widest">{title}</h3>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function LatencyBar({ label, value, text, color }: { label: string; value: number; text: string; color: 'accent-green' | 'accent-yellow' | 'accent-pink' }) {
+  const colorMap = {
+    'accent-green': 'bg-accent-green',
+    'accent-yellow': 'bg-accent-yellow',
+    'accent-pink': 'bg-accent-pink'
+  };
+  return (
+    <div className="space-y-1.5">
+      <div className="flex justify-between text-[10px] font-mono uppercase tracking-wider">
+        <span className="text-neutral-400">{label}</span>
+        <span className="text-white">{text}</span>
+      </div>
+      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+        <div
+          className={`h-full ${colorMap[color]} transition-all duration-1000 ease-out`}
+          style={{ width: `${value}%` }}
+        />
       </div>
     </div>
-  </div>
+  );
+}
 
-  
-  
+function ConfidenceRing({ value, label, color }: { value: number; label: string; color: 'accent-blue' | 'accent-green' | 'accent-pink' }) {
+  const colorMap = {
+    'accent-blue': 'text-accent-blue',
+    'accent-green': 'text-accent-green',
+    'accent-pink': 'text-accent-pink'
+  };
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <div className={`text-2xl font-bold font-mono ${colorMap[color]}`}>{value}%</div>
+      <div className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest">{label}</div>
+    </div>
+  );
+}
 
-
-` }} />
+function ContractModal({ contract, onClose }: { contract: ContractSpec; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+      <div className="argonaut-panel max-w-2xl w-full p-8 relative animate-in fade-in zoom-in duration-300">
+        <button onClick={onClose} className="absolute top-6 right-6 text-neutral-400 hover:text-white transition-colors">
+          <X className="w-6 h-6" />
+        </button>
+        <div className="mb-8">
+          <h3 className="text-2xl font-bold text-white mb-2">{contract.title}</h3>
+          <p className="text-neutral-400 font-mono text-sm tracking-wide">{contract.subtitle}</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] pt-2">Responsibilities</h5>
+            <ul className="space-y-3 text-sm text-white/80 font-light">
+              <li className="flex gap-2"><span className="text-accent-blue">→</span><span>Maintains interface integrity.</span></li>
+              <li className="flex gap-2"><span className="text-accent-blue">→</span><span>Strict validation rules.</span></li>
+            </ul>
+          </div>
+          <div className="space-y-4">
+            <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em] pt-2">Architecture Notes</h5>
+            <ul className="space-y-3 text-sm text-white/80 font-light">
+              {contract.notes.map(n => (
+                <li key={n} className="flex gap-2"><span className="text-accent-blue">→</span><span>{n}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <button onClick={onClose} className="w-full mt-10 bg-white/5 border border-white/10 py-4 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/10 transition-all text-white">
+          Close Specification
+        </button>
+      </div>
+    </div>
   );
 }

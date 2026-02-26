@@ -24,16 +24,16 @@ interface NodeSpec {
 
 const NODE_SPECS: Record<string, NodeSpec> = {
   'security-alerts': {
-    title: 'Security Alert Ingress',
-    summary: 'Planned integration: normalizes real-time telemetry from external security tools into the Argonaut Event Stream.',
+    title: 'Object Pipeline Ingress',
+    summary: 'Agent listens and ingests build bundles from object storage. Bundles contain artifacts for deterministic pipeline processing.',
     responsibilities: [
-      'Webhook signature validation',
-      'Event normalization to argonaut_schema',
-      'Immediate state checkpointing'
+      'Bundle manifest validation',
+      'Artifact checksum verification',
+      'Object store retrieval'
     ],
-    tags: ['External', 'Ingress', 'Streaming'],
-    icon: 'https://cdn.simpleicons.org/pagerduty/ffffff',
-    meta: 'PagerDuty / DD (Planned)'
+    tags: ['External', 'Ingress', 'Object Store'],
+    icon: 'https://cdn.simpleicons.org/amazons3/ffffff',
+    meta: 'AWS S3 / Linode'
   },
   'appsec-scans': {
     title: 'AppSec Scan Ingress',
@@ -85,14 +85,14 @@ const NODE_SPECS: Record<string, NodeSpec> = {
   },
   'action-agent': {
     title: 'Action Agent',
-    summary: 'Responsible for downstream impact: creating tickets, posting summaries, and initiating auto-remediation.',
+    summary: 'Responsible for downstream impact: posting summaries, generating fix bundles, and initiating auto-remediation.',
     responsibilities: [
-      'Jira/Slack dynamic templating',
-      'Notification throttling',
+      'Slack notification & templating',
+      'Fix bundle generation',
       'Remediation follow-up'
     ],
     tags: ['Agent', 'Automation', 'Integration'],
-    icon: 'https://cdn.simpleicons.org/slack/ffffff',
+    icon: 'ARGUS_Logo.png',
     meta: 'Worker'
   },
   'es-state-index': {
@@ -155,7 +155,7 @@ interface Counters {
 }
 
 const EVENTS = [
-  { source: 'PagerDuty', msg: 'Ingested raw SARIF alert #4022', time: 'Just Now', type: 'ingress' },
+  { source: 'Slack', msg: 'Posted new scan alert to #argonaut-alerts', time: 'Just Now', type: 'ingress' },
   { source: 'Supervisor', msg: 'Orchestrating enrichment for CVE-2024-001', time: '12s ago', type: 'orch' },
   { source: 'Enrichment', msg: 'Matched reachability path: payment.js -> lib.util', time: '24s ago', type: 'logic' },
   { source: 'ES|QL', msg: 'Calculated FPS: 8.4 (High Priority)', time: '40s ago', type: 'data' }
@@ -417,7 +417,7 @@ export default function SystemPage() {
         </InsightCard>
 
         <InsightCard title="System Confidence" icon={<Target className="w-4 h-4" />}>
-          <div className="flex justify-around items-end h-full py-4">
+          <div className="flex justify-around items-center pt-8 pb-4">
             <ConfidenceRing value={98} label="Evidence" color="accent-blue" />
             <ConfidenceRing value={92} label="Paths" color="accent-green" />
             <ConfidenceRing value={87} label="Fixes" color="accent-pink" />
@@ -441,10 +441,8 @@ export default function SystemPage() {
       </div>
 
 
-      <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
-        <span>Argonaut Command Deck</span>
+      <footer className="mt-12 py-8 border-t border-white/10 flex justify-center items-center text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
         <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
-        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">v1.0</span>
       </footer>
     </div >
   );

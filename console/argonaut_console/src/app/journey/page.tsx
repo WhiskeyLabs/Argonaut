@@ -144,7 +144,7 @@ export default function JourneyPage() {
             icon={<Smile className="w-6 h-6 text-accent-green" />}
             accentColor="border-accent-green/30"
             bgColor="bg-accent-green/5"
-            trigger='"Argonaut, triage payment-service build 128."'
+            trigger='Security scanning tool outputs scan results via upload, API call, or MCP server.'
             triggerMono
             steps={[
               {
@@ -249,10 +249,8 @@ export default function JourneyPage() {
         </div>
       </section>
 
-      <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
-        <span>Argonaut Command Deck</span>
+      <footer className="mt-12 py-8 border-t border-white/10 flex justify-center items-center text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
         <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
-        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">CONFIDENTIAL</span>
       </footer>
     </div>
   );

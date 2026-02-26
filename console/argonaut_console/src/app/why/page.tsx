@@ -103,10 +103,10 @@ export default function WhyPage() {
             <strong className="text-accent-blue font-semibold">Argonaut automates the full loop from evidence → context → action.</strong>
           </p>
           <p>
-            Argonaut reuses an existing local triage engine (Argus) for what it already does well—parsing SARIF,
-            extracting dependencies from lockfiles/SBOMs, and computing reachability signals—then layers
-            <strong className="text-accent-green font-semibold">Agent Builder orchestration</strong> on top to make it an agent that "gets work done."
-            Elasticsearch becomes the shared system-of-record and memory layer.
+            Argonaut uses a purpose built triage engine, layers
+            <strong className="text-accent-green font-semibold"> Agent Builder orchestration</strong> on top with
+            Elasticsearch as the shared system-of-record and memory layer to make it an agent system that gets work done;
+            with the right Human In The Loop intervention to ensure there is verifiability and provenance.
           </p>
         </div>
 
@@ -175,109 +175,9 @@ export default function WhyPage() {
         </div>
       </section>
 
-      <section className="section argonaut-panel p-8 mb-8 reveal">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-              <i data-lucide="check-circle" className="text-accent-blue w-6 h-6"></i>
-              Judging Criteria Mapping
-            </h2>
-            <p className="text-neutral-400 mt-1">Alignment with official hackathon criteria</p>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <article className="argonaut-panel p-6 bg-accent-blue/5 border-accent-blue/30 group hover:border-accent-blue/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-blue mb-4">1. Technical Execution (25%)</h3>
-            <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex gap-2">
-                <span className="text-accent-blue">→</span>
-                <span><strong>Clear Multi-Step Agent:</strong> Supervisor plans, acquires, enriches, scores, and creates actions.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-blue">→</span>
-                <span><strong>Agent Builder Use:</strong> Workflows (deterministic), Search (hybrid), ES|QL (joins + ranking).</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-blue">→</span>
-                <span><strong>Clean Index Design:</strong> Purpose-built indices allowing structured joins, RAG, and stateful memory.</span>
-              </li>
-            </ul>
-          </article>
-
-          <article className="argonaut-panel p-6 bg-accent-yellow/5 border-accent-yellow/30 group hover:border-accent-yellow/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-yellow mb-4">2. Impact & Wow Factor (25%)</h3>
-            <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex gap-2">
-                <span className="text-accent-yellow">→</span>
-                <span><strong>Clear Problem:</strong> Reduces 800 findings → 5 fix-first in under 60s.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-yellow">→</span>
-                <span><strong>Measurable Impact:</strong> Saves ~90% time, reduces 6 steps to 1, eliminates manual joins.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-yellow">→</span>
-                <span><strong>Novelty:</strong> Executes downstream action, explains logic, and maintains audit memory.</span>
-              </li>
-            </ul>
-          </article>
-
-          <article className="argonaut-panel p-6 bg-accent-green/5 border-accent-green/30 group hover:border-accent-green/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-green mb-4">3. Demo & Presentation (25%)</h3>
-            <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex gap-2">
-                <span className="text-accent-green">→</span>
-                <span><strong>Visual Demo:</strong> Shows tool orchestration, ranked output, and Slack actions.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-green">→</span>
-                <span><strong>Clear Narrative:</strong> Narrative flows from raw SARIF pain to one-click triage.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-green">→</span>
-                <span><strong>Evidence:</strong> Agent Builder configs, Elasticsearch queries, Kibana dashboards, Slack alerts.</span>
-              </li>
-            </ul>
-          </article>
-
-          <article className="argonaut-panel p-6 bg-accent-pink/5 border-accent-pink/30 group hover:border-accent-pink/60 transition-all">
-            <h3 className="text-xl font-bold text-accent-pink mb-4">4. Elastic-Specific Use (25%)</h3>
-            <ul className="space-y-3 text-sm text-white/80">
-              <li className="flex gap-2">
-                <span className="text-accent-pink">→</span>
-                <span><strong>Elasticsearch-First:</strong> All data lives in purpose-built indices with strict mappings.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-pink">→</span>
-                <span><strong>Observability:</strong> Kibana dashboards provide full audit trail and run observability.</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-accent-pink">→</span>
-                <span><strong>Agent Builder:</strong> Workflows, search, and structured data orchestration via Elastic tooling.</span>
-              </li>
-            </ul>
-          </article>
-        </div>
-
-        <div className="mt-12 argonaut-panel p-8 border-accent-pink/30 bg-accent-pink/5 relative overflow-hidden group rounded-3xl">
-          <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-accent-pink/10 blur-[100px] pointer-events-none group-hover:bg-accent-pink/20 transition-all duration-700" />
-          <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-            <i data-lucide="award" className="text-accent-pink w-6 h-6"></i>
-            Competitive Positioning
-          </h3>
-          <p className="text-neutral-400 text-lg relative z-10 font-light">
-            Argonaut clearly demonstrates: Multi-step reasoning, Tool orchestration, Elasticsearch-first design,
-            Real-world automation, Measurable impact, Explainable output, and Production-style architecture.
-            This positions it strongly for Top 3 placement.
-          </p>
-        </div>
-      </section>
-
-      <footer className="mt-12 py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono tracking-widest text-neutral-400 uppercase">
-        <span>Argonaut Command Deck</span>
+      <footer className="mt-12 py-8 border-t border-white/10 flex justify-center items-center text-xs font-mono tracking-widest text-neutral-400 uppercase">
         <span className="text-accent-blue">Powered by Elastic Agent Builder</span>
-        <span className="px-3 py-1 bg-white/5 rounded-full border border-white/10">v1.0</span>
       </footer>
     </div>
   );

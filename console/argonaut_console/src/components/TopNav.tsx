@@ -20,7 +20,7 @@ export function TopNav() {
                         <LayoutTemplate size={16} /><span>SYSTEM</span>
                     </Link>
                     <Link href="/journey" className="hover:text-primary-400 transition-colors flex items-center space-x-1">
-                        <Compass size={16} /><span>JOURNEY</span>
+                        <Compass size={16} /><span>USER JOURNEY</span>
                     </Link>
                     <Link href="/why" className="hover:text-primary-400 transition-colors flex items-center space-x-1">
                         <Info size={16} /><span>WHY</span>

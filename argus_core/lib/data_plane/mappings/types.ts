@@ -17,7 +17,7 @@ export const ARGONAUT_INDEX_NAMES = [
 
 export type ArgonautIndexName = typeof ARGONAUT_INDEX_NAMES[number];
 
-export type MappingDynamic = 'strict' | false;
+export type MappingDynamic = 'strict' | 'true' | 'runtime' | false;
 
 export interface MappingField {
     type?: 'keyword' | 'text' | 'boolean' | 'float' | 'integer' | 'date' | 'object' | 'flattened';

@@ -33,19 +33,10 @@ export async function GET(
             },
             sort: [
                 {
-                    _script: {
-                        type: 'number',
-                        script: {
-                            lang: 'painless',
-                            source: "def status = doc.containsKey('status') && doc['status'].size() > 0 ? doc['status'].value : ''; if (status == 'NEW') { return 1; } else if (status == 'PROCESSED') { return 2; } else if (status == 'FAILED') { return 3; } else { return 4; }"
-                        },
-                        order: 'asc'
-                    }
+                    status: { order: 'asc' }
                 },
                 {
-                    createdAt: {
-                        order: 'desc'
-                    }
+                    createdAt: { order: 'desc' }
                 }
             ]
         });

@@ -18,7 +18,7 @@ import BackButton from '@/components/BackButton';
 
 // Helper to fetch the run directly from the route or service
 async function getRun(runId: string) {
-    const res = await fetch(`http://localhost:3000/api/runs/${runId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/runs/${runId}`, {
         cache: 'no-store'
     });
     if (!res.ok) {

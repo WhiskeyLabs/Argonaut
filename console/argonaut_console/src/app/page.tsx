@@ -93,29 +93,31 @@ export default async function Home() {
                 <div className="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar max-h-[320px]">
                   {app.recentBundles && app.recentBundles.length > 0 ? (
                     app.recentBundles.map((bundle) => {
-                      const effectiveRunId = bundle.lastRunId || bundle.activeRunId;
-                      const targetUrl = effectiveRunId ? `/runs/${effectiveRunId}` : `/apps/${app.applicationId}/bundles/${bundle.bundleId}`;
+                      // Only accept hash-format runIds (from demo:judge). Reject watcher-style run_* IDs.
+                      const rawRunId = bundle.lastRunId || bundle.activeRunId;
+                      const effectiveRunId = rawRunId && /^[a-f0-9]{40,}$/i.test(rawRunId) ? rawRunId : null;
+                      const hasRun = !!effectiveRunId;
 
-                      return (
-                        <Link
-                          key={bundle.bundleId}
-                          href={targetUrl}
-                          className="flex items-center justify-between p-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.03] hover:border-white/10 rounded-xl transition-all duration-200 group/row"
-                        >
+                      const rowContent = (
+                        <>
                           <div className="flex items-center gap-5">
                             <div className="flex flex-col">
-                              <span className="text-sm font-bold text-white group-hover/row:text-accent-blue transition-colors">
+                              <span className={`text-sm font-bold transition-colors ${hasRun ? 'text-white group-hover/row:text-accent-blue' : 'text-neutral-300'}`}>
                                 Build {bundle.buildId}
                               </span>
                               <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-tighter">
                                 {bundle.bundleId}
                               </span>
                             </div>
-                            <span className={`badge-neon text-[9px] py-0.5 px-2 ${bundle.status === 'NEW' ? 'badge-blue animate-pulse' :
-                              bundle.status === 'FAILED' ? 'badge-pink' : 'badge-green'
-                              }`}>
-                              {bundle.status}
-                            </span>
+                            {hasRun ? (
+                              <span className={`badge-neon text-[9px] py-0.5 px-2 ${bundle.status === 'FAILED' ? 'badge-pink' : 'badge-green'}`}>
+                                {bundle.status}
+                              </span>
+                            ) : (
+                              <span className="badge-neon text-[9px] py-0.5 px-2 badge-blue animate-pulse">
+                                Awaiting Run
+                              </span>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-6">
@@ -127,13 +129,36 @@ export default async function Home() {
                                 {new Date(bundle.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
                               </span>
                             </div>
-                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/row:bg-accent-blue/20 group-hover/row:scale-110 transition-all">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-400 group-hover/row:text-accent-blue">
-                                <path d="m9 18 6-6-6-6" />
-                              </svg>
-                            </div>
+                            {hasRun && (
+                              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/row:bg-accent-blue/20 group-hover/row:scale-110 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-400 group-hover/row:text-accent-blue">
+                                  <path d="m9 18 6-6-6-6" />
+                                </svg>
+                              </div>
+                            )}
                           </div>
-                        </Link>
+                        </>
+                      );
+
+                      if (hasRun) {
+                        return (
+                          <Link
+                            key={bundle.bundleId}
+                            href={`/runs/${effectiveRunId}`}
+                            className="flex items-center justify-between p-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.03] hover:border-white/10 rounded-xl transition-all duration-200 group/row"
+                          >
+                            {rowContent}
+                          </Link>
+                        );
+                      }
+
+                      return (
+                        <div
+                          key={bundle.bundleId}
+                          className="flex items-center justify-between p-4 bg-white/[0.03] border border-white/[0.03] rounded-xl opacity-70 cursor-default"
+                        >
+                          {rowContent}
+                        </div>
                       );
                     })
                   ) : (

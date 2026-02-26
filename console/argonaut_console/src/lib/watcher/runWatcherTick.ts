@@ -20,7 +20,7 @@ const INDEX_ACTIONS = 'argonaut_actions';
  * Pushes a new scan notification to Slack, or acts as a dry_run depending on SLACK_MODE.
  * Idempotent: writes to argonaut_actions using sha256 to avoid duplicate sends.
  */
-export async function pushSlackNewScan(applicationId: string, bundleId: string) {
+export async function pushSlackNewScan(applicationId: string, bundleId: string, runId?: string) {
     const crypto = require('crypto');
     const templateVersion = 'v1';
 
@@ -62,7 +62,7 @@ export async function pushSlackNewScan(applicationId: string, bundleId: string) 
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `A new bundle **${bundleId}** has been received for **${applicationId}** and is currently processing. <http://localhost:3000/apps/${applicationId}/bundles/${bundleId}|View Analysis ↗>`
+                    text: `A new bundle **${bundleId}** has been received for **${applicationId}** and is currently processing. <${process.env.PUBLIC_BASE_URL || 'http://localhost:3000'}/runs/${runId || bundleId}|View Analysis ↗>`
                 }
             }
         ]
@@ -267,6 +267,7 @@ export async function runWatcherTick(): Promise<{ processed: number, skipped: nu
         const searchRes = await esClient.search({
             index: INDEX_REGISTRY,
             size: 5, // Process up to 5 at a time
+            seq_no_primary_term: true,
             query: {
                 term: { 'status': 'NEW' }
             },
@@ -294,36 +295,35 @@ export async function runWatcherTick(): Promise<{ processed: number, skipped: nu
             const applicationId = doc.applicationId || doc.repo || 'unknown_app';
             const buildId = doc.buildId || doc.version;
 
-            const runId = `run_${Date.now()}_${bundleId.substring(0, 6).trim()}`.trim();
+            // Deterministic hash runId — must stay in sync with demo:judge's computeRunId tuple
+            const crypto = require('crypto');
+            const runId = crypto.createHash('sha256').update([applicationId, buildId || '', bundleId].join('|')).digest('hex');
             const lockedAt = new Date().toISOString();
 
-            // 1. Atomic claim via Update-By-Query or Script Update 
+            // 1. Atomic claim via optimistic concurrency (no Painless scripting)
             try {
-                const updateRes = await esClient.update({
+                await esClient.update({
                     index: INDEX_REGISTRY,
                     id: bundleId,
-                    script: {
-                        source: `
-        if (ctx._source.status == 'NEW') {
-            ctx._source.status = 'PROCESSING';
-            ctx._source.processingLock = params.lock;
-            ctx._source.activeRunId = params.lock.runId;
-        } else {
-            ctx.op = 'noop';
-        }
-        `,
-                        params: {
-                            lock: { lockedAt, lockedBy: WATCHER_LOCK_OWNER, runId }
+                    if_seq_no: hit._seq_no,
+                    if_primary_term: hit._primary_term,
+                    doc: {
+                        status: 'PROCESSING',
+                        activeRunId: runId,
+                        processingLock: {
+                            lockedAt,
+                            lockedBy: WATCHER_LOCK_OWNER,
+                            runId
                         }
-                    }
+                    },
+                    refresh: 'wait_for'
                 });
-
-                if (updateRes.result === 'noop') {
-                    // Bundle was claimed by someone else between our search and update
+            } catch (err: any) {
+                if (err.meta?.statusCode === 409) {
+                    // Bundle was claimed by another watcher between search and update
                     skipped++;
                     continue;
                 }
-            } catch (err) {
                 console.error(`Failed to claim bundle ${bundleId}: `, err);
                 skipped++;
                 continue;
@@ -334,7 +334,7 @@ export async function runWatcherTick(): Promise<{ processed: number, skipped: nu
 
             try {
                 // Kick off Slack notification simultaneously
-                await pushSlackNewScan(applicationId, bundleId);
+                await pushSlackNewScan(applicationId, bundleId, runId);
 
                 // Run simulation
                 await simulateWorkflowRun(bundleId, applicationId, runId, buildId);

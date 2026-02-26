@@ -12,22 +12,11 @@ export async function GET() {
             aggs: {
                 applications: {
                     terms: {
-                        script: {
-                            source: "def appId = doc['applicationId'].size() > 0 ? doc['applicationId'].value : (doc['repo'].size() > 0 ? doc['repo'].value : 'unknown_app'); return appId;",
-                            lang: 'painless'
-                        },
+                        field: 'applicationId',
+                        missing: 'unknown_app',
                         size: 1000
                     },
                     aggs: {
-                        app_name: {
-                            terms: {
-                                script: {
-                                    source: "def appId = doc['applicationId'].size() > 0 ? doc['applicationId'].value : (doc['repo'].size() > 0 ? doc['repo'].value : 'unknown_app'); return appId;",
-                                    lang: 'painless'
-                                },
-                                size: 1
-                            }
-                        },
                         statuses: {
                             terms: {
                                 field: 'status',
@@ -64,7 +53,7 @@ export async function GET() {
 
             return {
                 applicationId: bucket.key,
-                applicationName: bucket.app_name.buckets[0]?.key || bucket.key,
+                applicationName: bucket.key,
                 totalBundles: bucket.doc_count,
                 statusCounts: statuses,
                 latestBundle: recentBundles[0] || null,

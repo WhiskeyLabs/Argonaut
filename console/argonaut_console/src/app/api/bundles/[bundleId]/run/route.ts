@@ -27,7 +27,9 @@ export async function POST(req: Request, { params }: { params: Promise<{ bundleI
         }
 
         const applicationId = doc.applicationId || doc.repo || 'unknown_app';
-        const runId = `run_manual_${Date.now()}_${bundleId.substring(0, 6).trim()}`;
+        const buildId = doc.buildId || doc.version || '';
+        const crypto = require('crypto');
+        const runId = crypto.createHash('sha256').update([applicationId, buildId, bundleId].join('|')).digest('hex');
 
         // Update bundle to PROCESSING
         await esClient.update({

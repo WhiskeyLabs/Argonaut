@@ -21,6 +21,9 @@ export interface FixBundleAction {
         confidence: number;
         warnings: string[];
     };
+    targetSystem?: string;  // 'inline' | 'object_store'
+    targetKey?: string;     // future: 'bundles/<runId>/fixes/<findingId>.patch'
+    source?: string;        // 'fix_agent' | 'console'
     createdAt: string;
 }
 
@@ -77,7 +80,7 @@ export class FixEngine {
             // 3. Generate new fix (Mocking the AI engine call for now)
             // In a real implementation, we would call aiAnalysisService.analyzeFinding(context)
             // But we'd need to mock its Dexie dependencies.
-            const result = await this.mockGenerateFix(findingId, inputHash);
+            const result = await this.mockGenerateFix(findingId, inputHash, findingDoc);
 
             // 4. Store in argonaut_actions
             const action: FixBundleAction = {
@@ -87,7 +90,7 @@ export class FixEngine {
                 findingIds: [findingId],
                 status: 'CREATED',
                 payload: {
-                    engineVersion: '1.0.0-console',
+                    engineVersion: '1.0.0-agent',
                     inputHash,
                     patchSummary: result.summary,
                     filesTouched: result.filesTouched,
@@ -95,6 +98,9 @@ export class FixEngine {
                     confidence: result.confidence,
                     warnings: [],
                 },
+                targetSystem: 'inline',
+                targetKey: `bundles/${runId}/fixes/${findingId}.patch`,
+                source: 'fix_agent',
                 createdAt: new Date().toISOString()
             };
 
@@ -128,15 +134,24 @@ export class FixEngine {
         }
     }
 
-    private async mockGenerateFix(findingId: string, inputHash: string) {
+    private async mockGenerateFix(findingId: string, inputHash: string, findingDoc?: any) {
         // Simulating AI latency
         await new Promise(resolve => setTimeout(resolve, 1000));
         const confidence = this.deterministicConfidence(inputHash);
 
+        const pkg = findingDoc?.packageName || 'vulnerable-lib';
+        const fromVer = findingDoc?.packageVersion || '1.0.0';
+        const cve = findingDoc?.cve || 'CVE-XXXX-XXXX';
+        // Derive a plausible patch version
+        const parts = fromVer.split('.');
+        const toVer = parts.length === 3
+            ? `${parts[0]}.${parts[1]}.${parseInt(parts[2] || '0', 10) + 1}`
+            : `${fromVer}-patched`;
+
         return {
-            summary: `Automated fix for ${findingId}. Updated dependencies to resolve vulnerability.`,
+            summary: `Fix ${cve}: upgrade ${pkg} from ${fromVer} to ${toVer}.`,
             filesTouched: ['package.json', 'package-lock.json'],
-            diff: `--- a/package.json\n+++ b/package.json\n@@ -10,1 +10,1 @@\n-    "vulnerable-lib": "1.0.0"\n+    "vulnerable-lib": "1.1.0"`,
+            diff: `--- a/package.json\n+++ b/package.json\n@@ -10,1 +10,1 @@\n-    "${pkg}": "${fromVer}"\n+    "${pkg}": "${toVer}"`,
             confidence
         };
     }

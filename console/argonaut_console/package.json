@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "watcher:start": "tsx scripts/watcher.ts"
+    "watcher:start": "tsx scripts/watcher.ts",
+    "fixagent:start": "tsx scripts/fixAgent.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.0.0",

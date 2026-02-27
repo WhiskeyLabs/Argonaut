@@ -2,52 +2,40 @@
  * Fix Agent — PM2 Standalone Process
  *
  * Polls Elasticsearch for FIX_REQUEST actions every POLL_INTERVAL_MS.
- * Runs as: pm2 start scripts/fixAgent.ts --name argonaut_fix_agent --interpreter tsx
+ * Runs as: pm2 start npm --name argonaut_fix_agent -- run fixagent:start
  */
 
-// Load env vars
-import dotenv from 'dotenv';
-import path from 'path';
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.local' });
 
-// Try loading from the console's .env.local
-dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+console.log('🔧 Starting Argonaut Fix Agent Process...');
 
-import { runFixAgentTick } from '../src/lib/fixAgent/runFixAgentTick';
+const intervalMs = process.env.FIX_AGENT_POLL_MS ? parseInt(process.env.FIX_AGENT_POLL_MS, 10) : 10000;
 
-const POLL_INTERVAL_MS = parseInt(process.env.FIX_AGENT_POLL_MS || '10000', 10);
-const AGENT_NAME = 'argonaut_fix_agent';
-
-let running = false;
-
-async function tick() {
-    if (running) return;
-    running = true;
+async function start() {
+    console.log(`📡 Fix Agent starting. Interval: ${intervalMs}ms`);
 
     try {
-        const result = await runFixAgentTick();
-        if (result.processed > 0 || result.skipped > 0) {
-            console.log(`[${AGENT_NAME}] Tick result: processed=${result.processed}, skipped=${result.skipped}`);
+        console.log('[FIX_AGENT] Importing runFixAgentTick...');
+        // Dynamic import to ensure ES client doesn't initialize before dotenv
+        const { runFixAgentTick } = await import('../src/lib/fixAgent/runFixAgentTick');
+        console.log('[FIX_AGENT] Import successful.');
+
+        while (true) {
+            try {
+                const result = await runFixAgentTick();
+                if (result.processed > 0 || result.skipped > 0) {
+                    console.log(`[FIX_AGENT] Tick completed. Processed: ${result.processed}, Skipped: ${result.skipped}`);
+                }
+            } catch (err) {
+                console.error('[FIX_AGENT] Unexpected error in tick loop:', err);
+            }
+            await new Promise(resolve => setTimeout(resolve, intervalMs));
         }
     } catch (err) {
-        console.error(`[${AGENT_NAME}] Error in tick:`, err);
-    } finally {
-        running = false;
+        console.error('[FIX_AGENT] Critical initialization error:', err);
+        process.exit(1);
     }
 }
 
-console.log(`[${AGENT_NAME}] Starting fix agent (poll every ${POLL_INTERVAL_MS}ms)`);
-setInterval(tick, POLL_INTERVAL_MS);
-
-// Run once immediately
-tick();
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log(`[${AGENT_NAME}] Received SIGTERM, shutting down...`);
-    process.exit(0);
-});
-process.on('SIGINT', () => {
-    console.log(`[${AGENT_NAME}] Received SIGINT, shutting down...`);
-    process.exit(0);
-});
+start();

@@ -76,7 +76,5 @@ The core focus is reliability, traceability, and a clean handoff to developers.
 
 ## Links
 - System overview: https://argonaut.whiskeylabs.io/system
-- Demo video: [<add link>](https://www.youtube.com/watch?v=5V0XU-YEMvo)
+- Demo video: [[<add link>](https://www.youtube.com/watch?v=5V0XU-YEMvo)](https://www.youtube.com/watch?v=5V0XU-YEMvo)
 
-## License
-<add license>

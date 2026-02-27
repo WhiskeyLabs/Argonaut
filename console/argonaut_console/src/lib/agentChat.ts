@@ -40,7 +40,7 @@ const MINIMAL_FINDING_FIELDS = [
  */
 const LOCKED_SORT: any[] = [
     { priorityScore: { order: 'desc', missing: '_last' } },
-    { 'findingId.keyword': { order: 'asc' } },
+    { 'findingId': { order: 'asc' } },
 ];
 
 export interface ChatRequest {
@@ -520,7 +520,7 @@ async function executeFixGeneration(
         },
         sort: [
             { priorityScore: { order: 'desc' } },
-            { 'findingId.keyword': { order: 'asc' } },
+            { 'findingId': { order: 'asc' } },
         ],
     });
 

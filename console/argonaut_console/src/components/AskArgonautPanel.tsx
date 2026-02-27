@@ -128,8 +128,8 @@ export default function AskArgonautPanel({
                 onClick={onClose}
             />
 
-            {/* Panel */}
-            <div className="fixed inset-y-0 right-0 w-[480px] max-w-[90vw] z-[201] flex flex-col bg-[#070711] border-l border-indigo-500/20 shadow-2xl shadow-indigo-500/5 transform transition-transform duration-300">
+            {/* Panel — half-screen height, bottom-right */}
+            <div className="fixed bottom-0 right-0 w-[480px] max-w-[90vw] z-[201] flex flex-col bg-[#070711] border-l border-t border-indigo-500/20 shadow-2xl shadow-indigo-500/5 rounded-tl-2xl transform transition-transform duration-300" style={{ height: '50vh' }}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-indigo-500/20 bg-gradient-to-r from-indigo-950/40 to-purple-950/30 shrink-0">
@@ -202,8 +202,8 @@ export default function AskArgonautPanel({
                                 </div>
                             )}
                             <div className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${msg.role === 'user'
-                                    ? 'bg-indigo-600/20 text-indigo-100 border border-indigo-500/20'
-                                    : 'bg-white/[0.03] text-neutral-300 border border-white/5'
+                                ? 'bg-indigo-600/20 text-indigo-100 border border-indigo-500/20'
+                                : 'bg-white/[0.03] text-neutral-300 border border-white/5'
                                 }`}>
                                 <div className="whitespace-pre-wrap break-words">{msg.content}</div>
                                 {msg.citations && msg.citations.length > 0 && (

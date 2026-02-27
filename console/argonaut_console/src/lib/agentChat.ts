@@ -16,8 +16,8 @@ import crypto from 'crypto';
 const INDEX_FINDINGS = 'argonaut_findings';
 const INDEX_RUNS = 'argonaut_runs';
 
-// Kibana Agent Builder env vars
-const KIBANA_BASE_URL = process.env.KIBANA_BASE_URL || '';
+// Kibana Agent Builder env vars (must match .env.local / prod .env)
+const KIBANA_URL = process.env.KIBANA_URL || '';
 const KIBANA_API_KEY = process.env.KIBANA_API_KEY || '';
 const KIBANA_SPACE = process.env.KIBANA_SPACE || '';
 const AGENT_ID = process.env.ELASTIC_AGENT_ID || '';
@@ -282,11 +282,11 @@ export async function sendAgentChat(request: ChatRequest): Promise<ChatResponse>
 
         let answer: string;
 
-        if (KIBANA_BASE_URL && KIBANA_API_KEY && AGENT_ID) {
-            // Call Kibana Agent Builder API
+        if (KIBANA_URL && KIBANA_API_KEY && AGENT_ID) {
+            // Call Kibana Agent Builder API (real LLM)
             answer = await callKibanaAgent(fullPrompt, conversationId);
         } else {
-            // Local mock for demo / development
+            // Local mock for demo / development (no Kibana configured)
             answer = await mockAgentResponse(request.message, contextPacket);
         }
 
@@ -322,7 +322,7 @@ export async function sendAgentChat(request: ChatRequest): Promise<ChatResponse>
  */
 async function callKibanaAgent(prompt: string, conversationId: string): Promise<string> {
     const spacePrefix = KIBANA_SPACE ? `/s/${KIBANA_SPACE}` : '';
-    const url = `${KIBANA_BASE_URL}${spacePrefix}/api/security_ai_assistant/chat/complete`;
+    const url = `${KIBANA_URL}${spacePrefix}/api/actions/connector/${AGENT_ID}/_execute`;
 
     const res = await fetch(url, {
         method: 'POST',
@@ -332,14 +332,17 @@ async function callKibanaAgent(prompt: string, conversationId: string): Promise<
             'kbn-xsrf': 'true',
         },
         body: JSON.stringify({
-            connectorId: AGENT_ID,
-            persist: false,
-            messages: [
-                {
-                    role: 'user',
-                    content: prompt,
-                }
-            ],
+            params: {
+                subAction: 'invokeAI',
+                subActionParams: {
+                    messages: [
+                        {
+                            role: 'user',
+                            content: prompt,
+                        }
+                    ],
+                },
+            },
         }),
     });
 
@@ -349,7 +352,11 @@ async function callKibanaAgent(prompt: string, conversationId: string): Promise<
     }
 
     const data = await res.json();
-    return data.message?.content || data.choices?.[0]?.message?.content || 'No response from agent.';
+    // Kibana connector _execute response shape: { status, data: { message } }
+    if (data.status === 'error') {
+        throw new Error(`Agent connector error: ${data.message || data.serviceMessage || 'Unknown'}`);
+    }
+    return data.data?.message || data.data?.choices?.[0]?.message?.content || data.message?.content || 'No response from agent.';
 }
 
 /**

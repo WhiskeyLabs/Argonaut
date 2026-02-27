@@ -374,21 +374,21 @@ export default function SystemPage() {
           </div>
 
           <aside className="detail-panel space-y-6">
-            <div className="argonaut-panel p-6 border-accent-blue/20 h-full">
+            <div className="argonaut-panel p-6 border-accent-blue/20 h-full overflow-hidden">
               <div className="detail-head mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">{spec.title}</h3>
-                <span className="text-xs font-mono text-accent-blue uppercase tracking-widest">{selectedNode.replace('-', ' ')}</span>
+                <h3 className="text-3xl font-bold text-white mb-2">{spec.title}</h3>
+                <span className="text-base font-mono text-accent-blue uppercase tracking-widest">{selectedNode.replace('-', ' ')}</span>
               </div>
               <div className="detail-body space-y-6">
                 <div className="flex gap-2 flex-wrap">
                   {spec.tags.map(t => (
-                    <span key={t} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest">{t}</span>
+                    <span key={t} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-xs font-mono uppercase tracking-widest">{t}</span>
                   ))}
                 </div>
-                <p className="text-neutral-400 text-sm leading-relaxed font-light">{spec.summary}</p>
-                <div className="space-y-3">
-                  <h5 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.2em]">Responsibilities</h5>
-                  <ul className="space-y-2 text-sm text-white/80 font-light">
+                <p className="text-neutral-400 text-lg leading-relaxed font-light">{spec.summary}</p>
+                <div className="space-y-4">
+                  <h5 className="text-sm font-mono text-white/70 uppercase tracking-[0.2em]">Responsibilities</h5>
+                  <ul className="space-y-3 text-lg text-white/80 font-light">
                     {spec.responsibilities.map(r => (
                       <li key={r} className="flex gap-2">
                         <span className="text-accent-blue">→</span>
@@ -397,8 +397,8 @@ export default function SystemPage() {
                     ))}
                   </ul>
                 </div>
-                <button className="w-full mt-8 border border-white/10 py-3 rounded-xl text-xs font-mono uppercase tracking-widest hover:bg-white/5 transition-all flex items-center justify-center gap-2 text-neutral-400 hover:text-white">
-                  <Expand className="w-3 h-3" />
+                <button className="w-full mt-8 border border-white/10 py-4 rounded-xl text-sm font-mono uppercase tracking-widest hover:bg-white/5 transition-all flex items-center justify-center gap-2 text-neutral-400 hover:text-white">
+                  <Expand className="w-4 h-4" />
                   Open Full Spec
                 </button>
               </div>
@@ -407,38 +407,6 @@ export default function SystemPage() {
         </div>
       </section>
 
-      <div className="insight-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 reveal">
-        <InsightCard title="Agent Workflow Latency" icon={<BarChart3 className="w-4 h-4" />}>
-          <div className="space-y-4 pt-4">
-            <LatencyBar label="Initial Fetch & Parse" value={12} text="120ms" color="accent-green" />
-            <LatencyBar label="Threat Intel & Path" value={68} text="680ms" color="accent-yellow" />
-            <LatencyBar label="Action & Routing" value={45} text="450ms" color="accent-pink" />
-          </div>
-        </InsightCard>
-
-        <InsightCard title="System Confidence" icon={<Target className="w-4 h-4" />}>
-          <div className="flex justify-around items-center pt-8 pb-4">
-            <ConfidenceRing value={98} label="Evidence" color="accent-blue" />
-            <ConfidenceRing value={92} label="Paths" color="accent-green" />
-            <ConfidenceRing value={87} label="Fixes" color="accent-pink" />
-          </div>
-        </InsightCard>
-
-        <InsightCard title="Multi-Agent Event Stream" icon={<Terminal className="w-4 h-4" />}>
-          <div className="space-y-3 pt-4 font-mono text-[10px]">
-            {EVENTS.map((e, i) => (
-              <div key={i} className="flex gap-3 border-l border-white/10 pl-3 py-1">
-                <span className={`uppercase font-bold ${e.type === 'ingress' ? 'text-accent-blue' :
-                  e.type === 'orch' ? 'text-accent-pink' :
-                    e.type === 'data' ? 'text-accent-yellow' : 'text-accent-green'
-                  }`}>{e.source}</span>
-                <span className="text-white/60 truncate flex-1">{e.msg}</span>
-                <span className="text-white/20">{e.time}</span>
-              </div>
-            ))}
-          </div>
-        </InsightCard>
-      </div>
 
 
       <footer className="mt-12 py-8 border-t border-white/10 flex justify-center items-center text-[10px] font-sans font-bold tracking-widest text-neutral-400 uppercase">
@@ -471,8 +439,8 @@ function Plane({ id, title, boundary, active, children }: { id: string; title: s
         }`}
     >
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xs font-mono font-bold text-white/70 uppercase tracking-[0.2em]">{title}</h3>
-        <span className="text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-full text-neutral-400">{boundary}</span>
+        <h3 className="text-sm font-mono font-bold text-white/70 uppercase tracking-[0.2em]">{title}</h3>
+        <span className="text-xs font-mono border border-white/10 px-2 py-0.5 rounded-full text-neutral-400">{boundary}</span>
       </div>
       {children}
     </div>
@@ -491,14 +459,14 @@ function Node({ id, active, onClick }: { id: string; active: boolean; onClick: (
     >
       <div className="flex items-center gap-2 mb-2 relative z-10">
         {spec.icon.startsWith('http') ? (
-          <img src={spec.icon} className="w-4 h-4" alt="" />
+          <img src={spec.icon} className="w-5 h-5" alt="" />
         ) : (
-          <img src={spec.icon} className={`w-4 h-4 ${active ? '' : 'brightness-0 invert opacity-40'}`} alt="" />
+          <img src={spec.icon} className={`w-5 h-5 ${active ? '' : 'brightness-0 invert opacity-40'}`} alt="" />
         )}
-        <span className={`text-[11px] font-bold ${active ? 'text-white' : 'text-white/60'}`}>{spec.title.split(' ').slice(0, 2).join(' ')}</span>
+        <span className={`text-base font-bold ${active ? 'text-white' : 'text-white/60'}`}>{spec.title.split(' ').slice(0, 2).join(' ')}</span>
       </div>
-      <p className="text-[10px] text-neutral-400 leading-tight font-light relative z-10 line-clamp-2">{spec.summary}</p>
-      <div className="mt-2 text-[9px] font-mono text-white/20 uppercase tracking-widest relative z-10">{spec.meta}</div>
+      <p className="text-xs text-neutral-400 leading-tight font-light relative z-10 line-clamp-2">{spec.summary}</p>
+      <div className="mt-2 text-[10px] font-mono text-white/20 uppercase tracking-widest relative z-10">{spec.meta}</div>
     </button>
   );
 }

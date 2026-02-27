@@ -47,32 +47,29 @@ export function TopNav() {
                         <Link href="/system" className="hover:text-primary-400 transition-colors flex items-center space-x-1">
                             <LayoutTemplate size={16} /><span>SYSTEM</span>
                         </Link>
-                        <Link href="/journey" className="hover:text-primary-400 transition-colors flex items-center space-x-1">
-                            <Compass size={16} /><span>USER JOURNEY</span>
-                        </Link>
                         <Link href="/why" className="hover:text-primary-400 transition-colors flex items-center space-x-1">
-                            <Info size={16} /><span>WHY</span>
+                            <Info size={16} /><span>THE WHY?</span>
                         </Link>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        {/* ASK ARGONAUT Button */}
+
+                        {/* ASK ARGONAUT Button - Now centrally located */}
                         <button
                             onClick={handleOpenChat}
-                            className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 border shadow-lg active:scale-95 ${chatOpen
-                                    ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40 shadow-indigo-500/10'
-                                    : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-400 border-indigo-500/30 hover:from-indigo-500/20 hover:to-purple-500/20 hover:text-indigo-300 hover:border-indigo-500/50 shadow-indigo-500/5 hover:shadow-indigo-500/15'
+                            className={`relative inline-flex items-center gap-2 px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.12em] transition-all duration-300 border shadow-lg active:scale-95 ml-2 ${chatOpen
+                                ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40 shadow-indigo-500/10'
+                                : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 text-indigo-400 border-indigo-500/30 hover:from-indigo-500/20 hover:to-purple-500/20 hover:text-indigo-300 hover:border-indigo-500/50 shadow-indigo-500/5 hover:shadow-indigo-500/15'
                                 }`}
                         >
-                            <Sparkles className={`w-4 h-4 ${!hasPulsed ? 'animate-pulse' : ''}`} />
+                            <Sparkles className={`w-3.5 h-3.5 ${!hasPulsed ? 'animate-pulse' : ''}`} />
                             <span>ASK ARGONAUT</span>
                             {!hasPulsed && (
-                                <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500"></span>
                                 </span>
                             )}
                         </button>
-
+                    </div>
+                    <div className="flex items-center gap-3">
                         <div className="h-[34px] px-[0.72rem] inline-flex items-center text-[0.66rem] font-mono font-semibold tracking-[0.08em] text-[var(--nav-muted)] opacity-50 uppercase leading-none">
                             v1.2.0-DEMO
                         </div>

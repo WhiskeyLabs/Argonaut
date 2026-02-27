@@ -12,9 +12,13 @@
 import esClient from './esClient';
 import { TaskLogger } from './taskLogger';
 import crypto from 'crypto';
+import {
+    FIX_ENGINE_VERSION,
+} from './fixAgent/fixAgentTypes';
 
 const INDEX_FINDINGS = 'argonaut_findings';
 const INDEX_RUNS = 'argonaut_runs';
+const INDEX_ACTIONS = 'argonaut_actions';
 
 // Kibana Agent Builder env vars (must match .env.local / prod .env)
 const KIBANA_URL = process.env.KIBANA_URL || '';
@@ -256,7 +260,7 @@ const SYSTEM_PROMPT = `You are **Argonaut**, an AI security analyst embedded in 
 ## Rules (STRICT)
 1. **Answer ONLY using the provided Run Context Packet below.** If the data is missing or insufficient to answer, say exactly what data is missing — never invent CVEs, packages, scores, or counts.
 2. **All answers are run-scoped.** You can only discuss findings from the provided run.
-3. **You cannot take actions.** If the user asks you to generate fixes, post to Slack, triage, or modify anything, respond: "I can explain and summarize in this mode. Use the buttons in the UI to take actions."
+3. **Fix generation:** If the user asks you to generate fixes for high-priority findings (priority score ≥ 90 or similar), you MAY do so. The system will automatically detect this request and dispatch fix generation. Confirm what was dispatched in your response.
 4. **Be concise and factual.** Use bullet points. Cite findingIds when referencing specific findings.
 5. **Never hallucinate.** If you don't have enough context, say so.`;
 
@@ -276,6 +280,18 @@ export async function sendAgentChat(request: ChatRequest): Promise<ChatResponse>
     );
 
     try {
+        // Check if this is a fix generation request
+        const fixAction = detectFixRequest(request.message);
+        if (fixAction) {
+            const fixResult = await executeFixGeneration(request.runId, fixAction.minScore, logger, conversationId);
+            await logger.log(
+                'ASK_ARGONAUT', 'SYSTEM', `chat:${conversationId}`, 'SUCCEEDED',
+                `ASK_ARGONAUT fix generation dispatched: ${fixResult.findingCount} findings`,
+                { runId: request.runId }
+            );
+            return { conversationId, answer: fixResult.answer, citations: fixResult.citations };
+        }
+
         // Build grounded context packet
         const contextPacket = await buildRunContextPacket(request.runId, request.context);
         const fullPrompt = `${SYSTEM_PROMPT}\n\n---\n# Run Context Packet\n${contextPacket}\n---\n\nUser question: ${request.message}`;
@@ -381,8 +397,8 @@ async function mockAgentResponse(question: string, contextPacket: string): Promi
     const countMatch = contextPacket.match(/Finding Count: (\d+)/);
     const totalCount = countMatch ? countMatch[1] : 'unknown';
 
-    if (q.includes('action') || q.includes('fix') || q.includes('remediat') || q.includes('slack') || q.includes('triage')) {
-        return "I can explain and summarize in this mode. Use the buttons in the UI to take actions.\n\n- To generate fixes: click **Generate Fixes (Top 5)** in the findings toolbar\n- To view threat intel: click the 🔬 icon on any finding row\n- Fix results appear as toast notifications and in Slack";
+    if (q.includes('action') || q.includes('slack') || q.includes('triage')) {
+        return "I can explain and summarize in this mode. Use the buttons in the UI to take actions.\n\n- To generate fixes: ask me \"Generate fixes for priority 90 and above\"\n- To view threat intel: click the 🔬 icon on any finding row\n- Fix results appear as toast notifications and in Slack";
     }
 
     if (q.includes('top') && q.includes('reachable') && q.includes('kev')) {
@@ -440,5 +456,155 @@ async function mockAgentResponse(question: string, contextPacket: string): Promi
         `Could you be more specific about what you'd like to know? For example:\n` +
         `- "What are the top reachable KEVs?"\n` +
         `- "Summarize this run in 5 bullets"\n` +
+        `- "Generate fixes for priority 90 and above"\n` +
         `- "Why is finding X ranked higher than Y?"`;
+}
+
+// ─────────────────────────────────────────────────────
+// Fix Generation via Chat
+// ─────────────────────────────────────────────────────
+
+/**
+ * Detect whether the user's message is asking for fix generation.
+ * Returns { minScore } if detected, null otherwise.
+ */
+function detectFixRequest(message: string): { minScore: number } | null {
+    const q = message.toLowerCase();
+
+    // Must mention fix/remediate AND some priority threshold
+    const isFixRequest = (q.includes('fix') || q.includes('remediat') || q.includes('patch') || q.includes('generate fix'));
+    if (!isFixRequest) return null;
+
+    // Check for priority score threshold
+    const scoreMatch = q.match(/(\d+)\s*(and above|\+|or above|or higher|and higher|above|plus)/i)
+        || q.match(/(?:priority|score|above|over|>=?|≥)\s*(\d+)/i)
+        || q.match(/(\d+)\s*(?:priority|score)/i);
+
+    if (scoreMatch) {
+        const score = parseInt(scoreMatch[1], 10);
+        if (score >= 50 && score <= 100) {
+            return { minScore: score };
+        }
+    }
+
+    // Also match "top" or "high priority" even without a number
+    if (q.includes('top') || q.includes('high') || q.includes('critical')) {
+        return { minScore: 90 };
+    }
+
+    return null;
+}
+
+/**
+ * Execute fix generation server-side: query findings with score >= minScore,
+ * create a FIX_REQUEST action, return a chat response describing the result.
+ */
+async function executeFixGeneration(
+    runId: string,
+    minScore: number,
+    logger: TaskLogger,
+    conversationId: string
+): Promise<{ answer: string; citations: Array<{ type: string; runId: string; findingId: string }>; findingCount: number }> {
+    // 1. Query findings with priorityScore >= minScore
+    const searchRes = await esClient.search({
+        index: INDEX_FINDINGS,
+        size: 20,
+        _source: ['findingId', 'title', 'priorityScore', 'cve', 'context.threat.kev', 'context.reachability.reachable'],
+        query: {
+            bool: {
+                must: [
+                    { term: { runId } },
+                    { range: { priorityScore: { gte: minScore } } },
+                ],
+            },
+        },
+        sort: [
+            { priorityScore: { order: 'desc' } },
+            { 'findingId.keyword': { order: 'asc' } },
+        ],
+    });
+
+    const findings = (searchRes.hits.hits || []).map((h: any) => ({
+        id: h._id as string,
+        ...(h._source as any),
+    }));
+
+    if (findings.length === 0) {
+        return {
+            answer: `No findings with priority score ≥ ${minScore} found in this run. No fix generation needed.`,
+            citations: [],
+            findingCount: 0,
+        };
+    }
+
+    // 2. Create FIX_REQUEST action (same pattern as /api/fixes/request)
+    const findingIds = findings.map((f: any) => f.id);
+    const hashInput = JSON.stringify({
+        findingIdsResolved: [...findingIds].sort(),
+        filters: { minPriorityScore: minScore },
+        fixEngineVersion: FIX_ENGINE_VERSION,
+        mode: 'agent_chat',
+        runId,
+        source: 'ask_argonaut',
+    });
+    const requestHash = crypto.createHash('sha256').update(hashInput).digest('hex');
+    const idempotencyKey = `FIX_REQUEST:${runId}:${requestHash}`;
+
+    // Check if already exists
+    let duplicate = false;
+    let existingStatus = '';
+    try {
+        const existing = await esClient.get({ index: INDEX_ACTIONS, id: idempotencyKey });
+        if (existing.found) {
+            duplicate = true;
+            existingStatus = (existing._source as any)?.status || 'EXISTS';
+        }
+    } catch { /* not found — proceed */ }
+
+    if (!duplicate) {
+        const now = new Date().toISOString();
+        await esClient.index({
+            index: INDEX_ACTIONS,
+            id: idempotencyKey,
+            document: {
+                actionType: 'FIX_REQUEST',
+                runId,
+                findingIds,
+                status: 'NEW',
+                idempotencyKey,
+                payloadHash: requestHash,
+                source: 'ask_argonaut',
+                templateVersion: '',
+                targetKey: `chat:${conversationId}`,
+                createdAt: now,
+                updatedAt: now,
+            },
+            refresh: 'wait_for',
+        });
+        console.log(`[ASK_ARGONAUT] Created FIX_REQUEST ${idempotencyKey} for ${findingIds.length} findings (score >= ${minScore})`);
+    }
+
+    // 3. Build the response
+    const findingBullets = findings.slice(0, 10).map((f: any) =>
+        `- **${f.findingId}** — ${f.title || 'Untitled'} (score: ${f.priorityScore}, KEV: ${f.context?.threat?.kev ?? false}, reachable: ${f.context?.reachability?.reachable ?? 'N/A'})`
+    ).join('\n');
+
+    const statusLine = duplicate
+        ? `\n\n⚠️ A fix request for these findings already exists (status: **${existingStatus}**). The Fix Worker will process it shortly.`
+        : `\n\n✅ **Fix request dispatched!** The Elastic Agent Fix Worker will process these ${findingIds.length} findings and send a Slack alert when fix bundles are ready.`;
+
+    const answer = `## 🔧 Fix Generation — Priority ≥ ${minScore}\n\n` +
+        `Found **${findings.length}** findings with priority score ≥ ${minScore}:\n\n` +
+        findingBullets +
+        (findings.length > 10 ? `\n- ... and ${findings.length - 10} more` : '') +
+        statusLine +
+        `\n\n**Action ID:** \`${idempotencyKey.slice(0, 40)}…\``;
+
+    const citations = findings.slice(0, 10).map((f: any) => ({
+        type: 'finding',
+        runId,
+        findingId: f.findingId,
+    }));
+
+    return { answer, citations, findingCount: findings.length };
 }

@@ -14,7 +14,9 @@ import {
     Clock,
     Flame,
     Activity,
-    Check
+    Check,
+    Wrench,
+    X
 } from 'lucide-react';
 import ResearchDrawer from '@/components/ResearchDrawer';
 
@@ -77,56 +79,68 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
 
     // Fix Generation State
     const [fixGenerating, setFixGenerating] = useState(false);
-    const [stageStatus, setStageStatus] = useState<string | null>(null);
-    const prevStageStatus = useRef<string | null>(null);
+    const [fixActionId, setFixActionId] = useState<string | null>(null);
+    const [fixResult, setFixResult] = useState<{ status: string; summary?: string; findingIds?: string[]; bundles?: any[] } | null>(null);
+    const [showFixResult, setShowFixResult] = useState(false);
+    const fixPollRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Polling for stage status
+    // Poll fix request status when we have a pending actionId
     useEffect(() => {
-        let interval: NodeJS.Timeout;
+        if (!fixActionId) return;
 
-        const checkStatus = async () => {
+        const pollStatus = async () => {
             try {
-                const res = await fetch(`/api/runs/${runId}/stages/FIX_BUNDLES`);
+                const res = await fetch(`/api/fixes/status?actionId=${fixActionId}`, {
+                    headers: { 'X-Agent-Key': 'argonaut-fix-agent-2026' }
+                });
                 if (res.ok) {
                     const data = await res.json();
-                    setStageStatus(data.status);
-                    if (data.status === 'RUNNING') {
-                        setFixGenerating(true);
-                    } else {
+                    if (data.request?.status === 'SUCCEEDED' || data.request?.status === 'FAILED') {
                         setFixGenerating(false);
-                        // If we just finished successfully, refresh the grid
-                        if (prevStageStatus.current === 'RUNNING' && data.status === 'SUCCEEDED') {
-                            fetchFindings(null);
-                        }
+                        setFixResult({
+                            status: data.request.status,
+                            summary: data.request.error, // outcome summary string
+                            findingIds: data.request.findingIds,
+                            bundles: data.bundles || []
+                        });
+                        setShowFixResult(true);
+                        setFixActionId(null);
+                        if (fixPollRef.current) clearInterval(fixPollRef.current);
                     }
-                    prevStageStatus.current = data.status;
                 }
             } catch (err) {
-                console.error("Failed to fetch stage status", err);
+                console.error('Fix status poll error:', err);
             }
         };
 
-        checkStatus();
-        interval = setInterval(checkStatus, 3000);
-        return () => clearInterval(interval);
-    }, [runId]);
+        pollStatus();
+        fixPollRef.current = setInterval(pollStatus, 3000);
+        return () => { if (fixPollRef.current) clearInterval(fixPollRef.current); };
+    }, [fixActionId]);
 
     const handleGenerateTopNFixes = async () => {
         setFixGenerating(true);
+        setFixResult(null);
+        setShowFixResult(false);
         try {
-            const requestId = `req_${Date.now()}`;
-            const res = await fetch('/api/fixes/generate', {
+            const res = await fetch('/api/fixes/request', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Agent-Key': 'argonaut-fix-agent-2026'
+                },
                 body: JSON.stringify({
                     runId,
                     mode: 'topN',
                     topN: 5,
-                    requestId
+                    source: 'console'
                 })
             });
 
-            if (!res.ok) {
+            if (res.ok) {
+                const data = await res.json();
+                setFixActionId(data.actionId);
+            } else {
                 const data = await res.json();
                 alert(data.error || 'Failed to start fix generation');
                 setFixGenerating(false);
@@ -351,16 +365,15 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                 <div className="flex items-center gap-4">
                     <button
                         onClick={handleGenerateTopNFixes}
-                        disabled={fixGenerating || stageStatus === 'RUNNING'}
-                        className={`btn-neon-blue px-5 py-2 flex items-center gap-2 !text-[10px] ${fixGenerating || stageStatus === 'RUNNING' ? 'opacity-50 !cursor-wait' : ''
-                            }`}
+                        disabled={fixGenerating}
+                        className={`btn-neon-blue px-5 py-2 flex items-center gap-2 !text-[10px] ${fixGenerating ? 'opacity-50 !cursor-wait' : ''}`}
                     >
-                        {fixGenerating || stageStatus === 'RUNNING' ? (
+                        {fixGenerating ? (
                             <Activity className="w-3.5 h-3.5 animate-spin" />
                         ) : (
-                            <Zap className="w-3.5 h-3.5" />
+                            <Wrench className="w-3.5 h-3.5" />
                         )}
-                        {fixGenerating || stageStatus === 'RUNNING' ? 'Generative Remediation in Progress...' : 'Remediate Top 5 Findings'}
+                        {fixGenerating ? 'Agent Generating Fixes...' : 'Generate Fixes (Top 5)'}
                     </button>
 
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-black/20 rounded border border-white/5">
@@ -555,6 +568,50 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                     </button>
                 </div>
             </div>
+
+            {/* Fix Result Toast */}
+            {showFixResult && fixResult && (
+                <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-4 fade-in duration-500">
+                    <div className={`min-w-[340px] max-w-md rounded-xl border shadow-2xl backdrop-blur-xl p-5 ${fixResult.status === 'SUCCEEDED'
+                            ? 'bg-emerald-950/90 border-emerald-500/30 shadow-emerald-500/10'
+                            : 'bg-red-950/90 border-red-500/30 shadow-red-500/10'
+                        }`}>
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                            <div className="flex items-center gap-2">
+                                {fixResult.status === 'SUCCEEDED' ? (
+                                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                                ) : (
+                                    <XCircle className="w-5 h-5 text-red-400" />
+                                )}
+                                <span className="text-sm font-bold text-white">
+                                    {fixResult.status === 'SUCCEEDED' ? 'Fix Bundles Generated' : 'Fix Generation Failed'}
+                                </span>
+                            </div>
+                            <button onClick={() => setShowFixResult(false)} className="text-neutral-500 hover:text-white transition-colors">
+                                <X className="w-4 h-4" />
+                            </button>
+                        </div>
+                        {fixResult.summary && (
+                            <div className="text-[11px] font-mono text-neutral-300 bg-black/30 rounded-lg px-3 py-2 mb-3 border border-white/5">
+                                {fixResult.summary}
+                            </div>
+                        )}
+                        <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest">
+                            {fixResult.bundles && fixResult.bundles.length > 0 && (
+                                <span className="text-emerald-400">
+                                    <Wrench className="w-3 h-3 inline mr-1" />
+                                    {fixResult.bundles.length} bundle{fixResult.bundles.length !== 1 ? 's' : ''}
+                                </span>
+                            )}
+                            {fixResult.findingIds && (
+                                <span className="text-neutral-500">
+                                    {fixResult.findingIds.length} finding{fixResult.findingIds.length !== 1 ? 's' : ''} processed
+                                </span>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Research Drawer Component */}
             <ResearchDrawer

@@ -220,14 +220,15 @@ async function postFixReadySlack(
     const summaryString = formatOutcomeSummary(outcome);
     const consoleUrl = `${PUBLIC_BASE_URL}/runs/${runId}`;
     const slackResult = await publishAlertToSlack({
-        title: '🔧 Fix bundle ready',
-        message: `Fix generation complete for ${totalFindings} finding(s): ${summaryString}`,
+        title: '🔧 Elastic Agent — Fix Bundles Ready',
+        message: `Elastic Agent Builder dispatched remediation for ${totalFindings} finding(s). Fix Worker completed: ${summaryString}`,
         level: outcome.failed > 0 ? 'warning' : 'info',
         fields: [
             { label: 'Run', value: runId },
             { label: 'Created', value: String(outcome.created) },
             { label: 'Existed', value: String(outcome.exists) },
             { label: 'Failed', value: String(outcome.failed) },
+            { label: 'Agent', value: 'Elastic Agent Builder' },
         ],
         actions: [
             { text: 'View Run ↗', url: consoleUrl },

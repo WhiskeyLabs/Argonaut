@@ -136,24 +136,58 @@ export class FixEngine {
 
     private async mockGenerateFix(findingId: string, inputHash: string, findingDoc?: any) {
         // Simulating AI latency
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 400));
         const confidence = this.deterministicConfidence(inputHash);
 
         const pkg = findingDoc?.packageName || 'vulnerable-lib';
         const fromVer = findingDoc?.packageVersion || '1.0.0';
         const cve = findingDoc?.cve || 'CVE-XXXX-XXXX';
+        const severity = (findingDoc?.severity || 'MEDIUM').toUpperCase();
+        const title = findingDoc?.title || findingDoc?.description || cve;
+
         // Derive a plausible patch version
         const parts = fromVer.split('.');
         const toVer = parts.length === 3
             ? `${parts[0]}.${parts[1]}.${parseInt(parts[2] || '0', 10) + 1}`
             : `${fromVer}-patched`;
 
-        return {
-            summary: `Fix ${cve}: upgrade ${pkg} from ${fromVer} to ${toVer}.`,
-            filesTouched: ['package.json', 'package-lock.json'],
-            diff: `--- a/package.json\n+++ b/package.json\n@@ -10,1 +10,1 @@\n-    "${pkg}": "${fromVer}"\n+    "${pkg}": "${toVer}"`,
-            confidence
-        };
+        // Deterministically pick a fix strategy based on inputHash
+        const strategyByte = parseInt(inputHash.slice(2, 4), 16) % 4;
+
+        switch (strategyByte) {
+            case 0: // Dependency upgrade
+                return {
+                    summary: `[Dependency Upgrade] ${cve}: upgrade ${pkg} from ${fromVer} → ${toVer}. Resolves ${severity} vulnerability in transitive dependency chain.`,
+                    filesTouched: ['package.json', 'package-lock.json'],
+                    diff: `--- a/package.json\n+++ b/package.json\n@@ -10,1 +10,1 @@\n-    "${pkg}": "${fromVer}"\n+    "${pkg}": "${toVer}"`,
+                    confidence
+                };
+
+            case 1: // Configuration hardening
+                return {
+                    summary: `[Config Hardening] ${cve}: apply security configuration to mitigate "${title}". Added CSP headers and disabled unsafe defaults.`,
+                    filesTouched: ['security.config.ts', 'next.config.js'],
+                    diff: `--- a/security.config.ts\n+++ b/security.config.ts\n@@ -1,3 +1,8 @@\n export const securityConfig = {\n-  allowUnsafeEval: true,\n+  allowUnsafeEval: false,\n+  csp: {\n+    directives: {\n+      'default-src': ["'self'"],\n+      'script-src': ["'self'", "'strict-dynamic'"],\n+    }\n+  },\n   headers: {`,
+                    confidence
+                };
+
+            case 2: // Code patch
+                return {
+                    summary: `[Code Patch] ${cve}: patch input validation for "${title}". Added sanitization layer and bounds checking on user-controlled input.`,
+                    filesTouched: ['src/utils/validators.ts', 'src/middleware/sanitize.ts'],
+                    diff: `--- a/src/utils/validators.ts\n+++ b/src/utils/validators.ts\n@@ -12,4 +12,9 @@\n export function validateInput(raw: string): string {\n-  return raw.trim();\n+  const sanitized = raw\n+    .trim()\n+    .replace(/[<>]/g, '')\n+    .slice(0, 10000);\n+  if (!sanitized || /[\\x00-\\x1f]/.test(sanitized))\n+    throw new ValidationError('Invalid input detected');\n+  return sanitized;\n }`,
+                    confidence
+                };
+
+            case 3: // WAF / Runtime mitigation
+            default:
+                return {
+                    summary: `[Runtime Mitigation] ${cve}: deploy WAF rule + runtime guard for "${title}". Blocks exploit patterns at edge while ${pkg} ${toVer} is validated.`,
+                    filesTouched: ['waf-rules/cve-rules.json', 'src/middleware/runtimeGuard.ts'],
+                    diff: `--- a/waf-rules/cve-rules.json\n+++ b/waf-rules/cve-rules.json\n@@ -1,3 +1,10 @@\n {\n   "rules": [\n+    {\n+      "id": "CVE-GUARD-${inputHash.slice(0, 8)}",\n+      "description": "Block ${cve} exploit pattern",\n+      "condition": "REQUEST_URI matches /${pkg}/",\n+      "action": "BLOCK",\n+      "severity": "${severity}"\n+    },\n     {\n       "id": "baseline"`,
+                    confidence
+                };
+        }
     }
 
     private deterministicConfidence(inputHash: string): number {

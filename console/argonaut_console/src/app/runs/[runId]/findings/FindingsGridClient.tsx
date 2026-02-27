@@ -373,7 +373,7 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                         ) : (
                             <Wrench className="w-3.5 h-3.5" />
                         )}
-                        {fixGenerating ? 'Agent Generating Fixes...' : 'Generate Fixes (Top 5)'}
+                        {fixGenerating ? 'Elastic Agent Remediating...' : 'Generate Fixes (Top 5)'}
                     </button>
 
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-black/20 rounded border border-white/5">
@@ -573,8 +573,8 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
             {showFixResult && fixResult && (
                 <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-4 fade-in duration-500">
                     <div className={`min-w-[340px] max-w-md rounded-xl border shadow-2xl backdrop-blur-xl p-5 ${fixResult.status === 'SUCCEEDED'
-                            ? 'bg-emerald-950/90 border-emerald-500/30 shadow-emerald-500/10'
-                            : 'bg-red-950/90 border-red-500/30 shadow-red-500/10'
+                        ? 'bg-emerald-950/90 border-emerald-500/30 shadow-emerald-500/10'
+                        : 'bg-red-950/90 border-red-500/30 shadow-red-500/10'
                         }`}>
                         <div className="flex items-start justify-between gap-3 mb-3">
                             <div className="flex items-center gap-2">
@@ -584,13 +584,14 @@ export default function FindingsGridClient({ runId }: { runId: string }) {
                                     <XCircle className="w-5 h-5 text-red-400" />
                                 )}
                                 <span className="text-sm font-bold text-white">
-                                    {fixResult.status === 'SUCCEEDED' ? 'Fix Bundles Generated' : 'Fix Generation Failed'}
+                                    {fixResult.status === 'SUCCEEDED' ? 'Elastic Agent — Fix Bundles Generated' : 'Elastic Agent — Fix Generation Failed'}
                                 </span>
                             </div>
                             <button onClick={() => setShowFixResult(false)} className="text-neutral-500 hover:text-white transition-colors">
                                 <X className="w-4 h-4" />
                             </button>
                         </div>
+                        <div className="text-[10px] text-neutral-500 mb-2 italic">Dispatched by Elastic Agent Builder AI Agent via Argonaut Fix Worker</div>
                         {fixResult.summary && (
                             <div className="text-[11px] font-mono text-neutral-300 bg-black/30 rounded-lg px-3 py-2 mb-3 border border-white/5">
                                 {fixResult.summary}

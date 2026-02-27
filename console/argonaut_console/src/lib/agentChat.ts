@@ -333,14 +333,16 @@ async function callKibanaAgent(prompt: string, conversationId: string): Promise<
         },
         body: JSON.stringify({
             params: {
-                subAction: 'invokeAI',
+                subAction: 'unified_completion',
                 subActionParams: {
-                    messages: [
-                        {
-                            role: 'user',
-                            content: prompt,
-                        }
-                    ],
+                    body: {
+                        messages: [
+                            {
+                                role: 'user',
+                                content: prompt,
+                            }
+                        ],
+                    },
                 },
             },
         }),
@@ -352,11 +354,12 @@ async function callKibanaAgent(prompt: string, conversationId: string): Promise<
     }
 
     const data = await res.json();
-    // Kibana connector _execute response shape: { status, data: { message } }
+    // .inference connector _execute response shape:
+    // { status: 'ok', data: { choices: [{ message: { content, role } }] } }
     if (data.status === 'error') {
-        throw new Error(`Agent connector error: ${data.message || data.serviceMessage || 'Unknown'}`);
+        throw new Error(`Agent connector error: ${data.message || data.service_message || 'Unknown'}`);
     }
-    return data.data?.message || data.data?.choices?.[0]?.message?.content || data.message?.content || 'No response from agent.';
+    return data.data?.choices?.[0]?.message?.content || data.data?.message || 'No response from agent.';
 }
 
 /**
